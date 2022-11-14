@@ -7,25 +7,24 @@ namespace Player
     {
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
         [SerializeField] private float size = 6f;
-        [SerializeField] private Transform selection;
-        
-        private readonly Vector3 _constantOfProportionality = new (6, 6);
-        
+
         private void Update()
         {
+            var multiplier = 2;
+            
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                multiplier *= 10;
+            }
+
             if (Input.GetKey(KeyCode.Minus))
             {
-                size += Time.deltaTime * 2;
+                size += Time.deltaTime * multiplier;
             }
 
             if (Input.GetKey(KeyCode.Equals))
             {
-                size -= Time.deltaTime * 2;
-            }
-
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                size *= 10;
+                size -= Time.deltaTime * multiplier;
             }
 
             if (size == 0) return;
@@ -35,5 +34,9 @@ namespace Player
             
             virtualCamera.m_Lens.OrthographicSize = size;
         }
+
+        [SerializeField] private Transform selection;
+
+        private readonly Vector3 _constantOfProportionality = new (6, 6);
     }
 }

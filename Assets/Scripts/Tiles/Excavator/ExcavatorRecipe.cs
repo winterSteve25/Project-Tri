@@ -12,7 +12,6 @@ namespace Tiles.Excavator
     {
         public TileBase ore;
         public float duration;
-        public Item yieldItem;
-        public int yieldAmount;
+        public ItemStack output;
     }
 }

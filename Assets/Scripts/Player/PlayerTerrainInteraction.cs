@@ -1,11 +1,10 @@
-﻿using DG.Tweening;
-using InventorySystem;
-using Items;
-using Terrain;
+﻿using Items;
+using Systems.Inv;
 using Tiles;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
+using World;
 
 namespace Player
 {
@@ -14,17 +13,16 @@ namespace Player
     /// </summary>
     public class PlayerTerrainInteraction : MonoBehaviour
     {
+        private InventoryManager _inventoryManager;
         private TilemapManager _tilemapManager;
         private Tilemap _groundLayer;
         private Tilemap _obstacleLayer;
-        private Camera _camera;
-
-        [SerializeField] private Canvas selectionCanvas;
-        [SerializeField] private CanvasGroup selection;
+        
+        [SerializeField] private Camera mainCamera;
 
         private void Start()
         {
-            _camera = Camera.main; 
+            _inventoryManager = InventoryManager.current;
             _tilemapManager = FindObjectOfType<TilemapManager>();
             _groundLayer = _tilemapManager.GroundLayer;
             _obstacleLayer = _tilemapManager.ObstacleLayer;
@@ -32,37 +30,14 @@ namespace Player
 
         private void Update()
         {
-            var point = _camera.ScreenToWorldPoint(Input.mousePosition);
+            var point = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             var pos = _obstacleLayer.WorldToCell(point);
             var tileAtPos = _obstacleLayer.GetTile(pos);
             var isEmpty = tileAtPos == null;
             var overUI = EventSystem.current.IsPointerOverGameObject();
             
-            var inventoryManager = InventoryManager.Instance;
-            var draggingItem = inventoryManager.draggedItem.Item;
+            var draggingItem = _inventoryManager.draggedItem.Item;
             var isHoldingPlaceableItem = draggingItem.item is PlaceableItem;
-            
-            // selection
-            if ((isEmpty && !isHoldingPlaceableItem) || overUI)
-            {
-                HideSelection();
-            }
-            else if (isHoldingPlaceableItem)
-            {
-                var placeableItem = (PlaceableItem) draggingItem.item;
-                if (placeableItem.placeableTile.CanPlace(pos, _groundLayer, _obstacleLayer))
-                {
-                    MoveSelection(pos);
-                }
-                else
-                {
-                    HideSelection();
-                }
-            }
-            else
-            {
-                MoveSelection(pos);
-            }
 
             if (Input.GetMouseButton(0) && !overUI)
             {
@@ -91,11 +66,11 @@ namespace Player
                                 var itemCount = draggingItem.count - 1;
                                 if (itemCount <= 0)
                                 {
-                                    inventoryManager.DragItem(ItemStack.Empty);
+                                    _inventoryManager.DragItem(ItemStack.Empty);
                                 }
                                 else
                                 {
-                                    inventoryManager.draggedItem.Item = new ItemStack(draggingItem.item, itemCount);
+                                    _inventoryManager.draggedItem.Item = new ItemStack(draggingItem.item, itemCount);
                                 }
                             }
                         }
@@ -113,37 +88,6 @@ namespace Player
                         break;
                     }
                 }
-            }
-        }
-
-        private void MoveSelection(Vector3Int cellPos)
-        {
-            var cam = selectionCanvas.worldCamera;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                selectionCanvas.transform as RectTransform,
-                RectTransformUtility.WorldToScreenPoint(cam, _obstacleLayer.CellToWorld(cellPos) + _obstacleLayer.cellSize * 0.5f),
-                cam, out var p);
-            var p2 = selectionCanvas.transform.TransformPoint(p);
-            
-            if (!selection.gameObject.activeSelf)
-            {
-                selection.transform.position = p2;
-                selection.gameObject.SetActive(true);
-                selection.DOFade(1, 0.2f)
-                    .SetEase(Ease.Linear);
-            }
-            
-            selection.transform.DOMove(p2, 0.35f)
-                .SetEase(Ease.OutCubic);
-        }
-
-        private void HideSelection()
-        {
-            if (selection.gameObject.activeSelf)
-            {
-                selection.DOFade(0, 0.2f)
-                    .SetEase(Ease.Linear)
-                    .OnComplete(() => selection.gameObject.SetActive(false));
             }
         }
     }

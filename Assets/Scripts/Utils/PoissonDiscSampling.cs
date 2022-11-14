@@ -6,9 +6,9 @@ namespace Utils
 	public static class PoissonDiscSampling
 	{
 
-		public static List<Vector2> GeneratePoints(float radius, Vector2 sampleRegionSize,
-			int numSamplesBeforeRejection)
+		public static List<Vector2> GeneratePoints(float radius, Vector2 sampleRegionSize, int numSamplesBeforeRejection, int seed)
 		{
+			var random = new System.Random(seed);
 			var cellSize = radius / Mathf.Sqrt(2);
 
 			var grid = new int[Mathf.CeilToInt(sampleRegionSize.x / cellSize),
@@ -18,15 +18,15 @@ namespace Utils
 
 			while (spawnPoints.Count > 0)
 			{
-				var spawnIndex = Random.Range(0, spawnPoints.Count);
+				var spawnIndex = random.Next(0, spawnPoints.Count);
 				var spawnCentre = spawnPoints[spawnIndex];
 				var candidateAccepted = false;
 
 				for (var i = 0; i < numSamplesBeforeRejection; i++)
 				{
-					var angle = Random.value * Mathf.PI * 2;
+					var angle = (float) random.NextDouble() * Mathf.PI * 2;
 					var dir = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle));
-					var candidate = spawnCentre + dir * Random.Range(radius, 2 * radius);
+					var candidate = spawnCentre + dir * random.NextFloat(radius, 2 * radius);
 					if (IsValid(candidate, sampleRegionSize, cellSize, radius, points, grid))
 					{
 						points.Add(candidate);

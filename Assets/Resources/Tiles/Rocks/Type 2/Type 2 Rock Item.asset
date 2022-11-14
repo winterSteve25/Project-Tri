@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d323bc9305de40d3a724ef50ece9986c, type: 3}
   m_Name: Type 2 Rock Item
   m_EditorClassIdentifier: 
+  itemName: Rock
+  itemDescription: Just some rock
   sprite: {fileID: 21300000, guid: 8adedacf5995a854d9a85773fd37639e, type: 3}
   maxStackSize: 128
   placeableTile: {fileID: 11400000, guid: 9e8950b825c16e645bcfeea8a5379fbe, type: 2}

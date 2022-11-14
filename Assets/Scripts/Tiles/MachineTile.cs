@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Items;
-using Terrain;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utils;
+using World;
 
 namespace Tiles
 {

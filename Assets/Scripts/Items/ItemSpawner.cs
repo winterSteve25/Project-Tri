@@ -9,13 +9,13 @@ namespace Items
     public class ItemSpawner : Singleton<ItemSpawner>
     {
         
-        [SerializeField] private GameObject groundItemPrefab;
+        [SerializeField] private ItemBehaviour groundItemPrefab;
         private ObjectPool<ItemBehaviour> _pool;
 
         private void Start()
         {
             _pool = new ObjectPool<ItemBehaviour>(
-                () => Instantiate(groundItemPrefab, transform).GetComponent<ItemBehaviour>(),
+                () => Instantiate(groundItemPrefab, transform),
                 ib => ib.gameObject.SetActive(true),
                 ib => ib.gameObject.SetActive(false),
                 ib => Destroy(ib.gameObject),

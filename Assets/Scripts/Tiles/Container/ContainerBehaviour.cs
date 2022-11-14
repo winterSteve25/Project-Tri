@@ -1,6 +1,6 @@
 ﻿using System;
-using InventorySystem;
 using Player;
+using Systems.Inv;
 using UnityEngine;
 
 namespace Tiles.Container
@@ -12,12 +12,15 @@ namespace Tiles.Container
     {
         [SerializeField] private float distanceBeforeAccessDenied;
         public Inventory Inventory { get; private set; }
+        
         private PlayerInventory _playerInventory;
+        private InventoryManager _inventoryManager;
 
         private void Awake()
         {
             Inventory = new Inventory(inventoryName: "Container");
             _playerInventory = FindObjectOfType<PlayerInventory>();
+            _inventoryManager = InventoryManager.current;
         }
 
         private void Update()
@@ -30,7 +33,7 @@ namespace Tiles.Container
 
         public override void OnInteract()
         {
-            InventoryManager.Instance.Show(Inventory);
+            _inventoryManager.Show(Inventory);
         }
 
         public override void OnBroken()
@@ -41,10 +44,9 @@ namespace Tiles.Container
         private void ExitMenu()
         {
             // if currently displaying this inventory, close it when this is broken
-            var inventoryManager = InventoryManager.Instance;
-            if (inventoryManager.CurrentInventory == Inventory)
+            if (_inventoryManager.CurrentInventory == Inventory)
             {
-                inventoryManager.Show(null);
+                _inventoryManager.Show(null);
             }
         }
     }

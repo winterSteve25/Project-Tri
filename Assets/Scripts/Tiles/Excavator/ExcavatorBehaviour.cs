@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Items;
-using Terrain;
 using Tiles.Container;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using World;
 
 namespace Tiles.Excavator
 {
@@ -26,7 +26,7 @@ namespace Tiles.Excavator
             base.Start();
             _ore = _tilemapManager.GetTile(Pos, TilemapLayer.Ground);
             _recipe = recipes.recipes.Find(r => r.ore == _ore);
-            _validRecipe = _recipe.yieldItem == null;
+            _validRecipe = _recipe.output.IsEmpty;
             GetContainer();
         }
 
@@ -50,8 +50,7 @@ namespace Tiles.Excavator
         private void SpawnOutput()
         {
             var pos = transform.position;
-            var output = _recipe.yieldItem;
-            var itemStack = new ItemStack(output, _recipe.yieldAmount);
+            var itemStack = _recipe.output;
 
             if (_container is null)
             {

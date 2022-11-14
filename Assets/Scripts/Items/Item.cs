@@ -10,16 +10,13 @@ namespace Items
     [CreateAssetMenu(fileName = "New Item", menuName = "Items/New Item")]
     public class Item : ScriptableObject
     {
+        public string itemName;
+        public string itemDescription;
         public Sprite sprite;
         public int maxStackSize;
 
         public virtual void OnPickUp()
         {
-        }
-
-        private void OnEnable()
-        {
-            ItemsRegistry.items.Add(this);
         }
     }
 }

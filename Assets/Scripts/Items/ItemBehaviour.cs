@@ -13,10 +13,11 @@ namespace Items
     public class ItemBehaviour : MonoBehaviour
     {
         [SerializeField] private float despawnTimer = 180;
-
-        private Action _despawnFunc;
+        [SerializeField] private SpriteRenderer spriteRenderer;
         
+        private Action _despawnFunc;
         private ItemStack _item;
+        
         [ReadOnly, SerializeField] private bool despawnAwaited;
         [ReadOnly, SerializeField] private float internalTimer;
 
@@ -27,7 +28,7 @@ namespace Items
             despawnAwaited = false;
             internalTimer = despawnTimer;
 
-            GetComponent<SpriteRenderer>().sprite = _item.item.sprite;
+            spriteRenderer.sprite = _item.item.sprite;
             transform.localScale = new Vector3(0.5f, 0.5f, 1);
             transform.DORotate(new Vector3(0, 0, 360), 4f, RotateMode.FastBeyond360)
                 .SetLoops(-1, LoopType.Restart)

@@ -1,9 +1,15 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Items
 {
-    public class ItemsRegistry
+    [CreateAssetMenu(fileName = "Items Registry", menuName = "Items/New Items Registry")]
+    public class ItemsRegistry : ScriptableObject
     {
-        public static readonly List<Item> items = new List<Item>();
+        private static ItemsRegistry _instance;
+        public static ItemsRegistry Instance => _instance ??= Resources.Load<ItemsRegistry>("Items/Items Registry");
+        
+        [SerializeField] private List<Item> items;
+        public List<Item> Items => items;
     }
 }

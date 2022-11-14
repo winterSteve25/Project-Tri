@@ -1,6 +1,6 @@
 ﻿using System;
-using InventorySystem;
 using Items;
+using Systems.Inv;
 using UnityEngine;
 
 namespace Player
@@ -11,17 +11,23 @@ namespace Player
     public class PlayerInventory : MonoBehaviour
     {
         [NonSerialized] public Inventory Inv;
+        private InventoryManager _inventoryManager;
+
+        private void Awake()
+        {
+            Inv = new Inventory();
+        }
 
         private void Start()
         {
-            Inv = new Inventory();
+            _inventoryManager = InventoryManager.current;
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                InventoryManager.Instance.Show(Inv);
+                _inventoryManager.Show(Inv);
             }
         }
 
