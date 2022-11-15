@@ -1,8 +1,12 @@
-﻿using KevinCastejon.MoreAttributes;
+﻿using System;
+using System.Linq;
+using KevinCastejon.MoreAttributes;
+using UI.Utilities;
 using UnityEngine;
 using Utils;
 using Utils.Data;
 using World;
+using Random = UnityEngine.Random;
 
 namespace UI.Menu
 {
@@ -12,18 +16,23 @@ namespace UI.Menu
         [SerializeField] private ParsedInput worldWidth;
         [SerializeField] private ParsedInput worldHeight;
         [Scene, SerializeField] private string loadingScene;
-        
+
+        private void Start()
+        {
+            NewRandomSeed();
+        }
+
         public void Create()
         {
-            var s = Random.Range(-10000, 10000);
-            
-            if (seed.Text != string.Empty)
-            {
-                s = seed.Int;
-            }
-            
+            var isInt =  seed.TryInt(out var result);
+            var s = isInt ? result : seed.Text.Aggregate(0, (current, c) => current + c);
             GlobalData.Set(GlobalDataKeys.WorldSettings, new WorldSettings(s, worldWidth.Int, worldHeight.Int));
             SceneManager.Instance.LoadScene(loadingScene);
+        }
+
+        public void NewRandomSeed()
+        {
+            seed.InputField.text = Random.Range(-10000, 10000).ToString();
         }
     }
 }

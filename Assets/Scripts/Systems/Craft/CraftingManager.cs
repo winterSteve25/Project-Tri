@@ -2,7 +2,6 @@
 using Items;
 using Player;
 using Systems.Inv;
-using UI;
 using UnityEngine;
 
 namespace Systems.Craft

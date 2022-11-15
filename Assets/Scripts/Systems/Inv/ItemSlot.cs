@@ -38,8 +38,8 @@ namespace Systems.Inv
             if (!item.IsEmpty)
             {
                 _tooltip = Tooltip.Empty()
-                    .AddText(item.item.itemName, headerStyle: true)
-                    .AddText(item.item.itemDescription);
+                    .AddText(item.item.itemName.GetLocalizedString(), headerStyle: true)
+                    .AddText(item.item.itemDescription.GetLocalizedString());
             }
             
             if (!_isPointerOver) return;
@@ -47,6 +47,14 @@ namespace Systems.Inv
             ShowTooltip();
         }
 
+        private void OnDestroy()
+        {
+            if (_isPointerOver)
+            {
+                TooltipManager.Hide();
+            }
+        }
+        
         public void OnPointerEnter(PointerEventData eventData)
         {
             _isPointerOver = true;

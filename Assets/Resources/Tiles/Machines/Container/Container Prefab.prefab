@@ -52,6 +52,18 @@ MonoBehaviour:
     count: 1
   instantiateVariables: 1
   distanceBeforeAccessDenied: 6
+  inventoryName:
+    m_TableReference:
+      m_TableCollectionName: GUID:51e668827b3e80c4d8a6f5ebe1a446cc
+    m_TableEntryReference:
+      m_KeyId: 5822075072512
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!212 &7697104183477601492
 SpriteRenderer:
   m_ObjectHideFlags: 0

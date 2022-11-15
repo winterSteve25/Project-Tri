@@ -1,5 +1,4 @@
 ﻿using Items;
-using KevinCastejon.MoreAttributes;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

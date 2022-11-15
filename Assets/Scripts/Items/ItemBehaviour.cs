@@ -3,7 +3,6 @@ using DG.Tweening;
 using KevinCastejon.MoreAttributes;
 using Player;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Items
 {

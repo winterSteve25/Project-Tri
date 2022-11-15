@@ -7,7 +7,8 @@ namespace UI.Utilities
     {
         [SerializeField] private Canvas parentCanvas;
         [SerializeField] private Vector2 offset;
-
+        [SerializeField] private bool changePivot; 
+        
         private RectTransform _rectTransform;
         private Transform _transform;
         
@@ -39,6 +40,8 @@ namespace UI.Utilities
                 {
                     _transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
 
+                    if (!changePivot) break;
+                    
                     var pivotX = mousePosition.x / Screen.width;
                     var pivotY = mousePosition.y / Screen.height;
                 

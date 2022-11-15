@@ -1,7 +1,7 @@
-﻿using System;
-using Player;
+﻿using Player;
 using Systems.Inv;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Tiles.Container
 {
@@ -11,6 +11,8 @@ namespace Tiles.Container
     public class ContainerBehaviour : MachineTile
     {
         [SerializeField] private float distanceBeforeAccessDenied;
+        [SerializeField] private LocalizedString inventoryName;
+        
         public Inventory Inventory { get; private set; }
         
         private PlayerInventory _playerInventory;
@@ -18,7 +20,7 @@ namespace Tiles.Container
 
         private void Awake()
         {
-            Inventory = new Inventory(inventoryName: "Container");
+            Inventory = new Inventory(inventoryName.GetLocalizedString());
             _playerInventory = FindObjectOfType<PlayerInventory>();
             _inventoryManager = InventoryManager.current;
         }

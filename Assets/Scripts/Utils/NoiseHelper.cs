@@ -11,7 +11,6 @@ namespace Utils
     /// </summary>
     public static class NoiseHelper
     {
-        private static readonly Dictionary<NoiseSignature, Vector2[]> GeneratedSeeds = new();
 
         public static Texture2D GenerateNoiseTexture(int width, int height, float[,] noiseMap)
         {
@@ -41,12 +40,12 @@ namespace Utils
             File.WriteAllBytes(dirPath + name + ".png", bytes);
         }
         
-        public static float[,] GenerateNoiseMap(int width, int height, float scale, int seed = 5237, int octave = 1, float persistence = 0.2f, float lacunarity = 1f, bool preserveOffsetRandomness = false)
+        public static float[,] GenerateNoiseMap(int width, int height, float scale, int seed = 5237, int octave = 1, float persistence = 0.2f, float lacunarity = 1f)
         {
-            return GenerateNoiseMap(width, height, scale, new Vector2(0, 0), seed, octave, persistence, lacunarity, preserveOffsetRandomness);
+            return GenerateNoiseMap(width, height, scale, new Vector2(0, 0), seed, octave, persistence, lacunarity);
         }
         
-        public static float[,] GenerateNoiseMap(int width, int height, float scale, Vector2 offset, int seed = 5237, int octave = 1, float persistence = 0.2f, float lacunarity = 1f, bool preserveOffsetRandomness = false)
+        public static float[,] GenerateNoiseMap(int width, int height, float scale, Vector2 offset, int seed = 5237, int octave = 1, float persistence = 0.2f, float lacunarity = 1f)
         {
             var map = new float[width,height];
 
@@ -55,7 +54,7 @@ namespace Utils
             var halfWidth = width / 2;
             var halfHeight = height / 2;
             
-            var randOffset = preserveOffsetRandomness ? GenerateSeeds(seed, octave) : GetGeneratedSeeds(seed, octave);
+            var randOffset = GenerateSeeds(seed, octave);
 
             if (scale <= 0)
             {
@@ -107,19 +106,6 @@ namespace Utils
             return map;
         }
 
-        private static Vector2[] GetGeneratedSeeds(int seed, int octaves)
-        {
-            var noiseSignature = new NoiseSignature(seed, octaves);
-            if (GeneratedSeeds.ContainsKey(noiseSignature))
-            {
-                return GeneratedSeeds[noiseSignature];
-            }
-
-            var seeds = GenerateSeeds(seed, octaves);
-            GeneratedSeeds.Add(noiseSignature, seeds);
-            return seeds;
-        }
-        
         private static Vector2[] GenerateSeeds(int seed, int octaves)
         {
             var rand = new System.Random(seed);

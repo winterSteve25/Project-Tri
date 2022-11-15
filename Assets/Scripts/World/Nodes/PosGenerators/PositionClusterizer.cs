@@ -29,13 +29,14 @@ namespace World.Nodes.PosGenerators
             var s = GetInputValue(nameof(seed), seed);
             var p = GetInputValue<Vector3Int[]>(nameof(positions));
             var config = GetInputValue(nameof(worldGenConfiguration), worldGenConfiguration);
+            var rand = new System.Random(s);
             
             foreach (var center in p)
             {
-                var size = new Vector2Int(Random.Range(minSize.x, maxSize.x + 1), Random.Range(minSize.y, maxSize.y + 1));
+                var size = new Vector2Int(rand.Next(minSize.x, maxSize.x + 1), rand.Next(minSize.y, maxSize.y + 1));
                 
                 var centreOfNoise = new Vector3Int((int)(size.x * 0.5f), (int)(size.y * 0.5f));
-                var noise = NoiseHelper.GenerateNoiseMap(size.x, size.y, noiseScale, octave: noiseOctaves, seed: s, preserveOffsetRandomness: true);
+                var noise = NoiseHelper.GenerateNoiseMap(size.x, size.y, noiseScale, offset: new Vector2(center.x, center.y), octave: noiseOctaves, seed: s);
                 
                 for (var i = 0; i < size.x; i++)
                 {

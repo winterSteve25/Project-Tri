@@ -156,6 +156,27 @@ MonoBehaviour:
   itemIcon: {fileID: 1736639071078812753}
   itemCount: {fileID: 1736639072227143631}
   includeName: 0
+  craft:
+    m_TableReference:
+      m_TableCollectionName: GUID:51e668827b3e80c4d8a6f5ebe1a446cc
+    m_TableEntryReference:
+      m_KeyId: 7189229432832
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  requires:
+    m_TableReference:
+      m_TableCollectionName: GUID:51e668827b3e80c4d8a6f5ebe1a446cc
+    m_TableEntryReference:
+      m_KeyId: 7226567127040
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &951000928580066795
 MonoBehaviour:
   m_ObjectHideFlags: 0

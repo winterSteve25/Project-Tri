@@ -6,7 +6,6 @@ using DG.Tweening;
 using Items;
 using TMPro;
 using UnityEngine;
-using Utils;
 
 namespace Systems.Inv
 {
@@ -24,7 +23,7 @@ namespace Systems.Inv
         private const float TitleMoveAmount = 30f;
         private const float TitleMoveDuration = 0.25f;
         private const float TitleFadeDuration = 0.25f;
-        private const float DiscardRequestTimer = 0.5f;
+        private const float DiscardRequestTimer = 0.25f;
 
         #endregion
 
@@ -72,6 +71,7 @@ namespace Systems.Inv
 
         public void Show(Inventory inv)
         {
+
             // already active and is the same inventory being opened
             if (inv == null || (CurrentInventory == inv && inventory.activeSelf))
             {
@@ -80,7 +80,7 @@ namespace Systems.Inv
                     CurrentInventory.OnChanged -= Refresh;
                     CurrentInventory = null;
                 }
-
+                
                 // close inventory
                 StartCoroutine(CloseInventory());
                 return;

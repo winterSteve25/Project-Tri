@@ -19,7 +19,7 @@ namespace Systems.Inv
         
         private readonly ItemStack[] _itemStacks;
 
-        public Inventory(string inventoryName = "Inventory", int rows = 3)
+        public Inventory(string inventoryName, int rows = 3)
         {
             // if there is an equal amount of rows;
             if (rows % 2 == 0)

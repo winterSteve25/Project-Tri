@@ -17,7 +17,7 @@ namespace Player
         private TilemapManager _tilemapManager;
         private Tilemap _groundLayer;
         private Tilemap _obstacleLayer;
-        
+
         [SerializeField] private Camera mainCamera;
 
         private void Start()
@@ -35,11 +35,13 @@ namespace Player
             var tileAtPos = _obstacleLayer.GetTile(pos);
             var isEmpty = tileAtPos == null;
             var overUI = EventSystem.current.IsPointerOverGameObject();
+
+            if (overUI) return;
             
             var draggingItem = _inventoryManager.draggedItem.Item;
             var isHoldingPlaceableItem = draggingItem.item is PlaceableItem;
-
-            if (Input.GetMouseButton(0) && !overUI)
+            
+            if (Input.GetMouseButton(0))
             {
                 if (!isEmpty)
                 {
@@ -47,46 +49,39 @@ namespace Player
                 }
             }
 
-            if (Input.GetMouseButton(1) && !overUI)
+            if (Input.GetMouseButton(1) && isEmpty)
             {
-                switch (isEmpty)
+                // if currently using a placeable item
+                if (isHoldingPlaceableItem)
                 {
-                    case true:
-                        // if currently using a placeable item
-                        if (isHoldingPlaceableItem)
-                        {
-                            var placeableItem = (PlaceableItem) draggingItem.item;
-                            var tile = placeableItem.placeableTile;
-                            if (tile.CanPlace(pos, _groundLayer, _obstacleLayer))
-                            {
-                                // place the tile
-                                _tilemapManager.PlaceTile(pos, tile.tileBase, TilemapLayer.Obstacles);
-
-                                // consume an item
-                                var itemCount = draggingItem.count - 1;
-                                if (itemCount <= 0)
-                                {
-                                    _inventoryManager.DragItem(ItemStack.Empty);
-                                }
-                                else
-                                {
-                                    _inventoryManager.draggedItem.Item = new ItemStack(draggingItem.item, itemCount);
-                                }
-                            }
-                        }
-
-                        break;
-                    case false:
+                    var placeableItem = (PlaceableItem)draggingItem.item;
+                    var tile = placeableItem.placeableTile;
+                    if (tile.CanPlace(pos, _groundLayer, _obstacleLayer))
                     {
-                        var go = _tilemapManager.GetGameObject(tileAtPos, pos, _obstacleLayer);
-                        if (go == null) return;
-                        if (go.TryGetComponent<MachineTile>(out var tileMachine))
-                        {
-                            tileMachine.OnInteract();
-                        }
+                        // place the tile
+                        _tilemapManager.PlaceTile(pos, tile.tileBase, TilemapLayer.Obstacles);
 
-                        break;
+                        // consume an item
+                        var itemCount = draggingItem.count - 1;
+                        if (itemCount <= 0)
+                        {
+                            _inventoryManager.DragItem(ItemStack.Empty);
+                        }
+                        else
+                        {
+                            _inventoryManager.draggedItem.Item = new ItemStack(draggingItem.item, itemCount);
+                        }
                     }
+                }
+            }
+
+            if (Input.GetMouseButtonDown(1) && !isEmpty)
+            {
+                var go = _tilemapManager.GetGameObject(tileAtPos, pos, _obstacleLayer);
+                if (go == null) return;
+                if (go.TryGetComponent<MachineTile>(out var tileMachine))
+                {
+                    tileMachine.OnInteract();
                 }
             }
         }

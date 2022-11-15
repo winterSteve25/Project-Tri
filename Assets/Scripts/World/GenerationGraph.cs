@@ -8,6 +8,5 @@ namespace World
     {
         [SerializeField] private bool enableDebugNodes;
         public bool EnableDebugNodes => enableDebugNodes;
-
     }
 }

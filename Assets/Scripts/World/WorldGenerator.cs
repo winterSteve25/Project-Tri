@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -15,7 +14,6 @@ namespace World
     {
         private TilemapManager _tilemapManager;
         private WorldSettings _worldSettings;
-        private int _seed;
 
         public int WorldSeed { get; private set; }
         public int TotalSteps { get; private set; }
@@ -41,7 +39,7 @@ namespace World
         public IEnumerator CreateWorld()
         {
             _worldSettings = GlobalData.Read(GlobalDataKeys.WorldSettings);
-            _seed = _worldSettings.Seed;
+            WorldSeed = _worldSettings.Seed;
             var width = _worldSettings.Width;
             var height = _worldSettings.Height;
             yield return Generate(width, height, -width / 2, -height / 2);
@@ -63,7 +61,7 @@ namespace World
                 yield break;
             }
 
-            rootNode.seed = _seed;
+            rootNode.seed = WorldSeed;
             rootNode.xOffset = xOffset;
             rootNode.yOffset = yOffset;
             rootNode.width = width;
@@ -83,7 +81,7 @@ namespace World
                 }
 
                 CurrentStepMessage = generatorNode.StageMessage();
-                generatorNode.Generate(_seed, width, height, xOffset, yOffset, _tilemapManager);
+                generatorNode.Generate(WorldSeed, width, height, xOffset, yOffset, _tilemapManager);
                 currentNode = generatorNode.GetPort("nextStage");
                 CurrentStep++;
 

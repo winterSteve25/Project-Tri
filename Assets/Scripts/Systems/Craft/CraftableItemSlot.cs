@@ -1,6 +1,8 @@
 ﻿using UI;
 using UI.Tooltips;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization;
 
 namespace Systems.Craft
 {
@@ -16,15 +18,27 @@ namespace Systems.Craft
                 RecipeChanged();
             }
         }
-
+        
+        [SerializeField] private LocalizedString craft;
+        [SerializeField] private LocalizedString requires;
+        
         private CraftingManager _craftingManager;
         private CraftingRecipe _recipe;
         private Tooltip _tooltip;
+        private bool _isPointerOver;
 
         protected override void Start()
         {
             base.Start();
             _craftingManager = CraftingManager.current;
+        }
+
+        private void OnDestroy()
+        {
+            if (_isPointerOver)
+            {
+                TooltipManager.Hide();
+            }
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -35,12 +49,14 @@ namespace Systems.Craft
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            _isPointerOver = true;
             if (_recipe.IsInvalid) return;
             TooltipManager.Show(_tooltip);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            _isPointerOver = false;
             TooltipManager.Hide();
         }
 
@@ -48,9 +64,9 @@ namespace Systems.Craft
         {
             if (_recipe.IsInvalid) return;
             _tooltip = Tooltip.Empty()
-                .AddText("Craft: ")
+                .AddText(craft.GetLocalizedString())
                 .AddItem(item)
-                .AddText("Requires: ")
+                .AddText(requires.GetLocalizedString())
                 .AddItems(_recipe.inputs);
         }
     }

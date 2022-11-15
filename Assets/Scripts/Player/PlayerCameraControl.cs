@@ -8,6 +8,16 @@ namespace Player
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
         [SerializeField] private float size = 6f;
 
+        [SerializeField] private Transform selection;
+
+        private readonly Vector3 _constantOfProportionality = new (6, 6);
+        private bool _isSelectionNull;
+
+        private void Start()
+        {
+            _isSelectionNull = selection == null;
+        }
+
         private void Update()
         {
             var multiplier = 2;
@@ -28,15 +38,11 @@ namespace Player
             }
 
             if (size == 0) return;
-            
             size = Mathf.Clamp(size, 3, 18);
-            selection.localScale = _constantOfProportionality / size;
-            
             virtualCamera.m_Lens.OrthographicSize = size;
+
+            if (_isSelectionNull) return;
+            selection.localScale = _constantOfProportionality / size;
         }
-
-        [SerializeField] private Transform selection;
-
-        private readonly Vector3 _constantOfProportionality = new (6, 6);
     }
 }

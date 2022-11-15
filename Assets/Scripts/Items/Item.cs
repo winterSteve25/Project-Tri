@@ -1,5 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Items
 {
@@ -10,8 +10,8 @@ namespace Items
     [CreateAssetMenu(fileName = "New Item", menuName = "Items/New Item")]
     public class Item : ScriptableObject
     {
-        public string itemName;
-        public string itemDescription;
+        public LocalizedString itemName;
+        public LocalizedString itemDescription;
         public Sprite sprite;
         public int maxStackSize;
 

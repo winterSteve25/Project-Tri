@@ -2,6 +2,7 @@
 using Items;
 using Systems.Inv;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Player
 {
@@ -11,11 +12,12 @@ namespace Player
     public class PlayerInventory : MonoBehaviour
     {
         [NonSerialized] public Inventory Inv;
+        [SerializeField] private LocalizedString inventoryName;
         private InventoryManager _inventoryManager;
 
         private void Awake()
         {
-            Inv = new Inventory();
+            Inv = new Inventory(inventoryName.GetLocalizedString());
         }
 
         private void Start()
