@@ -64,9 +64,9 @@ namespace Systems.Craft
         {
             if (_recipe.IsInvalid) return;
             _tooltip = Tooltip.Empty()
-                .AddText(craft.GetLocalizedString())
+                .AddText(craft)
                 .AddItem(item)
-                .AddText(requires.GetLocalizedString())
+                .AddText(requires)
                 .AddItems(_recipe.inputs);
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Items;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Systems.Inv
 {
@@ -14,12 +15,12 @@ namespace Systems.Inv
     {
         public readonly int RowCount;
         public readonly int SlotsCount;
-        public readonly string InventoryName;
+        public readonly LocalizedString InventoryName;
         public event Action OnChanged;
         
-        private readonly ItemStack[] _itemStacks;
+        public ItemStack[] ItemStacks { get; private set; }
 
-        public Inventory(string inventoryName, int rows = 3)
+        public Inventory(LocalizedString inventoryName, int rows = 3)
         {
             // if there is an equal amount of rows;
             if (rows % 2 == 0)
@@ -35,16 +36,16 @@ namespace Systems.Inv
 
             RowCount = rows;
             InventoryName = inventoryName;
-            _itemStacks = new ItemStack[SlotsCount];
+            ItemStacks = new ItemStack[SlotsCount];
         }
         
-        public int Count => _itemStacks.Count(i => !i.IsEmpty);
+        public int Count => ItemStacks.Count(i => !i.IsEmpty);
         public ItemStack this[int index]
         {
-            get => _itemStacks[index];
+            get => ItemStacks[index];
             set
             {
-                _itemStacks[index] = value;
+                ItemStacks[index] = value;
                 OnChanged?.Invoke();
             }
         }
@@ -63,7 +64,7 @@ namespace Systems.Inv
                 return true;
             }
             
-            var i = Array.FindIndex(_itemStacks, i => i.item == itemStack.item && i.count < i.item.maxStackSize);
+            var i = Array.FindIndex(ItemStacks, i => i.item == itemStack.item && i.count < i.item.maxStackSize);
             var maxStackSize = itemStack.item.maxStackSize;
 
             if (maxStackSize <= 0)
@@ -80,17 +81,17 @@ namespace Systems.Inv
             // if there available slots
             while (i != -1)
             {
-                var existing = _itemStacks[i];
+                var existing = ItemStacks[i];
 
                 // if it can fit all of them
                 if (existing.count + itemCount < maxStackSize)
                 {
-                    _itemStacks[i] = new ItemStack(item, existing.count + itemCount);
+                    ItemStacks[i] = new ItemStack(item, existing.count + itemCount);
                     OnChanged?.Invoke();
                     return true;
                 }
                 
-                _itemStacks[i] = new ItemStack(item, maxStackSize);
+                ItemStacks[i] = new ItemStack(item, maxStackSize);
                 itemCount -= maxStackSize - existing.count;
 
                 if (itemCount <= 0)
@@ -99,7 +100,7 @@ namespace Systems.Inv
                     return true;
                 }
                 
-                i = Array.FindIndex(_itemStacks, stack => stack.item == itemStack.item && stack.count < stack.item.maxStackSize);
+                i = Array.FindIndex(ItemStacks, stack => stack.item == itemStack.item && stack.count < stack.item.maxStackSize);
             }
 
             #endregion
@@ -135,7 +136,7 @@ namespace Systems.Inv
                     }
                     else
                     {
-                        ItemSpawner.Instance.Spawn(position, itemStack);
+                        ItemSpawner.Current.Spawn(position, itemStack);
                     }
                 }
 
@@ -153,7 +154,7 @@ namespace Systems.Inv
         
         public bool Contains(ItemStack itemStack)
         {
-            var itemStacks = _itemStacks.Where(item => item.item == itemStack.item).ToArray();
+            var itemStacks = ItemStacks.Where(item => item.item == itemStack.item).ToArray();
             
             if (itemStacks.Length > 0)
             {
@@ -169,18 +170,18 @@ namespace Systems.Inv
 
             var amountToRemove = itemStack.count;
             
-            foreach (var iStack in _itemStacks.Where(i => !i.IsEmpty && i.item == itemStack.item).Reverse())
+            foreach (var iStack in ItemStacks.Where(i => !i.IsEmpty && i.item == itemStack.item).Reverse())
             {
                 if (iStack.count >= amountToRemove)
                 {
                     var remaining = iStack.count - amountToRemove;
                     if (remaining > 0)
                     {
-                        _itemStacks[Array.IndexOf(_itemStacks, iStack)] = new ItemStack(iStack.item, remaining);
+                        ItemStacks[Array.IndexOf(ItemStacks, iStack)] = new ItemStack(iStack.item, remaining);
                     }
                     else
                     {
-                        _itemStacks[Array.IndexOf(_itemStacks, iStack)] = ItemStack.Empty;
+                        ItemStacks[Array.IndexOf(ItemStacks, iStack)] = ItemStack.Empty;
                     }
                     
                     OnChanged?.Invoke();
@@ -188,7 +189,7 @@ namespace Systems.Inv
                 }
 
                 amountToRemove -= iStack.count;
-                _itemStacks[Array.IndexOf(_itemStacks, iStack)] = ItemStack.Empty;
+                ItemStacks[Array.IndexOf(ItemStacks, iStack)] = ItemStack.Empty;
             }
 
             return false;
@@ -196,7 +197,19 @@ namespace Systems.Inv
         
         private void AddToFirstAvailableSlot(ItemStack itemstack)
         {
-            _itemStacks[Array.FindIndex(_itemStacks, s => s.IsEmpty)] = itemstack;
+            ItemStacks[Array.FindIndex(ItemStacks, s => s.IsEmpty)] = itemstack;
+        }
+
+        public void Load(ItemStack[] stacks)
+        {
+            if (stacks.Length != ItemStacks.Length)
+            {
+                Debug.LogWarning("Can not load inventory as itemstacks given is not the same size as the inventory");
+                return;
+            }
+
+            ItemStacks = stacks;
+            OnChanged?.Invoke();
         }
     }
 }

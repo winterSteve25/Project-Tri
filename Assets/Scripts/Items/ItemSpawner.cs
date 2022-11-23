@@ -1,21 +1,33 @@
 ﻿using DG.Tweening;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Pool;
-using Utils;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Items
 {
-    public class ItemSpawner : Singleton<ItemSpawner>
+    /// <summary>
+    /// Manages item spawning
+    /// </summary>
+    public class ItemSpawner : MonoBehaviour
     {
+        public static ItemSpawner Current { get; private set; }
         
-        [SerializeField] private ItemBehaviour groundItemPrefab;
-        private ObjectPool<ItemBehaviour> _pool;
+        [SerializeField, AssetsOnly] private GroundItemBehaviour groundGroundItemPrefab;
+        [SerializeField] private Transform groundItemsParent;
+        
+        private ObjectPool<GroundItemBehaviour> _pool;
+
+        private void Awake()
+        {
+            Current = this;
+        }
 
         private void Start()
         {
-            _pool = new ObjectPool<ItemBehaviour>(
-                () => Instantiate(groundItemPrefab, transform),
+            _pool = new ObjectPool<GroundItemBehaviour>(
+                () => Instantiate(groundGroundItemPrefab, groundItemsParent),
                 ib => ib.gameObject.SetActive(true),
                 ib => ib.gameObject.SetActive(false),
                 ib => Destroy(ib.gameObject),
@@ -23,13 +35,13 @@ namespace Items
                 maxSize: 64
             );
         }
-
-        public ItemBehaviour Spawn(Vector2 pos, ItemStack item)
+        
+        public GroundItemBehaviour Spawn(Vector2 pos, ItemStack item, float despawnTime = -1)
         {
             if (item.count <= 0) return null;
             var itemBehaviour = _pool.Get();
             itemBehaviour.transform.position = pos;
-            itemBehaviour.Init(() => Despawn(itemBehaviour), item);
+            itemBehaviour.Init(() => Despawn(itemBehaviour), item, despawnTime);
             return itemBehaviour;
         }
 
@@ -41,9 +53,9 @@ namespace Items
                 .SetEase(Ease.OutCubic);
         }
 
-        private void Despawn(ItemBehaviour itemBehaviour)
+        private void Despawn(GroundItemBehaviour groundItemBehaviour)
         {
-            _pool.Release(itemBehaviour);
+            _pool.Release(groundItemBehaviour);
         }
     }
 }

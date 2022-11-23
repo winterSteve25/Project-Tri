@@ -12,8 +12,9 @@ namespace UI
             get => item;
             set
             {
+                PreItemChanged();
                 item = value;
-                Refresh();
+                PostItemChanged();
             }
         }
         
@@ -24,10 +25,11 @@ namespace UI
         
         protected virtual void Start()
         {
-            Refresh();
+            PreItemChanged();
+            PostItemChanged();
         }
 
-        protected virtual void Refresh()
+        protected virtual void PostItemChanged()
         {
             if (item.IsEmpty)
             {
@@ -39,14 +41,26 @@ namespace UI
             itemIcon.gameObject.SetActive(true);
             itemIcon.sprite = item.item.sprite;
 
-            if (item.count <= 0)
+            if (includeName)
             {
-                itemCount.text = includeName ? $"{item.item.itemName}" : string.Empty;
+                item.item.itemName.StringChanged += UpdateName;
             }
             else
             {
-                itemCount.text = includeName ? $"{item.item.itemName} x{item.count}" : $"x{item.count}";
+                itemCount.text = item.count <= 0 ? string.Empty : $"x{item.count}";
             }
+        }
+
+        protected virtual void PreItemChanged()
+        {
+            if (item.IsEmpty) return;
+            if (!includeName) return;
+            item.item.itemName.StringChanged -= UpdateName;
+        }
+
+        private void UpdateName(string itemName)
+        {
+            itemCount.text = item.count <= 0 ? item.item.itemName.GetLocalizedString() : $"{item.item.itemName.GetLocalizedString()} x{item.count}";
         }
     }
 }

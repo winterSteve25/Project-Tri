@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Container Tile
   m_EditorClassIdentifier: 
   tileBase: {fileID: 11400000, guid: ba762b99321aa034298a5d0abb7b46e8, type: 2}
+  hasCollider: 1

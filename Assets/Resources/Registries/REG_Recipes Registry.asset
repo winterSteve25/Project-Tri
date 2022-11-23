@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0658a1dff3f89a4d857b269e244c99c, type: 3}
+  m_Name: REG_Recipes Registry
+  m_EditorClassIdentifier: 
+  entries:
+    m_keys:
+    - {fileID: 11400000, guid: c41f1b75130240947a04e6fea5f604b4, type: 2}
+    - {fileID: 11400000, guid: ccc3fa6fc5d440a4ca6211e3b6be7a13, type: 2}
+    - {fileID: 11400000, guid: fc555dbe86f06854e912e3c09f1bc30d, type: 2}
+    m_values:
+    - Container
+    - Laser_Drill
+    - Excavator

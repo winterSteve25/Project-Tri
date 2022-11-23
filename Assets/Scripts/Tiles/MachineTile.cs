@@ -13,14 +13,14 @@ namespace Tiles
         [SerializeField] protected List<ItemStack> drops;
         [SerializeField] protected bool instantiateVariables = true;
 
-        protected TilemapManager _tilemapManager;
-        protected Vector3Int Pos;
+        protected TilemapManager TilemapManager;
+        public Vector3Int Pos { get; protected set; }
 
         protected virtual void Start()
         {
             if (!instantiateVariables) return;
-            _tilemapManager = FindObjectOfType<TilemapManager>();
-            Pos = _tilemapManager.ObstacleLayer.WorldToCell(transform.position);
+            TilemapManager = FindObjectOfType<TilemapManager>();
+            Pos = TilemapManager.ObstacleLayer.WorldToCell(transform.position);
         }
 
         public virtual void OnInteract()
@@ -50,7 +50,7 @@ namespace Tiles
                 {
                     if (i == 0 && j == 0) continue;
                     var pos = new Vector3Int(i, j) + Pos;
-                    var go = _tilemapManager.GetGameObject(pos, TilemapLayer.Obstacles);
+                    var go = TilemapManager.GetGameObject(pos, TilemapLayer.Obstacles);
                     if (go is null) continue;
                     if (go.TryGetComponent<MachineTile>(out var machine))
                     {

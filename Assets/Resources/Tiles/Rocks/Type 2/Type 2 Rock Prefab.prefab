@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0.17254902, g: 0.20000002, b: 0.24705884, a: 0}
   drops:
-  - item: {fileID: 11400000, guid: fde87653ec879ce4daca44587ff42931, type: 2}
-    count: 1
+  - count: 1
+    item: {fileID: 11400000, guid: fde87653ec879ce4daca44587ff42931, type: 2}
   instantiateVariables: 0

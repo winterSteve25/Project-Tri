@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0.5801887, g: 0.7735849, b: 0.7449286, a: 0}
   drops:
-  - item: {fileID: 11400000, guid: 73b97e1327eed72419c90da3ae95854d, type: 2}
-    count: 1
+  - count: 1
+    item: {fileID: 11400000, guid: 73b97e1327eed72419c90da3ae95854d, type: 2}
   instantiateVariables: 1
   distanceBeforeAccessDenied: 6
   inventoryName:

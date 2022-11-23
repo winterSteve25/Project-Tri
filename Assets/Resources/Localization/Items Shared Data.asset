@@ -15,7 +15,7 @@ MonoBehaviour:
   m_TableCollectionName: Items
   m_TableCollectionNameGuidString: 350c5b8640b4cbf4586931c9c2e345e2
   m_Entries:
-  - m_Id: 7519825920
+  - m_Id: 1445024331427840
     m_Key: Gem Name
     m_Metadata:
       m_Items: []
@@ -45,6 +45,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2741102931968
     m_Key: Rock Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2021528719290368
+    m_Key: Laser Item Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2021528740261888
+    m_Key: Laser Item Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2695040471625728
+    m_Key: Metal Ingot Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2695040492597248
+    m_Key: Metal Ingot Description
     m_Metadata:
       m_Items: []
   m_Metadata:

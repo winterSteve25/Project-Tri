@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Items;
-using TMPro;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 
 namespace Systems.Inv
 {
@@ -30,17 +31,17 @@ namespace Systems.Inv
         #region Serialized Fields
 
         [SerializeField] private GameObject inventory;
-        [SerializeField] private TextMeshProUGUI inventoryText;
+        [SerializeField] private LocalizeStringEvent inventoryText;
 
         public DraggedItem draggedItem;
 
         [SerializeField] private Transform slotsParent;
-        [SerializeField] private ItemSlotRow longRowPrefab;
-        [SerializeField] private ItemSlotRow shortRowPrefab;
+        [SerializeField, AssetsOnly] private ItemSlotRow longRowPrefab;
+        [SerializeField, AssetsOnly] private ItemSlotRow shortRowPrefab;
 
         #endregion
 
-        public static InventoryManager current { get; private set; }
+        public static InventoryManager Current { get; private set; }
         
         [NonSerialized] public Inventory CurrentInventory;
         [NonSerialized] public List<ItemSlot> Slots;
@@ -51,7 +52,7 @@ namespace Systems.Inv
 
         private void Awake()
         {
-            current = this;
+            Current = this;
         }
 
         private void Start()
@@ -95,7 +96,7 @@ namespace Systems.Inv
             // not already active
             CurrentInventory = inv;
             CurrentInventory.OnChanged += Refresh;
-            inventoryText.text = CurrentInventory.InventoryName;
+            inventoryText.StringReference = CurrentInventory.InventoryName;
             Refresh();
 
             StartCoroutine(ShowInventory());
@@ -213,7 +214,7 @@ namespace Systems.Inv
             // start new inventory
             CurrentInventory = newInventory;
             CurrentInventory.OnChanged += Refresh;
-            inventoryText.text = CurrentInventory.InventoryName;
+            inventoryText.StringReference = CurrentInventory.InventoryName;
             Refresh();
 
             StartCoroutine(ShowInventory());

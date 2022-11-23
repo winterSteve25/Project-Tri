@@ -12,8 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Creating World.unity
     guid: 1bcf31ab67952d1489d4ec6040cdacec
   - enabled: 1
-    path: Assets/Scenes/Cave Level 1.unity
+    path: Assets/Scenes/Generic Cave.unity
     guid: 111be7825eb97164580ffb47fd9eccb7
+  - enabled: 1
+    path: Assets/Scenes/Joining World.unity
+    guid: a6071cceb31934543a193cbba0f5f9ac
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: b60f8c5baf299b743809c23909d9143e, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 50e3bff918bbd1c44ad259fb504e2947, type: 2}

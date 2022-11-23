@@ -4,7 +4,7 @@ namespace Systems.Inv
 {
     public class DraggedItem : UIItem
     {
-        protected override void Refresh()
+        protected override void PostItemChanged()
         {
             if (item.IsEmpty)
             {

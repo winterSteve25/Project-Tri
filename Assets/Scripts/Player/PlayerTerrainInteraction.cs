@@ -1,9 +1,10 @@
-﻿using Items;
+﻿using Items.ItemTypes;
 using Systems.Inv;
 using Tiles;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
+using Utils;
 using World;
 
 namespace Player
@@ -17,15 +18,17 @@ namespace Player
         private TilemapManager _tilemapManager;
         private Tilemap _groundLayer;
         private Tilemap _obstacleLayer;
-
+        private Transform _transform;
+        
         [SerializeField] private Camera mainCamera;
 
         private void Start()
         {
-            _inventoryManager = InventoryManager.current;
+            _inventoryManager = InventoryManager.Current;
             _tilemapManager = FindObjectOfType<TilemapManager>();
             _groundLayer = _tilemapManager.GroundLayer;
             _obstacleLayer = _tilemapManager.ObstacleLayer;
+            _transform = transform;
         }
 
         private void Update()
@@ -33,45 +36,38 @@ namespace Player
             var point = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             var pos = _obstacleLayer.WorldToCell(point);
             var tileAtPos = _obstacleLayer.GetTile(pos);
-            var isEmpty = tileAtPos == null;
+            var isEmpty = tileAtPos is null;
             var overUI = EventSystem.current.IsPointerOverGameObject();
+            var playerPosition = _transform.position;
+            var playerDistance = playerPosition - point;
 
             if (overUI) return;
-            
+
             var draggingItem = _inventoryManager.draggedItem.Item;
-            var isHoldingPlaceableItem = draggingItem.item is PlaceableItem;
-            
-            if (Input.GetMouseButton(0))
+
+            if (draggingItem.item is IHoldBehaviourItem pressBehaviourItem)
             {
-                if (!isEmpty)
+                if (Input.GetMouseButton(0))
                 {
-                    _tilemapManager.RemoveTile(pos, TilemapLayer.Obstacles);
+                    pressBehaviourItem.Hold(MouseButton.Left, tileAtPos, pos, _tilemapManager, _inventoryManager, playerPosition, playerDistance);
+                }
+
+                if (Input.GetMouseButton(1))
+                {
+                    pressBehaviourItem.Hold(MouseButton.Right, tileAtPos, pos, _tilemapManager, _inventoryManager, playerPosition, playerDistance);
                 }
             }
 
-            if (Input.GetMouseButton(1) && isEmpty)
+            if (draggingItem.item is IClickedBehaviourItem clickedBehaviourItem)
             {
-                // if currently using a placeable item
-                if (isHoldingPlaceableItem)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    var placeableItem = (PlaceableItem)draggingItem.item;
-                    var tile = placeableItem.placeableTile;
-                    if (tile.CanPlace(pos, _groundLayer, _obstacleLayer))
-                    {
-                        // place the tile
-                        _tilemapManager.PlaceTile(pos, tile.tileBase, TilemapLayer.Obstacles);
+                    clickedBehaviourItem.Click(MouseButton.Left, tileAtPos, pos, _tilemapManager, _inventoryManager, playerPosition, playerDistance);
+                }
 
-                        // consume an item
-                        var itemCount = draggingItem.count - 1;
-                        if (itemCount <= 0)
-                        {
-                            _inventoryManager.DragItem(ItemStack.Empty);
-                        }
-                        else
-                        {
-                            _inventoryManager.draggedItem.Item = new ItemStack(draggingItem.item, itemCount);
-                        }
-                    }
+                if (Input.GetMouseButtonDown(1))
+                {
+                    clickedBehaviourItem.Click(MouseButton.Right, tileAtPos, pos, _tilemapManager, _inventoryManager, playerPosition, playerDistance);
                 }
             }
 

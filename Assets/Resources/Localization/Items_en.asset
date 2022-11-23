@@ -18,7 +18,7 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 7519825920
+  - m_Id: 1445024331427840
     m_Localized: Gem
     m_Metadata:
       m_Items: []
@@ -48,6 +48,23 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2741102931968
     m_Localized: Just some rock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2021528719290368
+    m_Localized: Laser Drill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2021528740261888
+    m_Localized: A laser drill, can be used to manually harvest resources
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2695040471625728
+    m_Localized: Metal Ingot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2695040492597248
+    m_Localized: A hard metal ingot that can be used to construct various machines
+      and tools
     m_Metadata:
       m_Items: []
   references:

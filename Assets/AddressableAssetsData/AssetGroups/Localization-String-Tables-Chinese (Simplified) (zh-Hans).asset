@@ -28,6 +28,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-zh-Hans
     - Preload
+  - m_GUID: eaaf42e0cd24ec0458d95be890033767
+    m_Address: Menu_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    - Preload
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 4cc7fc1ec1b7b014c8261c905c08d61d, type: 2}
   m_SchemaSet:

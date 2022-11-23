@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
-using Items;
+using Items.ItemTypes;
+using Player;
 using Systems.Inv;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,17 +14,20 @@ namespace UI.Managers
         private InventoryManager _inventoryManager;
         private Tilemap _groundLayer;
         private Tilemap _obstacleLayer;
-
+        private TilemapManager _tilemapManager;
+        private Transform _playerTransform;
+        
         [SerializeField] private Camera mainCamera;
         [SerializeField] private Canvas selectionCanvas;
         [SerializeField] private CanvasGroup selection;
 
         private void Start()
         {
-            _inventoryManager = InventoryManager.current;
-            var tilemapManager = FindObjectOfType<TilemapManager>();
-            _groundLayer = tilemapManager.GroundLayer;
-            _obstacleLayer = tilemapManager.ObstacleLayer;
+            _inventoryManager = InventoryManager.Current;
+            _tilemapManager = FindObjectOfType<TilemapManager>();
+            _groundLayer = _tilemapManager.GroundLayer;
+            _obstacleLayer = _tilemapManager.ObstacleLayer;
+            _playerTransform = FindObjectOfType<PlayerTerrainInteraction>().transform;
         }
 
         private void Update()
@@ -35,16 +39,18 @@ namespace UI.Managers
             var overUI = EventSystem.current.IsPointerOverGameObject();
             
             var draggingItem = _inventoryManager.draggedItem.Item;
-            var isHoldingPlaceableItem = draggingItem.item is PlaceableItem;
+            var isHoldingInteractableItem = draggingItem.item is IInteractableItem;
 
-            if ((isEmpty && !isHoldingPlaceableItem) || overUI)
+            if ((isEmpty && !isHoldingInteractableItem) || overUI)
             {
                 HideSelection();
             }
-            else if (isHoldingPlaceableItem)
+            else if (isHoldingInteractableItem)
             {
-                var placeableItem = (PlaceableItem) draggingItem.item;
-                if (placeableItem.placeableTile.CanPlace(pos, _groundLayer, _obstacleLayer))
+                var playerPosition = _playerTransform.position;
+                var interactable = (IInteractableItem)draggingItem.item;
+
+                if (interactable.CanInteract(tileAtPos, pos, _tilemapManager, InventoryManager.Current, playerPosition, playerPosition - point))
                 {
                     MoveSelection(pos);
                 }
@@ -53,10 +59,10 @@ namespace UI.Managers
                     HideSelection();
                 }
             }
-            else
-            {
-                MoveSelection(pos);
-            }
+            // else
+            // {
+            //     MoveSelection(pos);
+            // }
         }
 
         private void MoveSelection(Vector3Int cellPos)

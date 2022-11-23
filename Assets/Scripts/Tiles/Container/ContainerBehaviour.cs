@@ -1,4 +1,8 @@
-﻿using Player;
+﻿using System.Threading.Tasks;
+using Items;
+using Player;
+using SaveLoad.Interfaces;
+using SaveLoad.Tasks;
 using Systems.Inv;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -8,7 +12,7 @@ namespace Tiles.Container
     /// <summary>
     /// The behaviour of a container tile
     /// </summary>
-    public class ContainerBehaviour : MachineTile
+    public class ContainerBehaviour : MachineTile, IChainedWorldData
     {
         [SerializeField] private float distanceBeforeAccessDenied;
         [SerializeField] private LocalizedString inventoryName;
@@ -20,9 +24,9 @@ namespace Tiles.Container
 
         private void Awake()
         {
-            Inventory = new Inventory(inventoryName.GetLocalizedString());
+            Inventory = new Inventory(inventoryName);
             _playerInventory = FindObjectOfType<PlayerInventory>();
-            _inventoryManager = InventoryManager.current;
+            _inventoryManager = InventoryManager.Current;
         }
 
         private void Update()
@@ -50,6 +54,16 @@ namespace Tiles.Container
             {
                 _inventoryManager.Show(null);
             }
+        }
+
+        public async Task Save(SaveTask saveTask)
+        {
+            await saveTask.Serialize(Inventory.ItemStacks);
+        }
+
+        public async Task Load(LoadTask loadTask)
+        {
+            Inventory.Load(await loadTask.Deserialize<ItemStack[]>());
         }
     }
 }

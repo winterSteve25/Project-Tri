@@ -1,15 +1,22 @@
-﻿using System;
+﻿using EditorAttributes;
 using Items;
+using Sirenix.OdinInspector;
 using Systems.Inv;
+using UnityEngine;
 
 namespace Systems.Craft
 {
-    [Serializable]
-    public struct CraftingRecipe
+    public class CraftingRecipe : ScriptableObject
     {
-        public ItemStack[] inputs;
+        [ItemSlot, HideLabel]
+        [HorizontalGroup("Main", Width = 100)]
+        [BoxGroup("Main/Result")]
         public ItemStack result;
         
+        [HorizontalGroup("Main")]
+        [BoxGroup("Main/Input")]
+        public ItemStack[] inputs;
+
         public bool IsInvalid => inputs is not { Length: > 0 } || result.IsEmpty;
 
         public bool CanCraft(Inventory inventory)

@@ -1,8 +1,11 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using CommandTerminal;
 using Items;
 using Player;
+using Registries;
 using UnityEngine;
+using Utils.Data;
 using World;
 using Debug = UnityEngine.Debug;
 
@@ -55,12 +58,13 @@ public class Commands
             return;
         }
 
-        var name = args[0].String.ToLower().Replace("_", " ");
-        var item = ItemsRegistry.Instance.Items.Find(i => i.name.ToLower() == name);
+        var name = args[0].String.ToLower();
+        var item = ItemsRegistry.Instance.Entries.FirstOrDefault(entry => entry.Value.ToLower() == name).Key;
 
         if (item == null || Terminal.IssuedError)
         {
             Debug.LogError($"Can not find item with name {name}");
+            return;
         }
 
         var itemStack = new ItemStack(item, args.Length == 1 ? 1 :args[1].Int);
@@ -76,17 +80,16 @@ public class Commands
     [RegisterCommand(command_name: "items", Name = "items", Help = "Prints a list of all items loaded", MinArgCount = 0, MaxArgCount = 0)]
     private static void ListItems(CommandArg[] args)
     {
-        foreach (var i in ItemsRegistry.Instance.Items)
+        foreach (var (item, _) in ItemsRegistry.Instance.Entries)
         {
-            Debug.Log(i.name.Replace(" ", "_"));
+            Debug.Log(item.name.Replace(" ", "_"));
         }
     }
 
     [RegisterCommand(command_name: "seed", Name = "seed", Help = "Prints the seed of the current world", MinArgCount = 0, MaxArgCount = 0)]
     private static void Seed(CommandArg[] args)
     {
-        var worldGenerator = Object.FindObjectOfType<WorldGenerator>();
         if (Terminal.IssuedError) return;
-        Debug.Log("The world seed is: " + worldGenerator.WorldSeed);
+        Debug.Log("The world seed is: " + GlobalData.Read(GlobalDataKeys.CurrentWorldSettings).Seed);
     }
 }

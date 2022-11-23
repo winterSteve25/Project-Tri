@@ -10,7 +10,7 @@ namespace PlaceableTiles
     [CreateAssetMenu(fileName = "Excavator Tile", menuName = "Machines/Excavator/New Excavator Tile")]
     public class ExcavatorTile : PlaceableTile
     {
-        [SerializeField] private ExcavatorRecipes recipes;
+        [SerializeField] private MiningRecipes recipes;
         
         public override bool CanPlace(Vector3Int pos, Tilemap groundLayer, Tilemap obstaclesLayer)
         {

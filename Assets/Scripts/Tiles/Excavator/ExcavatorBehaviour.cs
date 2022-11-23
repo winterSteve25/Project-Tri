@@ -2,6 +2,7 @@
 using Items;
 using Tiles.Container;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using World;
 
@@ -12,27 +13,44 @@ namespace Tiles.Excavator
     /// </summary>
     public class ExcavatorBehaviour : MachineTile
     {
-        [SerializeField] private ExcavatorRecipes recipes;
-
+        [SerializeField] private MiningRecipes recipes;
+        [SerializeField] private Animator animator;
+        [SerializeField] private ParticleSystem dustParticles;
+        
         private TileBase _ore;
-        private ExcavatorRecipe _recipe;
-        private bool _validRecipe;
+        private MiningRecipe _recipe;
+        private bool _invalidRecipe;
         private float _progress;
-
+        private bool _startedParticles;
+        
         private ContainerBehaviour _container;
+        private static readonly int Progress = Animator.StringToHash("Progress");
 
         protected override void Start()
         {
             base.Start();
-            _ore = _tilemapManager.GetTile(Pos, TilemapLayer.Ground);
-            _recipe = recipes.recipes.Find(r => r.ore == _ore);
-            _validRecipe = _recipe.output.IsEmpty;
+            _ore = TilemapManager.GetTile(Pos, TilemapLayer.Ground);
+            _recipe = recipes.FindRecipe(_ore);
+            _invalidRecipe = _recipe.output.IsEmpty;
             GetContainer();
         }
 
         private void Update()
         {
-            if (_validRecipe) return;
+            animator.SetFloat(Progress, _progress);
+            if (_invalidRecipe)
+            {
+                _startedParticles = false;
+                dustParticles.Stop();
+                return;
+            }
+
+            if (!_startedParticles)
+            {
+                dustParticles.Play();
+                _startedParticles = true;
+            }
+            
             _progress += Time.deltaTime;
 
             if (_progress >= _recipe.duration)
@@ -54,7 +72,7 @@ namespace Tiles.Excavator
 
             if (_container is null)
             {
-                ItemSpawner.Instance.SpawnApproximatelyAt(pos, itemStack);
+                ItemSpawner.Current.SpawnApproximatelyAt(pos, itemStack);
             }
             else
             {
@@ -67,7 +85,7 @@ namespace Tiles.Excavator
             var machineTiles = GetNeighbors();
             if (machineTiles.Count <= 0) return;
             
-            var container = machineTiles.First(machine =>
+            var container = machineTiles.FirstOrDefault(machine =>
                 machine is ContainerBehaviour containerBehaviour &&
                 containerBehaviour.Inventory.Count < containerBehaviour.Inventory.SlotsCount);
 

@@ -48,6 +48,9 @@ TagManager:
   - name: Tiles
     uniqueID: 2001454567
     locked: 0
+  - name: Particles
+    uniqueID: 277663793
+    locked: 0
   - name: Ground Items
     uniqueID: 3895610891
     locked: 0
@@ -56,4 +59,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3086014657
+    locked: 0
+  - name: Overlay
+    uniqueID: 2183209541
     locked: 0

@@ -17,12 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: ab6b5f77842cbab4795bd6b95720655b
   m_SerializeEntries:
-  - m_GUID: 1678a945357e95447b917bb0f20e1348
-    m_Address: UI Elements_en
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
-    - Preload
   - m_GUID: 72a022b0dd32c0849ac66b5b07df7ee1
     m_Address: UIElements_en
     m_ReadOnly: 1
@@ -31,6 +25,12 @@ MonoBehaviour:
     - Preload
   - m_GUID: 91c87df168edbf84980ca4f7002014d4
     m_Address: Items_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  - m_GUID: 8a3a8e5e77fddb042a832045cb7dd70d
+    m_Address: Menu_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

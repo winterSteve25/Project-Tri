@@ -10,6 +10,7 @@ namespace PlaceableTiles
     public class PlaceableTile : ScriptableObject
     {
         public TileBase tileBase;
+        public bool hasCollider;
 
         public virtual bool CanPlace(Vector3Int pos, Tilemap groundLayer, Tilemap obstacleLayer)
         {

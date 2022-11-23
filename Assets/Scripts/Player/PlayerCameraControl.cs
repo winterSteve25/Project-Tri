@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Player
 {
+    /// <summary>
+    /// Controls zooming of the camera
+    /// </summary>
     public class PlayerCameraControl : MonoBehaviour
     {
         [SerializeField] private CinemachineVirtualCamera virtualCamera;

@@ -1,8 +1,11 @@
 ﻿using System.Linq;
 using Items;
 using Player;
+using Registries;
+using Sirenix.OdinInspector;
 using Systems.Inv;
 using UnityEngine;
+using UnityEngine.Localization.SmartFormat.Utilities;
 
 namespace Systems.Craft
 {
@@ -12,7 +15,7 @@ namespace Systems.Craft
 
         [SerializeField] private RecipesRegistry recipes;
         [SerializeField] private Transform craftableItems;
-        [SerializeField] private CraftableItemSlot craftingSlotPrefab;
+        [SerializeField, AssetsOnly] private CraftableItemSlot craftingSlotPrefab;
         
         private PlayerInventory _playerInventory;
         private Inventory _playerInv;
@@ -42,10 +45,10 @@ namespace Systems.Craft
                 Destroy(children.gameObject);
             }
 
-            foreach (var recipe in recipes.Recipes.Where(recipe => recipe.CanCraft(_playerInv)))
+            foreach (var recipe in recipes.Entries.Where(recipe => !recipe.Key.IsInvalid && recipe.Key.CanCraft(_playerInv)))
             {
                 Instantiate(craftingSlotPrefab, craftableItems)
-                    .Recipe = recipe;
+                    .Recipe = recipe.Key;
             }
         }
 
@@ -53,7 +56,7 @@ namespace Systems.Craft
         {
             if (!recipe.CanCraft(_playerInv)) return;
             
-            var inventoryManager = InventoryManager.current;
+            var inventoryManager = InventoryManager.Current;
             var draggedItemItem = inventoryManager.draggedItem.Item;
             
             // if dragging the same item
@@ -66,7 +69,7 @@ namespace Systems.Craft
                 }
                 
                 //create result
-                inventoryManager.DragItem(new ItemStack(draggedItemItem.item, draggedItemItem.count + 1));
+                inventoryManager.DragItem(draggedItemItem.Copy(count: draggedItemItem.count + 1));
             }
             else
             {

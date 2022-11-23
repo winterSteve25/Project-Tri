@@ -26,20 +26,20 @@ namespace Systems.Inv
 
         protected override void Start()
         {
-            _inventoryManager = InventoryManager.current;
+            _inventoryManager = InventoryManager.Current;
             _slotIndex = _inventoryManager.Slots.IndexOf(this);
-            Refresh();
+            PostItemChanged();
         }
 
-        protected override void Refresh()
+        protected override void PostItemChanged()
         {
-            base.Refresh();
+            base.PostItemChanged();
 
             if (!item.IsEmpty)
             {
                 _tooltip = Tooltip.Empty()
-                    .AddText(item.item.itemName.GetLocalizedString(), headerStyle: true)
-                    .AddText(item.item.itemDescription.GetLocalizedString());
+                    .AddText(item.item.itemName, headerStyle: true)
+                    .AddText(item.item.itemDescription);
             }
             
             if (!_isPointerOver) return;
@@ -47,7 +47,7 @@ namespace Systems.Inv
             ShowTooltip();
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (_isPointerOver)
             {
@@ -71,14 +71,15 @@ namespace Systems.Inv
         
         public void OnPointerClick(PointerEventData eventData)
         {
+            var currentInventory = _inventoryManager.CurrentInventory;
+            if (currentInventory == null) return;
+
             if (eventData.button == PointerEventData.InputButton.Left)
             {
                 if (_inventoryManager.draggedItem.Item.IsEmpty)
                 {
-                    var currInv = _inventoryManager.CurrentInventory;
-                    if (currInv == null) return;
-                    var itemStack = currInv[_slotIndex];
-                    currInv[_slotIndex] = ItemStack.Empty;
+                    var itemStack = currentInventory[_slotIndex];
+                    currentInventory[_slotIndex] = ItemStack.Empty;
                     _inventoryManager.DragItem(itemStack);
                 }
                 else
@@ -86,13 +87,15 @@ namespace Systems.Inv
                     // if currently holding the same item and has space
                     var i = item.item;
                     var draggedI = _inventoryManager.draggedItem.Item;
+                    
+                    
                     if (draggedI.item == i)
                     {
                         // if already full we swap
                         if (item.count >= i.maxStackSize)
                         {
-                            _inventoryManager.DragItem(_inventoryManager.CurrentInventory[_slotIndex]);
-                            _inventoryManager.CurrentInventory[_slotIndex] = new ItemStack(i, draggedI.count);
+                            _inventoryManager.DragItem(currentInventory[_slotIndex]);
+                            currentInventory[_slotIndex] = new ItemStack(i, draggedI.count);
                             return;
                         }
                         
@@ -100,7 +103,7 @@ namespace Systems.Inv
                         if (item.count + draggedI.count <= i.maxStackSize)
                         {
                             // fit all in 1 slot
-                            _inventoryManager.CurrentInventory[_slotIndex] = new ItemStack(i, item.count + draggedI.count);
+                            currentInventory[_slotIndex] = new ItemStack(i, item.count + draggedI.count);
                             // stop dragging
                             _inventoryManager.DragItem(ItemStack.Empty);
                             return;
@@ -108,14 +111,14 @@ namespace Systems.Inv
 
                         // how much was added
                         var amountToAdd = i.maxStackSize - item.count;
-                        _inventoryManager.CurrentInventory[_slotIndex] = new ItemStack(i, i.maxStackSize);
+                        currentInventory[_slotIndex] = new ItemStack(i, i.maxStackSize);
                         // drag the remaining
                         _inventoryManager.DragItem(new ItemStack(i, draggedI.count - amountToAdd));
                     }
                     else
                     {
                         var currentItem = item;
-                        _inventoryManager.CurrentInventory[_slotIndex] = draggedI;
+                        currentInventory[_slotIndex] = draggedI;
                         _inventoryManager.DragItem(currentItem);
                     }
 
@@ -123,7 +126,7 @@ namespace Systems.Inv
                     if (!item.IsEmpty) return;
                     
                     // dump all in slot
-                    _inventoryManager.CurrentInventory[_slotIndex] = draggedI;
+                    currentInventory[_slotIndex] = draggedI;
                     _inventoryManager.DragItem(ItemStack.Empty);
                 }
             }
@@ -133,7 +136,7 @@ namespace Systems.Inv
                 if (_inventoryManager.draggedItem.Item.IsEmpty)
                 {
                     // split the stack in half and drag one half
-                    var currInv = _inventoryManager.CurrentInventory;
+                    var currInv = currentInventory;
                     var currItem = currInv[_slotIndex];
                     var half = currItem.count / 2;
                     var itemStack = ItemStack.Empty;
@@ -157,7 +160,7 @@ namespace Systems.Inv
                     var draggedI = _inventoryManager.draggedItem.Item;
                     if (draggedI.item == i && item.count < i.maxStackSize)
                     {
-                        _inventoryManager.CurrentInventory[_slotIndex] = new ItemStack(i, item.count + 1);
+                        currentInventory[_slotIndex] = new ItemStack(i, item.count + 1);
                         _inventoryManager.draggedItem.Item = new ItemStack(i, draggedI.count - 1);
                         return;
                     }
@@ -165,7 +168,7 @@ namespace Systems.Inv
                     // current slot is empty
                     if (item.IsEmpty)
                     {
-                        _inventoryManager.CurrentInventory[_slotIndex] = new ItemStack(draggedI.item, 1);
+                        currentInventory[_slotIndex] = new ItemStack(draggedI.item, 1);
                         _inventoryManager.draggedItem.Item = new ItemStack(draggedI.item, draggedI.count - 1);
                     }
                 }

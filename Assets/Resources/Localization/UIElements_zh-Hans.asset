@@ -27,11 +27,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7189229432832
-    m_Localized: 'Craft: '
+    m_Localized: "\u5408\u6210\uFF1A"
     m_Metadata:
       m_Items: []
   - m_Id: 7226567127040
-    m_Localized: 'Requires: '
+    m_Localized: "\u9700\u8981\uFF1A"
     m_Metadata:
       m_Items: []
   references:

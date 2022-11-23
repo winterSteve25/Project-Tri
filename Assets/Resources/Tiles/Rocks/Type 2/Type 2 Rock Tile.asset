@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Type 2 Rock Tile
   m_EditorClassIdentifier: 
   tileBase: {fileID: 11400000, guid: b42bd184e62b1bc47a6ff8d554bd2d0e, type: 2}
+  hasCollider: 1

@@ -1,88 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Utils.Data
 {
     public static class GlobalData
     {
-        private static readonly Dictionary<string, object> Data = new();
+        private static readonly SerializableData Instance = new();
 
-        private static void Set(string key, object value)
+        public static void Set<T>(DataSignature<T> signature, T value)
         {
-            if (Data.ContainsKey(key))
-            {
-                Data[key] = value;
-                return;
-            }
-            Data.Add(key, value);
-        }
-
-        public static void Set<T>(GlobalDataSignature<T> signature, T value)
-        {
-            Set(signature.Key, value);
+            Instance.Set(signature, value);
         }
         
-        private static T Read<T>(string key)
+        public static T Read<T>(DataSignature<T> signature)
         {
-            return (T)Data[key];
+            return Instance.Read<T>(signature);
         }
 
-        public static T Read<T>(GlobalDataSignature<T> signature)
+        public static void ComputeIfPresent<T>(DataSignature<T> signature, Action<T> action)
         {
-            return Read<T>(signature.Key);
+            Instance.ComputeIfPresent(signature, action);
         }
 
-        private static void ComputeIfPresent<T>(string key, Action<T> action)
+        public static bool HasKey<T>(DataSignature<T> signature)
         {
-            if (Data.ContainsKey(key))
-            {
-                action((T) Data[key]);
-            }
+            return Instance.HasKey(signature);
+        }
+
+        public static bool ExistAnd<T>(DataSignature<T> key, Predicate<T> condition)
+        {
+            return Instance.ExistAnd(key, condition);
+        }
+
+        public static bool NotExistOr<T>(DataSignature<T> key, Predicate<T> condition)
+        {
+            return Instance.NotExistOr(key, condition);
         }
         
-        private static void ComputeIfPresent<T>(GlobalDataSignature<T> signature, Action<T> action)
+        public static void Remove<T>(DataSignature<T> signature)
         {
-            ComputeIfPresent(signature.Key, action);
+            Instance.Remove(signature);
         }
 
-        public static bool HasKey(string key)
+        public static T GetOrDefault<T>(DataSignature<T> signature, T def)
         {
-            return Data.ContainsKey(key);
-        }
-
-        public static bool HasKey<T>(GlobalDataSignature<T> signature)
-        {
-            return HasKey(signature.Key);
-        }
-
-        public static bool ExistAnd<T>(string key, Predicate<T> condition)
-        {
-            return HasKey(key) && condition(Read<T>(key));
-        }
-        
-        public static void Remove(string key)
-        {
-            Data.Remove(key);
-        }
-
-        public static void Remove<T>(GlobalDataSignature<T> signature)
-        {
-            Remove(signature.Key);
-        }
-
-        private static T GetOrDefault<T>(string key, T def)
-        {
-            if (HasKey(key))
-            {
-                return (T)Data[key];
-            }
-
-            return def;
-        }
-        
-        public static T GetOrDefault<T>(GlobalDataSignature<T> signature, T def)
-        {
-            return GetOrDefault(signature.Key, def);
+            return Instance.GetOrDefault(signature, def);
         }
     }
 }
