@@ -1,9 +1,12 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Items;
+using Items.ItemTypes;
 using SaveLoad;
 using SaveLoad.Interfaces;
 using Systems.Inv;
+using UI.Managers;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -14,25 +17,32 @@ namespace Player
     /// </summary>
     public class PlayerInventory : MonoBehaviour, ICustomWorldData
     {
-        [NonSerialized] public Inventory Inv;
-        [SerializeField] private LocalizedString inventoryName;
-        private InventoryManager _inventoryManager;
+        public Inventory Inv { get; private set; }
+        public Inventory Equipments { get; private set; }
 
+        [SerializeField] private ItemStack[] startingEquipments;
+        [SerializeField] private ItemStack[] startingInventory;
+        [SerializeField] private LocalizedString inventoryName;
+
+        
         private void Awake()
         {
-            Inv = new Inventory(inventoryName);
+            Inv = new Inventory(inventoryName, 40);
+            Equipments = new Inventory(null, 3);
         }
 
         private void Start()
         {
-            _inventoryManager = InventoryManager.Current;
-        }
+            var pos = transform.position;
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            foreach (var equipment in startingEquipments)
             {
-                _inventoryManager.Show(Inv);
+                Equipments.Add(pos, equipment);
+            }
+
+            foreach (var item in startingInventory)
+            {
+                Inv.Add(pos, item);
             }
         }
 
@@ -45,10 +55,13 @@ namespace Player
 
         public Task Save()
         {
-            var draggingItem = InventoryManager.Current.draggedItem.Item;
+            // tries to add dragging item to inventory
+            var draggingItem = ItemDragManager.Current.DraggedItem.Item;
             if (draggingItem.IsEmpty) return Task.CompletedTask;
             TryAddItem(transform.position, draggingItem);
-            InventoryManager.Current.DragItem(ItemStack.Empty);
+            ItemDragManager.Current.DragItem(ItemStack.Empty);
+            
+            // no data are being saved here. inventory data being saved in PlayerDataSaver 
             return Task.CompletedTask;
         }
 

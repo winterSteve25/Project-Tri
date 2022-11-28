@@ -1,15 +1,16 @@
 ﻿using JetBrains.Annotations;
-using Systems.Inv;
+using Tiles;
+using UI.Menu.EscapeMenu;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using World;
+using World.Tiles;
 
 namespace Items.ItemTypes
 {
     public interface IInteractableItem
     {
-        bool CanInteract([CanBeNull] TileBase tileAtLocation, Vector3Int pos,
-            TilemapManager tilemapManager, InventoryManager inventoryManager, Vector3 playerPosition,
+        bool CanInteract(ref ItemStack itemStack, [CanBeNull] TileInstance tileAtLocation, Vector3Int pos,
+            TilemapManager tilemapManager, InventoryUIController inventoryUIController,
+            EquipmentsController equipmentsController, Vector3 playerPosition,
             Vector3 playerDistanceToClickedPoint);
     }
 }

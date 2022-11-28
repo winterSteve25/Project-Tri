@@ -18,14 +18,6 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 1445024331427840
-    m_Localized: Gem
-    m_Metadata:
-      m_Items: []
-  - m_Id: 115212775424
-    m_Localized: A glowy gem
-    m_Metadata:
-      m_Items: []
   - m_Id: 173488435200
     m_Localized: Excavator
     m_Metadata:
@@ -58,13 +50,29 @@ MonoBehaviour:
     m_Localized: A laser drill, can be used to manually harvest resources
     m_Metadata:
       m_Items: []
-  - m_Id: 2695040471625728
-    m_Localized: Metal Ingot
+  - m_Id: 3551037553602560
+    m_Localized: Kiterite Gem
     m_Metadata:
       m_Items: []
-  - m_Id: 2695040492597248
+  - m_Id: 3551037587156992
+    m_Localized: A kite shaped glowing blue gem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3551037591351296
+    m_Localized: Sqoil Ingot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3551037591351297
     m_Localized: A hard metal ingot that can be used to construct various machines
       and tools
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4253060620054528
+    m_Localized: Matter Obliterator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4253060645220352
+    m_Localized: Destroys tiles that you touch
     m_Metadata:
       m_Items: []
   references:

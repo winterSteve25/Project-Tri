@@ -13,28 +13,16 @@ namespace Systems.Inv
     [Serializable]
     public class Inventory
     {
-        public readonly int RowCount;
         public readonly int SlotsCount;
         public readonly LocalizedString InventoryName;
         public event Action OnChanged;
-        
+        public event Action<ItemStack, bool> OnItemChanged; 
+
         public ItemStack[] ItemStacks { get; private set; }
 
-        public Inventory(LocalizedString inventoryName, int rows = 3)
+        public Inventory(LocalizedString inventoryName, int slotsCount = 30)
         {
-            // if there is an equal amount of rows;
-            if (rows % 2 == 0)
-            {
-                var half = rows / 2;
-                SlotsCount = half * 6 + half * 5;
-            }
-            else
-            {
-                var halfHigher = Mathf.CeilToInt(rows * 0.5f);
-                SlotsCount = halfHigher * 6 + (halfHigher - 1) * 5;
-            }
-
-            RowCount = rows;
+            SlotsCount = slotsCount;
             InventoryName = inventoryName;
             ItemStacks = new ItemStack[SlotsCount];
         }
@@ -49,14 +37,26 @@ namespace Systems.Inv
                 OnChanged?.Invoke();
             }
         }
-
+        
         /// <summary>
         /// Attempts to add itemstack to inventory 
         /// </summary>
         /// <param name="position">Position that it will spawn the access items to the ground if inventory can not fit</param>
         /// <param name="itemStack">ItemStack to add</param>
-        /// <returns></returns>
+        /// <returns>If the item was added</returns>
         public bool Add(Vector2 position, ItemStack itemStack)
+        {
+            var result = AddInternal(position, itemStack);
+
+            if (result)
+            {
+                OnItemChanged?.Invoke(itemStack, true);
+            }
+            
+            return result;
+        }
+        
+        private bool AddInternal(Vector2 position, ItemStack itemStack)
         {
             if (itemStack.IsEmpty)
             {
@@ -166,6 +166,18 @@ namespace Systems.Inv
 
         public bool Remove(ItemStack itemStack)
         {
+            var result = RemoveInternal(itemStack);
+
+            if (result)
+            {
+                OnItemChanged?.Invoke(itemStack, false);
+            }
+            
+            return result;
+        }
+        
+        private bool RemoveInternal(ItemStack itemStack)
+        {
             if (!Contains(itemStack)) return false;
 
             var amountToRemove = itemStack.count;
@@ -210,6 +222,19 @@ namespace Systems.Inv
 
             ItemStacks = stacks;
             OnChanged?.Invoke();
+        }
+
+        public void RefreshItemSlotsWithContent(ItemSlot[] slots)
+        {
+            RefreshItemSlotsWithContent(slots, this);
+        }
+        
+        public static void RefreshItemSlotsWithContent(ItemSlot[] slots, Inventory inventory)
+        {
+            for (var i = 0; i < slots.Length; i++)
+            {
+                slots[i].Item = inventory == null ? ItemStack.Empty : inventory[i];
+            }
         }
     }
 }

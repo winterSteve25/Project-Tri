@@ -1,12 +1,13 @@
-﻿using UnityEngine;
-using UnityEngine.Tilemaps;
+﻿using Tiles;
+using UnityEngine;
+using World.Tiles;
 
 namespace World.Nodes.Tiles
 {
-    [CreateNodeMenu("Terrain/Tile Placer")]
+    [CreateNodeMenu("Terrain Gen/Terrain/Tile Placer")]
     public class TilePlacer : TerrainGenerator
     {
-        [SerializeField] private TileBase material;
+        [SerializeField] private TriTile material;
         [SerializeField] private TilemapLayer layer;
         [SerializeField] private string message;
         
@@ -22,13 +23,13 @@ namespace World.Nodes.Tiles
                 return;
             }
 
-            var tiles = new TileBase[p.Length];
+            var tiles = new TileInstance[p.Length];
             for (var i = 0; i < tiles.Length; i++)
             {
-                tiles[i] = material;
+                tiles[i] = new TileInstance(material);
             }
 
-            tilemapManager.PlaceTile(p, tiles, layer);
+            tilemapManager.PlaceTile(p, tiles, layer, false, false);
         }
 
         public override string StageMessage()

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a2a5514181a43058a2ee9a710c9bfca, type: 3}
+  m_Name: T_Container Tile
+  m_EditorClassIdentifier: 
+  tileBase: {fileID: 11400000, guid: ba762b99321aa034298a5d0abb7b46e8, type: 2}
+  color: {r: 1, g: 1, b: 1, a: 0}
+  hardness: 0.8
+  drops:
+  - count: 1
+    item: {fileID: 11400000, guid: 73b97e1327eed72419c90da3ae95854d, type: 2}
+  hasCollider: 0

@@ -15,12 +15,12 @@ MonoBehaviour:
   m_TableCollectionName: Items
   m_TableCollectionNameGuidString: 350c5b8640b4cbf4586931c9c2e345e2
   m_Entries:
-  - m_Id: 1445024331427840
-    m_Key: Gem Name
+  - m_Id: 3551037553602560
+    m_Key: Kiterite Gem Name
     m_Metadata:
       m_Items: []
-  - m_Id: 115212775424
-    m_Key: Gem Description
+  - m_Id: 3551037587156992
+    m_Key: Kiterite Gem Description
     m_Metadata:
       m_Items: []
   - m_Id: 173488435200
@@ -55,12 +55,20 @@ MonoBehaviour:
     m_Key: Laser Item Description
     m_Metadata:
       m_Items: []
-  - m_Id: 2695040471625728
-    m_Key: Metal Ingot Name
+  - m_Id: 3551037591351296
+    m_Key: Sqoil Ingot Name
     m_Metadata:
       m_Items: []
-  - m_Id: 2695040492597248
-    m_Key: Metal Ingot Description
+  - m_Id: 3551037591351297
+    m_Key: Sqoil Ingot Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4253060620054528
+    m_Key: Chain Saw Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4253060645220352
+    m_Key: Chain Saw Description
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -17,7 +17,13 @@ namespace UI.Utilities
 
         private void Update()
         {
-            layoutElement.enabled = text is { Count: > 0 } && text.Any(t => t.text.Length > characterLimit);
+            Refresh();
+        }
+
+        public void Refresh()
+        {
+            if (text == null) return;
+            layoutElement.enabled = text.Count > 0 && text.Where(t => t != null).Any(t => t.text.Length > characterLimit);
         }
     }
 }

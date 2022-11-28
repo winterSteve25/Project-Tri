@@ -6,7 +6,7 @@ using UnityEngine.Localization;
 
 namespace Editor.Registries
 {
-    public sealed class ItemTableEntry : BaseTableEntry<Item>
+    public sealed class ItemTableEntry : BaseTableEntry<TriItem>
     {
         [TableColumnWidth(50, false)]
         [ShowInInspector, PreviewField(50, ObjectFieldAlignment.Center)]
@@ -53,7 +53,7 @@ namespace Editor.Registries
             }
         }
 
-        public ItemTableEntry(Item o) : base(o)
+        public ItemTableEntry(TriItem o) : base(o)
         {
         }
     }

@@ -1,13 +1,13 @@
 ﻿using System.Linq;
+using Items;
 using Registries;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using Systems.Craft;
+using Tiles;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using Item = Items.Item;
 
 namespace Editor.Registries
 {
@@ -39,11 +39,11 @@ namespace Editor.Registries
                     var path = menuItem.GetFullPath();
                     if (path.StartsWith("Tiles"))
                     {
-                        tree.Add(path, new BaseTable<TileTableEntry, TileBase>(Resources.LoadAll<TileBase>(path), x => new TileTableEntry(x)));
-                    } 
+                        tree.Add(path, new BaseTable<TileTableEntry, TriTile>(Resources.LoadAll<TriTile>(path), x => new TileTableEntry(x)));
+                    }
                     else if (path.StartsWith("Items"))
                     {
-                        tree.Add(path, new BaseTable<ItemTableEntry, Item>(Resources.LoadAll<Item>(path), x => new ItemTableEntry(x)));
+                        tree.Add(path, new BaseTable<ItemTableEntry, TriItem>(Resources.LoadAll<TriItem>(path), x => new ItemTableEntry(x)));
                     }
                 });
             
@@ -80,12 +80,12 @@ namespace Editor.Registries
 
                 if (SirenixEditorGUI.ToolbarButton(new GUIContent("Create Tile")))
                 {
-                    ScriptableObjectCreator.ShowDialog<TileBase>("Assets/Resources/Tiles/", TrySelectMenuItemWithObject);
+                    ScriptableObjectCreator.ShowDialog<TriTile>("Assets/Resources/Tiles/", TrySelectMenuItemWithObject);
                 }
                 
                 if (SirenixEditorGUI.ToolbarButton(new GUIContent("Create Item")))
                 {
-                    ScriptableObjectCreator.ShowDialog<Item>("Assets/Resources/Items/", TrySelectMenuItemWithObject);
+                    ScriptableObjectCreator.ShowDialog<TriItem>("Assets/Resources/Items/", TrySelectMenuItemWithObject);
                 }
                 
                 if (SirenixEditorGUI.ToolbarButton(new GUIContent("Create Recipe")))
@@ -101,27 +101,18 @@ namespace Editor.Registries
             tree.DefaultMenuStyle.IconSize = 28.00f;
             tree.Config.DrawSearchToolbar = true;
 
-            tree.Add("Tiles", new BaseTable<TileTableEntry, TileBase>(TilesRegistry.Instance.Entries.Keys.ToList(), x => new TileTableEntry(x)));
-            tree.Add("Items", new BaseTable<ItemTableEntry, Item>(ItemsRegistry.Instance.Entries.Keys.ToList(), x => new ItemTableEntry(x)));
+            tree.Add("Tiles", new BaseTable<TileTableEntry, TriTile>(TilesRegistry.Instance.Entries.Keys.ToList(), x => new TileTableEntry(x)));
+            tree.Add("Items", new BaseTable<ItemTableEntry, TriItem>(ItemsRegistry.Instance.Entries.Keys.ToList(), x => new ItemTableEntry(x)));
             tree.Add("Recipes", new BaseTable<RecipeTableEntry, CraftingRecipe>(RecipesRegistry.Instance.Entries.Keys.ToList(), x => new RecipeTableEntry(x)));
             
-            tree.AddAllAssetsAtPath("Tiles", "Assets/Resources/Tiles/", typeof(Tile), true)
+            tree.AddAllAssetsAtPath("Tiles", "Assets/Resources/Tiles/", typeof(TriTile), true)
                 .ForEach(AddDragAndDeleteHandlers)
-                .AddIcons<Tile>(x =>
-                {
-                    if (x.sprite != null) return x.sprite;
-                    return x.gameObject.TryGetComponent<SpriteRenderer>(out var spriteRenderer) ? spriteRenderer.sprite : null;
-                });
-            tree.AddAllAssetsAtPath("Tiles", "Assets/Resources/Tiles/", typeof(RuleTile), true)
+                .AddIcons<TriTile>(x => x.Sprite);
+
+            tree.AddAllAssetsAtPath("Items", "Assets/Resources/Items/", typeof(TriItem), true)
                 .ForEach(AddDragAndDeleteHandlers)
-                .AddIcons<RuleTile>(x =>
-                {
-                    if (x.m_DefaultSprite != null) return x.m_DefaultSprite;
-                    return x.m_DefaultGameObject.TryGetComponent<SpriteRenderer>(out var spriteRenderer) ? spriteRenderer.sprite : null;
-                });
-            tree.AddAllAssetsAtPath("Items", "Assets/Resources/Items/", typeof(Item), true)
-                .ForEach(AddDragAndDeleteHandlers)
-                .AddIcons<Item>(x => x.sprite);
+                .AddIcons<TriItem>(x => x.sprite);
+            
             tree.AddAllAssetsAtPath("Recipes", "Assets/Resources/Recipes/", typeof(CraftingRecipe), true)
                 .ForEach(AddDragAndDeleteHandlers)
                 .AddIcons<CraftingRecipe>(x => x.result.IsEmpty ? null : x.result.item.sprite);

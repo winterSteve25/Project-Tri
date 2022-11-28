@@ -79,10 +79,9 @@ namespace Utils
         {
             // animator.SetTrigger(Start);
             // yield return new WaitForSeconds(transitionTime);
-            
-            fade.gameObject.SetActive(true);
+
             var duration = transitionTime * 0.25f;
-            fade.DOFade(1, duration);
+            fade.FadeIn(duration);
             yield return new WaitForSeconds(duration);
         }
 

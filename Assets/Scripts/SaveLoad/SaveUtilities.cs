@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using MsgPack.Serialization;
 using SaveLoad.Interfaces;
 using Utils.Data;
-using World;
+using World.Generation;
 
 namespace SaveLoad
 {
@@ -122,6 +123,11 @@ namespace SaveLoad
         public static MessagePackSerializer<T> GetSerializer<T>()
         {
             return MessagePackSerializer.Get<T>();
+        }
+        
+        public static MessagePackSerializer GetSerializer(Type type)
+        {
+            return MessagePackSerializer.Get(type);
         }
 
         public static WorldSettings GetWorldSettings()

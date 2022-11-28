@@ -34,6 +34,7 @@ namespace UI
             if (item.IsEmpty)
             {
                 itemIcon.gameObject.SetActive(false);
+                if (itemCount == null) return;
                 itemCount.text = "";
                 return;
             }
@@ -47,6 +48,7 @@ namespace UI
             }
             else
             {
+                if (itemCount == null) return;
                 itemCount.text = item.count <= 0 ? string.Empty : $"x{item.count}";
             }
         }
@@ -60,6 +62,7 @@ namespace UI
 
         private void UpdateName(string itemName)
         {
+            if (itemCount == null) return;
             itemCount.text = item.count <= 0 ? item.item.itemName.GetLocalizedString() : $"{item.item.itemName.GetLocalizedString()} x{item.count}";
         }
     }

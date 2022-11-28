@@ -2,8 +2,6 @@
 using UnityEngine;
 #if ODIN_INSPECTOR
 using Sirenix.OdinInspector.Editor;
-using Sirenix.Utilities;
-using Sirenix.Utilities.Editor;
 #endif
 
 namespace XNodeEditor {

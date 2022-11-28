@@ -32,6 +32,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   maxStackSize: 16
+  equipmentType: 00000000
   placeableTile: {fileID: 11400000, guid: 9fa81131e20ccdd46a1a9a3a6c800e2a, type: 2}
   references:
     version: 2

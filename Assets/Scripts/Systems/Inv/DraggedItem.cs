@@ -6,15 +6,18 @@ namespace Systems.Inv
     {
         protected override void PostItemChanged()
         {
-            if (item.IsEmpty)
+            if (Item.IsEmpty)
             {
                 gameObject.SetActive(false);
-                itemCount.text = "";
                 return;
             }
+
+            if (!gameObject.activeSelf)
+            {
+                gameObject.SetActive(true);
+            }
             
-            itemIcon.sprite = item.item.sprite;
-            itemCount.text = $"x{item.count}";
+            base.PostItemChanged();
         }
     }
 }

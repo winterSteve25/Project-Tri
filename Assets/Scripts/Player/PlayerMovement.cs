@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Utils;
 
 namespace Player
 {
@@ -20,8 +21,8 @@ namespace Player
 
         private void Update()
         {
-            _dir.x = Input.GetAxis("Horizontal");
-            _dir.y = Input.GetAxis("Vertical");
+            _dir.x = GameInput.GetAxis("Horizontal");
+            _dir.y = GameInput.GetAxis("Vertical");
         }
 
         private void FixedUpdate()

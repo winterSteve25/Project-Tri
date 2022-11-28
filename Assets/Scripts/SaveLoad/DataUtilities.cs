@@ -24,7 +24,7 @@ namespace SaveLoad
                     compressArray = memoryStream.ToArray();
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 // ignored
             }
@@ -49,7 +49,7 @@ namespace SaveLoad
                     decompressedArray = decompressedStream.ToArray();
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 // ignored
             }

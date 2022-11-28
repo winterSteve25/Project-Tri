@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Utils;
+using World.Generation;
 using XNode;
 
 namespace World.Nodes.PosGenerators
 {
-    [CreateNodeMenu("Pos Generators/Clusterizer")]
+    [CreateNodeMenu("Terrain Gen/Pos Generators/Clusterizer")]
     public class PositionClusterizer : Node
     {
         [SerializeField, Input] private int seed;

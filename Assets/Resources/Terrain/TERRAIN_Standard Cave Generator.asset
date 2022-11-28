@@ -1,5 +1,171 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7979479515527382645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e5f47bb0674d49879330b406f6d51f, type: 3}
+  m_Name: Tile Placer
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -296, y: 1224}
+  ports:
+    keys:
+    - positions
+    - lastStage
+    - nextStage
+    values:
+    - _fieldName: positions
+      _node: {fileID: -7979479515527382645}
+      _typeQualifiedName: UnityEngine.Vector3Int[], UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: clusterizedPositions
+        node: {fileID: -7835030194599647035}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: lastStage
+      _node: {fileID: -7979479515527382645}
+      _typeQualifiedName: System.Byte, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: nextStage
+        node: {fileID: -4858775074893914768}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: nextStage
+      _node: {fileID: -7979479515527382645}
+      _typeQualifiedName: System.Byte, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  lastStage: 0
+  nextStage: 0
+  material: {fileID: 11400000, guid: 7a19f2885be593348b6d2e253b6ca525, type: 2}
+  layer: 0
+  message: Placing ores with funny name...
+  positions: []
+--- !u!114 &-7835030194599647035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95c8199a873e44dd950123084e265725, type: 3}
+  m_Name: Position Clusterizer
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -584, y: 1192}
+  ports:
+    keys:
+    - seed
+    - worldGenConfiguration
+    - positions
+    - clusterizedPositions
+    values:
+    - _fieldName: seed
+      _node: {fileID: -7835030194599647035}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: seed
+        node: {fileID: -4675727750206390560}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: worldGenConfiguration
+      _node: {fileID: -7835030194599647035}
+      _typeQualifiedName: World.Generation.WorldGenConfiguration, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: configuration
+        node: {fileID: -4675727750206390560}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: positions
+      _node: {fileID: -7835030194599647035}
+      _typeQualifiedName: UnityEngine.Vector3Int[], UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: positions
+        node: {fileID: -4995324529805704370}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: clusterizedPositions
+      _node: {fileID: -7835030194599647035}
+      _typeQualifiedName: UnityEngine.Vector3Int[], UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: positions
+        node: {fileID: -7979479515527382645}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  seed: 0
+  worldGenConfiguration:
+    xOffset: 0
+    yOffset: 0
+    width: 0
+    height: 0
+  positions: []
+  clusterizedPositions: []
+  minSize: {x: 4, y: 4}
+  maxSize: {x: 8, y: 8}
+  distanceEffect:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  noiseScale: 15
+  noiseOctaves: 3
+  noiseThreshold: 0.3
+  comparison: 1
 --- !u!114 &-5367810070130064883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,7 +179,7 @@ MonoBehaviour:
   m_Name: Noise Generator
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -856, y: 472}
+  position: {x: -888, y: 408}
   ports:
     keys:
     - seed
@@ -34,8 +200,8 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: worldGenConfiguration
       _node: {fileID: -5367810070130064883}
-      _typeQualifiedName: World.WorldGenConfiguration, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      _typeQualifiedName: World.Generation.WorldGenConfiguration, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: configuration
         node: {fileID: -4675727750206390560}
@@ -66,6 +232,71 @@ MonoBehaviour:
   octaves: 2
   persistence: 0.5
   lacunarity: 1.87
+--- !u!114 &-4995324529805704370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94ce1a0a11a4e72b0b964c24d37e4b4, type: 3}
+  m_Name: Poisson Pos Generator
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -872, y: 1304}
+  ports:
+    keys:
+    - seed
+    - worldGenConfiguration
+    - positions
+    values:
+    - _fieldName: seed
+      _node: {fileID: -4995324529805704370}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: seed
+        node: {fileID: -4675727750206390560}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: worldGenConfiguration
+      _node: {fileID: -4995324529805704370}
+      _typeQualifiedName: World.Generation.WorldGenConfiguration, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: configuration
+        node: {fileID: -4675727750206390560}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: positions
+      _node: {fileID: -4995324529805704370}
+      _typeQualifiedName: UnityEngine.Vector3Int[], UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: positions
+        node: {fileID: -7835030194599647035}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  seed: 0
+  worldGenConfiguration:
+    xOffset: 0
+    yOffset: 0
+    width: 0
+    height: 0
+  positions: []
+  radius: 32
+  numSamplesBeforeDiscard: 15
 --- !u!114 &-4858775074893914768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,16 +345,19 @@ MonoBehaviour:
       _node: {fileID: -4858775074893914768}
       _typeQualifiedName: System.Byte, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-      connections: []
+      connections:
+      - fieldName: lastStage
+        node: {fileID: -7979479515527382645}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   lastStage: 0
   nextStage: 0
-  material: {fileID: 11400000, guid: 5217cae213c5e2c4b85d619766cfa0cf, type: 2}
+  material: {fileID: 11400000, guid: 599b649a4dd62204689dc360da64bed6, type: 2}
   layer: 0
-  message: Placing ores...
+  message: Placing ores with kinda normal name...
   positions: []
 --- !u!114 &-4675727750206390560
 MonoBehaviour:
@@ -170,10 +404,16 @@ MonoBehaviour:
         node: {fileID: -5367810070130064883}
         reroutePoints: []
       - fieldName: seed
-        node: {fileID: -1730303136442170667}
+        node: {fileID: -7835030194599647035}
         reroutePoints: []
       - fieldName: seed
         node: {fileID: -1694120301273215962}
+        reroutePoints: []
+      - fieldName: seed
+        node: {fileID: -1730303136442170667}
+        reroutePoints: []
+      - fieldName: seed
+        node: {fileID: -4995324529805704370}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -217,17 +457,20 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: configuration
       _node: {fileID: -4675727750206390560}
-      _typeQualifiedName: World.WorldGenConfiguration, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      _typeQualifiedName: World.Generation.WorldGenConfiguration, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: worldGenConfiguration
         node: {fileID: -5367810070130064883}
         reroutePoints: []
       - fieldName: worldGenConfiguration
+        node: {fileID: 174733671816765058}
+        reroutePoints: []
+      - fieldName: worldGenConfiguration
         node: {fileID: 1513083154179965257}
         reroutePoints: []
       - fieldName: worldGenConfiguration
-        node: {fileID: 174733671816765058}
+        node: {fileID: -7835030194599647035}
         reroutePoints: []
       - fieldName: worldGenConfiguration
         node: {fileID: -1694120301273215962}
@@ -235,21 +478,24 @@ MonoBehaviour:
       - fieldName: worldGenConfiguration
         node: {fileID: -1730303136442170667}
         reroutePoints: []
+      - fieldName: worldGenConfiguration
+        node: {fileID: -4995324529805704370}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   nextStage: 0
-  seed: 1123
+  seed: 0
   configuration:
     xOffset: 0
     yOffset: 0
     width: 0
     height: 0
-  xOffset: -256
-  yOffset: -256
-  width: 512
-  height: 512
+  xOffset: -128
+  yOffset: -128
+  width: 256
+  height: 256
 --- !u!114 &-1730303136442170667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,8 +555,8 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: worldGenConfiguration
       _node: {fileID: -1730303136442170667}
-      _typeQualifiedName: World.WorldGenConfiguration, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      _typeQualifiedName: World.Generation.WorldGenConfiguration, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: configuration
         node: {fileID: -4675727750206390560}
@@ -379,8 +625,8 @@ MonoBehaviour:
     values:
     - _fieldName: worldGenConfiguration
       _node: {fileID: -1694120301273215962}
-      _typeQualifiedName: World.WorldGenConfiguration, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      _typeQualifiedName: World.Generation.WorldGenConfiguration, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: configuration
         node: {fileID: -4675727750206390560}
@@ -455,10 +701,10 @@ MonoBehaviour:
   m_Name: TERRAIN_Standard Cave Generator
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: 7193638847616690435}
   - {fileID: 3571012258695307292}
-  - {fileID: -545643090667201805}
-  - {fileID: -4675727750206390560}
+  - {fileID: 7193638847616690435}
+  - {fileID: 3587941841056028788}
+  - {fileID: 3571012258695307292}
   - {fileID: 174733671816765058}
   - {fileID: 690672949390182337}
   - {fileID: 6810664002479303662}
@@ -467,6 +713,10 @@ MonoBehaviour:
   - {fileID: -1694120301273215962}
   - {fileID: -4858775074893914768}
   - {fileID: -1730303136442170667}
+  - {fileID: -4675727750206390560}
+  - {fileID: -4995324529805704370}
+  - {fileID: -7835030194599647035}
+  - {fileID: -7979479515527382645}
   enableDebugNodes: 1
 --- !u!114 &174733671816765058
 MonoBehaviour:
@@ -481,7 +731,7 @@ MonoBehaviour:
   m_Name: Dimensional Pos Generator
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -792, y: 136}
+  position: {x: -760, y: 56}
   ports:
     keys:
     - worldGenConfiguration
@@ -489,8 +739,8 @@ MonoBehaviour:
     values:
     - _fieldName: worldGenConfiguration
       _node: {fileID: 174733671816765058}
-      _typeQualifiedName: World.WorldGenConfiguration, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      _typeQualifiedName: World.Generation.WorldGenConfiguration, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: configuration
         node: {fileID: -4675727750206390560}
@@ -555,6 +805,9 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: nextStage
+        node: {fileID: 0}
+        reroutePoints: []
+      - fieldName: nextStage
         node: {fileID: -4675727750206390560}
         reroutePoints: []
       _direction: 0
@@ -575,7 +828,7 @@ MonoBehaviour:
       _dynamic: 0
   lastStage: 0
   nextStage: 0
-  material: {fileID: 11400000, guid: 8c1509ed54e536a49904c1b1741a39b6, type: 2}
+  material: {fileID: 11400000, guid: 418e8ea86fce9824dbc79912cd4fbf46, type: 2}
   layer: 0
   message: Creating a floor...
   positions: []
@@ -654,8 +907,8 @@ MonoBehaviour:
     values:
     - _fieldName: worldGenConfiguration
       _node: {fileID: 1513083154179965257}
-      _typeQualifiedName: World.WorldGenConfiguration, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      _typeQualifiedName: World.Generation.WorldGenConfiguration, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: configuration
         node: {fileID: -4675727750206390560}
@@ -716,6 +969,26 @@ MonoBehaviour:
   width: 943
   height: 291
   color: {r: 1, g: 1, b: 1, a: 0.1}
+--- !u!114 &3587941841056028788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f96cea6ada90b4984cf627badd4634, type: 3}
+  m_Name: Node Group
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -952, y: 1128}
+  ports:
+    keys: []
+    values: []
+  width: 941
+  height: 366
+  color: {r: 1, g: 1, b: 1, a: 0.1}
 --- !u!114 &6810664002479303662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,7 +1047,7 @@ MonoBehaviour:
       _dynamic: 0
   lastStage: 0
   nextStage: 0
-  material: {fileID: 11400000, guid: b42bd184e62b1bc47a6ff8d554bd2d0e, type: 2}
+  material: {fileID: 11400000, guid: 9e8950b825c16e645bcfeea8a5379fbe, type: 2}
   layer: 1
   message: Placing obstacles...
   positions: []

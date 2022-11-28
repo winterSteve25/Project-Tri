@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using World.Generation;
 using XNode;
 
 namespace World.Nodes.PosGenerators
 {
-    [CreateNodeMenu("Pos Generators/Dimensional")]
+    [CreateNodeMenu("Terrain Gen/Pos Generators/Dimensional")]
     public class DimensionalPosGenerator : Node
     {
         [SerializeField, Input] private WorldGenConfiguration worldGenConfiguration;

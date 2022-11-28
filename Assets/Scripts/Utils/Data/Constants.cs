@@ -1,5 +1,5 @@
 ﻿using SaveLoad;
-using World;
+using World.Generation;
 
 namespace Utils.Data
 {

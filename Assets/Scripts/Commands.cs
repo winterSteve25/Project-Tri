@@ -1,13 +1,15 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using CommandTerminal;
 using Items;
 using Player;
 using Registries;
-using UnityEngine;
+using UI.TextContents;
 using Utils.Data;
-using World;
+using World.Generation;
 using Debug = UnityEngine.Debug;
+using Object = UnityEngine.Object;
 
 public class Commands
 {
@@ -91,5 +93,15 @@ public class Commands
     {
         if (Terminal.IssuedError) return;
         Debug.Log("The world seed is: " + GlobalData.Read(GlobalDataKeys.CurrentWorldSettings).Seed);
+    }
+
+    [RegisterCommand(command_name: "spawn_notification", Name = "spawn_notification", Help = "Spawns a test notification", MinArgCount = 1, MaxArgCount = 3)]
+    private static void SpawnNotification(CommandArg[] args)
+    {
+        var content = TextContent.Empty()
+            .AddText(args.Length > 1 ? args[1].String : "Test Notification");
+        
+        NotificationManager.CreateNotification(content, 
+            Enum.Parse<NotificationManager.NotificationPosition>(args[0].String), args.Length > 2 ? args[2].Float : 5f);
     }
 }

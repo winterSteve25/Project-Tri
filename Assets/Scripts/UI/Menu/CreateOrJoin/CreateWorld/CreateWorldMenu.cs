@@ -3,7 +3,7 @@ using TMPro;
 using UI.Utilities;
 using UnityEngine;
 using Utils.Data;
-using World;
+using World.Generation;
 using Random = UnityEngine.Random;
 
 namespace UI.Menu.CreateOrJoin.CreateWorld

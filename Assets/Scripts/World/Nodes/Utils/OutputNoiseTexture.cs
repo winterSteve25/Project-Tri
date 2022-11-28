@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using Utils;
+using World.Tiles;
 
 namespace World.Nodes.Utils
 {
-    [CreateNodeMenu("Utils/Noise Texture Generator")]
+    [CreateNodeMenu("Terrain Gen/Utils/Noise Texture Generator")]
     public class OutputNoiseTexture : TerrainGenerator
     {
         [SerializeField] private string nameOfTexture;

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2840270276226422753}
   - component: {fileID: 2840270276226422750}
   - component: {fileID: 2840270276226422751}
+  - component: {fileID: 112534315850926562}
   m_Layer: 5
   m_Name: PREFAB_Small Button
   m_TagString: Untagged
@@ -98,18 +99,18 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_NormalColor: {r: 0.627451, g: 0.75686276, b: 0.81960785, a: 0.78431374}
+    m_HighlightedColor: {r: 0.627451, g: 0.75686276, b: 0.81960785, a: 1}
+    m_PressedColor: {r: 0.4627451, g: 0.5568628, b: 0.6039216, a: 1}
+    m_SelectedColor: {r: 0.3529412, g: 0.49019608, b: 0.4862745, a: 1}
+    m_DisabledColor: {r: 0.13725491, g: 0.17254902, b: 0.2, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: -43948688, guid: b0a1d0c01b806a740afc984d3195068b, type: 3}
+    m_PressedSprite: {fileID: 1714499889, guid: b0a1d0c01b806a740afc984d3195068b, type: 3}
+    m_SelectedSprite: {fileID: -43948688, guid: b0a1d0c01b806a740afc984d3195068b, type: 3}
+    m_DisabledSprite: {fileID: -1395903552, guid: b0a1d0c01b806a740afc984d3195068b, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -121,3 +122,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &112534315850926562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2840270276226422749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.49019608}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1

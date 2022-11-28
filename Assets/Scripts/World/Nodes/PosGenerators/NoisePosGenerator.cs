@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using UnityEngine;
 using Utils;
+using World.Generation;
 using World.Nodes.Utils;
 using XNode;
 
 namespace World.Nodes.PosGenerators
 {
-    [CreateNodeMenu("Pos Generators/Noise")]
+    [CreateNodeMenu("Terrain Gen/Pos Generators/Noise")]
     public class NoisePosGenerator : Node
     {
         [SerializeField, Input] private WorldGenConfiguration worldGenConfiguration;

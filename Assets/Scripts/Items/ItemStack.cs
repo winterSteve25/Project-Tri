@@ -3,7 +3,6 @@ using System.Linq;
 using MsgPack.Serialization;
 using Registries;
 using Sirenix.OdinInspector;
-using UnityEngine;
 using Utils.Data;
 
 namespace Items
@@ -15,29 +14,47 @@ namespace Items
     public struct ItemStack
     {
         public static readonly ItemStack Empty = new();
-        
+
         public string itemId => item == null ? string.Empty : ItemsRegistry.Instance.Entries[item];
         [MinValue(1)]
         public int count;
+
+        private SerializableDataStorage _savedData;
+        public SerializableDataStorage SavedData
+        {
+            get => _savedData ??= new SerializableDataStorage();
+            set => _savedData = value;
+        }
         
+        [MessagePackIgnore] private DataStorage _customData;
+        [MessagePackIgnore] public DataStorage CustomData
+        {
+            get => _customData ??= new DataStorage();
+            set => _customData = value;
+        }
+
         [MessagePackIgnore] 
         [AssetSelector(Paths = "Assets/Resources/Items")]
-        public Item item;
-        
-        [MessagePackIgnore] 
+        public TriItem item;
+
+        [MessagePackIgnore]
         public bool IsEmpty => item == null || count <= 0;
-        
-        public ItemStack(Item item, int count)
+
+        public ItemStack(TriItem item, int count)
         {
             this.item = item;
             this.count = count;
+            _savedData = new SerializableDataStorage();
+            _customData = new DataStorage();
         }
 
         [MessagePackDeserializationConstructor]
-        public ItemStack(string itemId, int count)
+        public ItemStack(string itemId, int count, SerializableDataStorage savedData)
         {
             item = itemId == string.Empty ? null : ItemsRegistry.Instance.Entries.First(i => i.Value == itemId).Key;
             this.count = count;
+            _savedData = savedData;
+            _customData = new DataStorage();
         }
 
         public override string ToString()
@@ -45,17 +62,18 @@ namespace Items
             return $"{item.name} x{count}";
         }
 
-        public ItemStack Copy(Item item = null, int count = -1, SerializableData customData = null)
+        public ItemStack Copy(TriItem item = null, int count = -1, SerializableDataStorage customData = null)
         {
             return Copy(this, item, count, customData);
         }
 
-        public static ItemStack Copy(ItemStack itemStack, Item item = null, int count = -1, SerializableData customData = null)
+        public static ItemStack Copy(ItemStack itemStack, TriItem item = null, int count = -1, SerializableDataStorage customData = null)
         {
             var newIs = new ItemStack
             {
                 item = item != null ? item : itemStack.item,
                 count = count != -1 ? count : itemStack.count,
+                _savedData = customData ?? itemStack._savedData
             };
 
             return newIs;

@@ -1,11 +1,12 @@
 ﻿using System.Linq;
 using UnityEngine;
 using Utils;
+using World.Generation;
 using XNode;
 
 namespace World.Nodes.PosGenerators
 {
-    [CreateNodeMenu("Pos Generators/Poisson Distribution")]
+    [CreateNodeMenu("Terrain Gen/Pos Generators/Poisson Distribution")]
     public class PoissonPosGenerator : Node
     {
         [SerializeField, Input] private int seed;

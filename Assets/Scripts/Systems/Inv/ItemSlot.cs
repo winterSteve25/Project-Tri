@@ -1,9 +1,8 @@
 ﻿using Items;
 using UI;
-using UI.Tooltips;
-using UnityEngine;
+using UI.Managers;
+using UI.TextContents;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Systems.Inv
 {
@@ -12,38 +11,35 @@ namespace Systems.Inv
     /// </summary>
     public class ItemSlot : UIItem, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        [SerializeField] private Sprite normalSprite;
-        [SerializeField] private Sprite hoverSprite;
-        
-        public Image slotIcon;
-        public CanvasGroup canvasGroup;
-
-        private InventoryManager _inventoryManager;
+        private Inventory _inventory;
+        private ItemDragManager _itemDragManager;
         private int _slotIndex;
         private bool _isPointerOver;
+        private bool _isEquipmentSlot;
+        
+        private TextContent _textContent;
 
-        private Tooltip _tooltip;
-
-        protected override void Start()
+        public void Init(Inventory inventory, int index, bool equipmentSlot = false)
         {
-            _inventoryManager = InventoryManager.Current;
-            _slotIndex = _inventoryManager.Slots.IndexOf(this);
+            _inventory = inventory;
+            _itemDragManager = ItemDragManager.Current;
+            _slotIndex = index;
+            _isEquipmentSlot = equipmentSlot;
             PostItemChanged();
         }
-
+        
         protected override void PostItemChanged()
         {
             base.PostItemChanged();
 
             if (!item.IsEmpty)
             {
-                _tooltip = Tooltip.Empty()
+                _textContent = TextContent.Empty()
                     .AddText(item.item.itemName, headerStyle: true)
                     .AddText(item.item.itemDescription);
             }
             
-            if (!_isPointerOver) return;
-            
+            if (!_isPointerOver || !gameObject.activeSelf) return;
             ShowTooltip();
         }
 
@@ -58,44 +54,41 @@ namespace Systems.Inv
         public void OnPointerEnter(PointerEventData eventData)
         {
             _isPointerOver = true;
-            slotIcon.sprite = hoverSprite;
             ShowTooltip();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             _isPointerOver = false;
-            slotIcon.sprite = normalSprite;
             TooltipManager.Hide();
         }
         
         public void OnPointerClick(PointerEventData eventData)
         {
-            var currentInventory = _inventoryManager.CurrentInventory;
-            if (currentInventory == null) return;
-
+            if (_inventory == null) return;
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                if (_inventoryManager.draggedItem.Item.IsEmpty)
+                // not holding anything
+                if (_itemDragManager.DraggedItem.Item.IsEmpty)
                 {
-                    var itemStack = currentInventory[_slotIndex];
-                    currentInventory[_slotIndex] = ItemStack.Empty;
-                    _inventoryManager.DragItem(itemStack);
+                    // grabs the item from the slot
+                    var itemStack = _inventory[_slotIndex];
+                    _inventory[_slotIndex] = ItemStack.Empty;
+                    _itemDragManager.DragItem(itemStack);
                 }
                 else
                 {
                     // if currently holding the same item and has space
                     var i = item.item;
-                    var draggedI = _inventoryManager.draggedItem.Item;
-                    
+                    var draggedI = _itemDragManager.DraggedItem.Item;
                     
                     if (draggedI.item == i)
                     {
                         // if already full we swap
                         if (item.count >= i.maxStackSize)
                         {
-                            _inventoryManager.DragItem(currentInventory[_slotIndex]);
-                            currentInventory[_slotIndex] = new ItemStack(i, draggedI.count);
+                            _itemDragManager.DragItem(_inventory[_slotIndex]);
+                            _inventory[_slotIndex] = new ItemStack(i, draggedI.count);
                             return;
                         }
                         
@@ -103,41 +96,41 @@ namespace Systems.Inv
                         if (item.count + draggedI.count <= i.maxStackSize)
                         {
                             // fit all in 1 slot
-                            currentInventory[_slotIndex] = new ItemStack(i, item.count + draggedI.count);
+                            _inventory[_slotIndex] = new ItemStack(i, item.count + draggedI.count);
                             // stop dragging
-                            _inventoryManager.DragItem(ItemStack.Empty);
+                            _itemDragManager.DragItem(ItemStack.Empty);
                             return;
                         }
 
                         // how much was added
                         var amountToAdd = i.maxStackSize - item.count;
-                        currentInventory[_slotIndex] = new ItemStack(i, i.maxStackSize);
+                        _inventory[_slotIndex] = new ItemStack(i, i.maxStackSize);
                         // drag the remaining
-                        _inventoryManager.DragItem(new ItemStack(i, draggedI.count - amountToAdd));
+                        _itemDragManager.DragItem(new ItemStack(i, draggedI.count - amountToAdd));
                     }
                     else
                     {
                         var currentItem = item;
-                        currentInventory[_slotIndex] = draggedI;
-                        _inventoryManager.DragItem(currentItem);
+                        if (!CanItemBePlacedInSlot(draggedI)) return;
+                        _inventory[_slotIndex] = draggedI;
+                        _itemDragManager.DragItem(currentItem);
                     }
-
-                    // current slot is empty
+                    
                     if (!item.IsEmpty) return;
+                    if (!CanItemBePlacedInSlot(draggedI)) return;
                     
                     // dump all in slot
-                    currentInventory[_slotIndex] = draggedI;
-                    _inventoryManager.DragItem(ItemStack.Empty);
+                    _inventory[_slotIndex] = draggedI;
+                    _itemDragManager.DragItem(ItemStack.Empty);
                 }
             }
             else if (eventData.button == PointerEventData.InputButton.Right)
             {
                 // if not dragging any item 
-                if (_inventoryManager.draggedItem.Item.IsEmpty)
+                if (_itemDragManager.DraggedItem.Item.IsEmpty)
                 {
                     // split the stack in half and drag one half
-                    var currInv = currentInventory;
-                    var currItem = currInv[_slotIndex];
+                    var currItem = _inventory[_slotIndex];
                     var half = currItem.count / 2;
                     var itemStack = ItemStack.Empty;
                     if (half > 0)
@@ -145,31 +138,31 @@ namespace Systems.Inv
                         itemStack = new ItemStack(currItem.item, half);
                     }
                 
-                    currInv[_slotIndex] = itemStack;
+                    _inventory[_slotIndex] = itemStack;
 
                     var remaining = currItem.count - half;
                     if (remaining > 0)
                     {
-                        _inventoryManager.DragItem(new ItemStack(currItem.item, remaining));
+                        _itemDragManager.DragItem(new ItemStack(currItem.item, remaining));
                     }
                 }
                 else
                 {
                     // if currently holding the same item and has space, we add one to current slot
                     var i = item.item;
-                    var draggedI = _inventoryManager.draggedItem.Item;
+                    var draggedI = _itemDragManager.DraggedItem.Item;
                     if (draggedI.item == i && item.count < i.maxStackSize)
                     {
-                        currentInventory[_slotIndex] = new ItemStack(i, item.count + 1);
-                        _inventoryManager.draggedItem.Item = new ItemStack(i, draggedI.count - 1);
+                        _inventory[_slotIndex] = new ItemStack(i, item.count + 1);
+                        _itemDragManager.DraggedItem.Item = new ItemStack(i, draggedI.count - 1);
                         return;
                     }
 
                     // current slot is empty
-                    if (item.IsEmpty)
+                    if (item.IsEmpty && CanItemBePlacedInSlot(draggedI))
                     {
-                        currentInventory[_slotIndex] = new ItemStack(draggedI.item, 1);
-                        _inventoryManager.draggedItem.Item = new ItemStack(draggedI.item, draggedI.count - 1);
+                        _inventory[_slotIndex] = new ItemStack(draggedI.item, 1);
+                        _itemDragManager.DraggedItem.Item = new ItemStack(draggedI.item, draggedI.count - 1);
                     }
                 }
             }
@@ -178,7 +171,23 @@ namespace Systems.Inv
         private void ShowTooltip()
         {
             if (item.IsEmpty) return;
-            TooltipManager.Show(_tooltip);
+            TooltipManager.Show(_textContent);
+        }
+
+        private bool CanItemBePlacedInSlot(ItemStack itemStack)
+        {
+            // if this is an equipment slot
+            if (_isEquipmentSlot)
+            {
+                // check if this item is valid for this slot
+                if (!itemStack.item.equipmentType.CanPlaceIn(_slotIndex))
+                {
+                    // if not we dont continue
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

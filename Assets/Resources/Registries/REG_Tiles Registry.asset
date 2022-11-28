@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
     m_keys:
-    - {fileID: 11400000, guid: fa07ba83e64b29c44bc54692ab859874, type: 2}
-    - {fileID: 11400000, guid: 5217cae213c5e2c4b85d619766cfa0cf, type: 2}
-    - {fileID: 11400000, guid: b42bd184e62b1bc47a6ff8d554bd2d0e, type: 2}
-    - {fileID: 11400000, guid: ba762b99321aa034298a5d0abb7b46e8, type: 2}
-    - {fileID: 11400000, guid: 8c1509ed54e536a49904c1b1741a39b6, type: 2}
+    - {fileID: 11400000, guid: 7a19f2885be593348b6d2e253b6ca525, type: 2}
+    - {fileID: 11400000, guid: 418e8ea86fce9824dbc79912cd4fbf46, type: 2}
+    - {fileID: 11400000, guid: 9e8950b825c16e645bcfeea8a5379fbe, type: 2}
+    - {fileID: 11400000, guid: 9fa81131e20ccdd46a1a9a3a6c800e2a, type: 2}
+    - {fileID: 11400000, guid: fb20b7ebf9c13c3418a6ec763366c1fe, type: 2}
+    - {fileID: 11400000, guid: 599b649a4dd62204689dc360da64bed6, type: 2}
     m_values:
-    - Excavator
-    - Type_1_Ore
-    - Type_2_Rock
-    - Container
-    - Type_1_Rock
+    - Sqoil_Ore
+    - Type_1_Rock_Tile
+    - Type_2_Rock_Tile
+    - Container_Tile
+    - Excavator_Tile
+    - Kiterite_Ore

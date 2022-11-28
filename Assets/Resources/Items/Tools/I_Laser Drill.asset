@@ -32,7 +32,9 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   maxStackSize: 1
+  equipmentType: 00000000
   recipes: {fileID: 11400000, guid: b4edfd8c98c49ce43842307cad05f9fe, type: 2}
+  miningSpeedModifier: 1
   references:
     version: 2
     RefIds: []

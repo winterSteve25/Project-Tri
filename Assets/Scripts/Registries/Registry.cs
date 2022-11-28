@@ -27,6 +27,7 @@ namespace Registries
                 entries.Add(obj, obj.name.Replace(" ", "_")[2..]);
             }
 
+            
             EditorUtility.SetDirty(this);
         }
 #endif

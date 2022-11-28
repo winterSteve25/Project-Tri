@@ -2,7 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 using Utils;
-using World;
+using World.Generation;
 using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace UI.Menu.CreateOrJoin.CreateWorld

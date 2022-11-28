@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7530bb816fec3b4ca3b37496e294383, type: 3}
   m_Name: I_Type 2 Rock Item
   m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: ffe1251d12e02f647a0e70196f38056d, type: 3}
   itemName:
     m_TableReference:
       m_TableCollectionName: GUID:350c5b8640b4cbf4586931c9c2e345e2
@@ -30,9 +31,8 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  sprite: {fileID: 21300000, guid: ffe1251d12e02f647a0e70196f38056d, type: 3}
   maxStackSize: 128
-  category: Environt Blocks/Generic Cave/Rock
+  equipmentType: 00000000
   placeableTile: {fileID: 11400000, guid: 9e8950b825c16e645bcfeea8a5379fbe, type: 2}
   references:
     version: 2

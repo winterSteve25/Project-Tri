@@ -1,0 +1,412 @@
+fileFormatVersion: 2
+guid: ca5b5cfbaf5df314cadc956ff79f0211
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMasterTextureLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 512
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: Propeller
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 298
+      y: 4
+      width: 203
+      height: 176
+    spriteID: edffb01490143554bb62cf7014dcf95c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 298, y: 4}
+    spritePosition: {x: 16, y: 299}
+  - name: Fans
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 298
+      y: 188
+      width: 169
+      height: 168
+    spriteID: 3ba3002c0e410344f81c70ca11616c19
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 298, y: 188}
+    spritePosition: {x: 32, y: 307}
+  - name: Body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 286
+      height: 422
+    spriteID: 472dfec4cf19327478df7688de139999
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 209, y: 38}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    boneReadOnly: 0
+  sharedRigSpriteImportData: []
+  sharedRigCharacterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    boneReadOnly: 0
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Server
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  mosaicLayers: 1
+  characterMode: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  layerMappingOption: 2
+  generatePhysicsShape: 0
+  paperDollMode: 0
+  keepDupilcateSpriteName: 1
+  skeletonAssetReferenceID: 
+  spriteCategoryList:
+    categories: []
+  spritePackingTag: 
+  resliceFromLayer: 0
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: Propeller
+    spriteName: Propeller
+    isGroup: 0
+    parentIndex: -1
+    spriteID: edffb01490143554bb62cf7014dcf95c
+    layerID: 60
+    mosaicPosition: {x: 298, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Fans
+    spriteName: Fans
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 3ba3002c0e410344f81c70ca11616c19
+    layerID: 57
+    mosaicPosition: {x: 298, y: 188}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Body
+    spriteName: Body
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 472dfec4cf19327478df7688de139999
+    layerID: 46
+    mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Propeller
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 62657bd2baf194c4da4a9dde53295072
+    layerID: 6
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Polygon 2
+    spriteName: Polygon 2
+    isGroup: 0
+    parentIndex: 3
+    spriteID: 73a5091cf848d184bb21bc4c9c675736
+    layerID: 13
+    mosaicPosition: {x: 298, y: 4}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Fans
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 15b7592c2b7ac5748870d4e99647da20
+    layerID: 29
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Triangle 1 copy 2
+    spriteName: Triangle 1 copy 2
+    isGroup: 0
+    parentIndex: 5
+    spriteID: 76152e7aa7af4a5409af92f6a78f9f75
+    layerID: 38
+    mosaicPosition: {x: 365, y: 255}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Triangle 1 copy 3
+    spriteName: Triangle 1 copy 3
+    isGroup: 0
+    parentIndex: 5
+    spriteID: 6100e477039e5414ab1b88d80b0089a3
+    layerID: 39
+    mosaicPosition: {x: 432, y: 188}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Triangle 1
+    spriteName: Triangle 1
+    isGroup: 0
+    parentIndex: 5
+    spriteID: 9d9990d5bf8e5ea4aa0815d391b93111
+    layerID: 36
+    mosaicPosition: {x: 432, y: 211}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Triangle 1 copy 4
+    spriteName: Triangle 1 copy 4
+    isGroup: 0
+    parentIndex: 5
+    spriteID: 13829e48b77192e4c84bc33fb8b4fdc8
+    layerID: 40
+    mosaicPosition: {x: 298, y: 188}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Triangle 1 copy 5
+    spriteName: Triangle 1 copy 5
+    isGroup: 0
+    parentIndex: 5
+    spriteID: 3d7db072a18e4154cb74de3b75da7299
+    layerID: 42
+    mosaicPosition: {x: 298, y: 255}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Triangle 1
+    spriteName: Triangle 1
+    isGroup: 0
+    parentIndex: 5
+    spriteID: 31d9c3ea01f4bc24a919897e0d4cbed0
+    layerID: 35
+    mosaicPosition: {x: 298, y: 322}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Triangle 1 copy
+    spriteName: Triangle 1 copy
+    isGroup: 0
+    parentIndex: 5
+    spriteID: e6902d37d9dd83e42bad8d6ad3dbd066
+    layerID: 37
+    mosaicPosition: {x: 365, y: 188}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Triangle 1
+    spriteName: Triangle 1
+    isGroup: 0
+    parentIndex: 5
+    spriteID: 05d79ccbf05c7c1429fae47a881009f3
+    layerID: 32
+    mosaicPosition: {x: 365, y: 339}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Ellipse 1
+    spriteName: Ellipse 1
+    isGroup: 0
+    parentIndex: 5
+    spriteID: b4a9bfb03045bbe45b7a7ab995324b05
+    layerID: 34
+    mosaicPosition: {x: 298, y: 389}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Body
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 9958fd40a185f624fb8bd901bdbaf41f
+    layerID: 15
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Polygon 1
+    spriteName: Polygon 1
+    isGroup: 0
+    parentIndex: 15
+    spriteID: a5c70e4471ae79d4eb26e60dc3546c97
+    layerID: 3
+    mosaicPosition: {x: 4, y: 434}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Polygon 1
+    spriteName: Polygon 1
+    isGroup: 0
+    parentIndex: 15
+    spriteID: 0f3b5e0bfd8434b4a93669fc82578d9b
+    layerID: 28
+    mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  sharedRigPSDLayers: []
+  pSDLayerImportSetting: []
+  generateGOHierarchy: 0
+  textureAssetName: 
+  prefabAssetName: 
+  spriteLibAssetName: 
+  skeletonAssetName: 
+  secondarySpriteTextures: []

@@ -1,11 +1,12 @@
 ﻿using System.Linq;
 using UnityEngine;
 using Utils;
+using World.Generation;
 using XNode;
 
 namespace World.Nodes.Utils
 {
-    [CreateNodeMenu("Utils/Noise Generator")]
+    [CreateNodeMenu("Terrain Gen/Utils/Noise Generator")]
     public class NoiseGenerator : Node
     {
         public const string FieldName = "noise";

@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Excavator Recipes
   m_EditorClassIdentifier: 
   recipes:
-  - ore: {fileID: 11400000, guid: 5217cae213c5e2c4b85d619766cfa0cf, type: 2}
-    duration: 2
+  - ore: {fileID: 11400000, guid: 599b649a4dd62204689dc360da64bed6, type: 2}
     output:
-      item: {fileID: 11400000, guid: 38079b4ce0e0c3f4abb70955d8b70a4b, type: 2}
       count: 1
+      item: {fileID: 11400000, guid: 38079b4ce0e0c3f4abb70955d8b70a4b, type: 2}
+  - ore: {fileID: 11400000, guid: 7a19f2885be593348b6d2e253b6ca525, type: 2}
+    output:
+      count: 1
+      item: {fileID: 11400000, guid: 2c6a5e0b7db95e546a217736d298ad93, type: 2}

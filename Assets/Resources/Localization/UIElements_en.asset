@@ -34,6 +34,14 @@ MonoBehaviour:
     m_Localized: 'Requires: '
     m_Metadata:
       m_Items: []
+  - m_Id: 3179800239239168
+    m_Localized: Equipments
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3179800260210688
+    m_Localized: Crafting
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

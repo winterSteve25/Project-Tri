@@ -4,7 +4,7 @@ namespace Utils.Data
 {
     public static class GlobalData
     {
-        private static readonly SerializableData Instance = new();
+        private static readonly DataStorage Instance = new DataStorage();
 
         public static void Set<T>(DataSignature<T> signature, T value)
         {
@@ -13,7 +13,7 @@ namespace Utils.Data
         
         public static T Read<T>(DataSignature<T> signature)
         {
-            return Instance.Read<T>(signature);
+            return Instance.Read(signature);
         }
 
         public static void ComputeIfPresent<T>(DataSignature<T> signature, Action<T> action)

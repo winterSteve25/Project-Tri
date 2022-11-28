@@ -1,5 +1,6 @@
 ﻿using Cinemachine;
 using UnityEngine;
+using Utils;
 
 namespace Player
 {
@@ -25,17 +26,17 @@ namespace Player
         {
             var multiplier = 2;
             
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (GameInput.KeyboardKey(KeyCode.LeftShift))
             {
                 multiplier *= 10;
             }
 
-            if (Input.GetKey(KeyCode.Minus))
+            if (GameInput.KeyboardKey(KeyCode.Minus))
             {
                 size += Time.deltaTime * multiplier;
             }
 
-            if (Input.GetKey(KeyCode.Equals))
+            if (GameInput.KeyboardKey(KeyCode.Equals))
             {
                 size -= Time.deltaTime * multiplier;
             }
