@@ -22,7 +22,7 @@ namespace World.Nodes.PosGenerators
         [SerializeField] private int noiseOctaves = 1;
         [SerializeField] private float noiseThreshold = 0.7f;
         [SerializeField] private ComparisonOperator comparison = ComparisonOperator.GreaterThan;
-        
+
         public override object GetValue(NodePort port)
         {
             if (port.fieldName != nameof(clusterizedPositions)) return base.GetValue(port);

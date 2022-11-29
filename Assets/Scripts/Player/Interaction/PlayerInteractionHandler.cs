@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Items;
-using Items.ItemTypes;
 using Systems.Inv;
 using TileBehaviours;
 using UI.Menu.EscapeMenu;
@@ -11,7 +10,7 @@ using UnityEngine.Tilemaps;
 using Utils;
 using World.Tiles;
 
-namespace Player
+namespace Player.Interaction
 {
     public class PlayerInteractionHandler : MonoBehaviour
     {
@@ -67,6 +66,7 @@ namespace Player
             if (!overUI)
             {
                 var point = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                point.z = 0;
                 var pos = _obstacleLayer.WorldToCell(point);
                 var tileAtPos = _tilemapManager.GetTile(pos, TilemapLayer.Obstacles);
                 var isEmpty = tileAtPos is null;
@@ -76,13 +76,13 @@ namespace Player
                 {
                     if (isLeftClickHeld)
                     {
-                        pressBehaviourItem.Hold(MouseButton.Left, ref item, tileAtPos, pos, _tilemapManager,
+                        pressBehaviourItem.Hold(MouseButton.Left, ref item, tileAtPos, point, pos, _tilemapManager,
                             _inventoryUIController, _equipmentsController, playerPosition, playerDistance);
                     }
 
                     if (isRightClickHeld)
                     {
-                        pressBehaviourItem.Hold(MouseButton.Right, ref item, tileAtPos, pos, _tilemapManager,
+                        pressBehaviourItem.Hold(MouseButton.Right, ref item, tileAtPos, point, pos, _tilemapManager,
                             _inventoryUIController, _equipmentsController, playerPosition, playerDistance);
                     }
                 }
@@ -91,13 +91,13 @@ namespace Player
                 {
                     if (isLeftClickDown)
                     {
-                        clickedBehaviourItem.Click(MouseButton.Left, ref item, tileAtPos, pos, _tilemapManager,
+                        clickedBehaviourItem.Click(MouseButton.Left, ref item, tileAtPos, point, pos, _tilemapManager,
                             _inventoryUIController, _equipmentsController, playerPosition, playerDistance);
                     }
 
                     if (isRightClickDown)
                     {
-                        clickedBehaviourItem.Click(MouseButton.Right, ref item, tileAtPos, pos, _tilemapManager,
+                        clickedBehaviourItem.Click(MouseButton.Right, ref item, tileAtPos, point, pos, _tilemapManager,
                             _inventoryUIController, _equipmentsController, playerPosition, playerDistance);
                     }
                 }

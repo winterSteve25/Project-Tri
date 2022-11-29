@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
     m_keys:
+    - {fileID: 11400000, guid: 699a97d8b073be34a941fb88bffd6231, type: 2}
     - {fileID: 11400000, guid: 0b496a9d1b8a5da4988bbd7a4e57f163, type: 2}
     - {fileID: 11400000, guid: fde87653ec879ce4daca44587ff42931, type: 2}
     - {fileID: 11400000, guid: 2c6a5e0b7db95e546a217736d298ad93, type: 2}
@@ -22,6 +23,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 38079b4ce0e0c3f4abb70955d8b70a4b, type: 2}
     - {fileID: 11400000, guid: 73b97e1327eed72419c90da3ae95854d, type: 2}
     m_values:
+    - Drone
     - Laser_Drill
     - Type_2_Rock_Item
     - Sqoil_Ingot

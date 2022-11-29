@@ -71,6 +71,14 @@ MonoBehaviour:
     m_Key: Chain Saw Description
     m_Metadata:
       m_Items: []
+  - m_Id: 4691311478665216
+    m_Key: Drone Item Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4691311508025344
+    m_Key: Drone Item Description
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

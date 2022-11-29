@@ -4,7 +4,6 @@ using Items.ItemTypes;
 using UI.Menu.EscapeMenu;
 using UnityEngine;
 using UnityEngine.UI;
-using World.Tiles;
 
 namespace UI.Managers
 {

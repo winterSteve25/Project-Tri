@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Player.Interaction;
+using Sirenix.OdinInspector;
 using Tiles;
 using UI.Menu.EscapeMenu;
 using UnityEngine;
@@ -16,14 +17,14 @@ namespace Items.ItemTypes
         [BoxGroup(GeneralInformationBox)] [VerticalGroup(VerticalMain)]
         public PlaceableTile placeableTile;
 
-        public void Hold(MouseButton mouseButton, ref ItemStack itemStack, TileInstance tileClicked, Vector3Int pos,
-            TilemapManager tilemapManager, InventoryUIController inventoryUIController,
+        public void Hold(MouseButton mouseButton, ref ItemStack itemStack, TileInstance tileClicked, Vector3 clickedPos, 
+            Vector3Int pos, TilemapManager tilemapManager, InventoryUIController inventoryUIController,
             EquipmentsController equipmentController, Vector3 playerPosition,
             Vector3 playerDistanceToClickedPoint)
         {
             if (mouseButton != MouseButton.Right) return;
             if (tileClicked is not null) return;
-            if (!(playerDistanceToClickedPoint.sqrMagnitude > 101)) return;
+            if (placeableTile.hasCollider && !(playerDistanceToClickedPoint.sqrMagnitude > 101)) return;
             if (!tilemapManager.TryPlaceTile(placeableTile, pos, TilemapLayer.Obstacles)) return;
 
             // consume an item
@@ -32,8 +33,8 @@ namespace Items.ItemTypes
             equipmentController[EquipmentType.Outer] = itemCount <= 0 ? ItemStack.Empty : item.Copy(count: itemCount);
         }
 
-        public bool CanInteract(ref ItemStack itemStack, TileInstance tileAtLocation, Vector3Int pos,
-            TilemapManager tilemapManager, InventoryUIController inventoryUIController,
+        public bool CanInteract(ref ItemStack itemStack, TileInstance tileAtLocation, Vector3 clickedPos,
+            Vector3Int pos, TilemapManager tilemapManager, InventoryUIController inventoryUIController,
             EquipmentsController equipmentController, Vector3 playerPosition,
             Vector3 playerDistanceToClickedPoint)
         {

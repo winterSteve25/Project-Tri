@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Player.Interaction;
+using UnityEngine;
 using World.Tiles;
 
 namespace Items.ItemTypes

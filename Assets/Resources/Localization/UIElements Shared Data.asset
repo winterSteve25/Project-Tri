@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: Crafting
     m_Metadata:
       m_Items: []
+  - m_Id: 4690214785609728
+    m_Key: Crafting Search
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -1,9 +1,10 @@
-﻿using UI.Menu.EscapeMenu;
+﻿using Items;
+using UI.Menu.EscapeMenu;
 using UnityEngine;
 using Utils;
 using World.Tiles;
 
-namespace Items.ItemTypes
+namespace Player.Interaction
 {
     public interface IReleasedBehaviourItem
     {

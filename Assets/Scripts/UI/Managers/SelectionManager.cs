@@ -2,6 +2,7 @@
 using Items;
 using Items.ItemTypes;
 using Player;
+using Player.Interaction;
 using UI.Menu.EscapeMenu;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -35,6 +36,7 @@ namespace UI.Managers
         private void Update()
         {
             var point = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            point.z = 0;
             var pos = _obstacleLayer.WorldToCell(point);
             var tileAtPos = _tilemapManager.GetTile(pos, TilemapLayer.Obstacles);
             var isEmpty = tileAtPos == null;
@@ -52,7 +54,8 @@ namespace UI.Managers
                 var playerPosition = _playerTransform.position;
                 var interactable = (IInteractableItem)item.item;
 
-                if (interactable.CanInteract(ref item, tileAtPos, pos, _tilemapManager, _inventoryUIController, _equipmentsController, playerPosition, playerPosition - point))
+                if (interactable.CanInteract(ref item, tileAtPos, point, pos, _tilemapManager, _inventoryUIController,
+                        _equipmentsController, playerPosition, playerPosition - point))
                 {
                     MoveSelection(pos);
                 }
@@ -61,8 +64,6 @@ namespace UI.Managers
                     HideSelection();
                 }
             }
-            
-            // disables hover over anything will select
             // else
             // {
             //     MoveSelection(pos);

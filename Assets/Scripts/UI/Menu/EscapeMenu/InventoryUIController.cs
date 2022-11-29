@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using Player;
 using Sirenix.OdinInspector;
 using Systems.Inv;
+using UI.TabsSystem;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.UI;
@@ -75,6 +76,9 @@ namespace UI.Menu.EscapeMenu
 
         [SerializeField, Required]
         private EscapeMenuController escapeMenuController;
+
+        [SerializeField, Required] 
+        private TabManager tabManager;
         
         private void Start()
         {
@@ -108,8 +112,9 @@ namespace UI.Menu.EscapeMenu
                 openedInventoryTabTitle.StringReference = OpenedInventory.InventoryName;
                 openedInventoryTabButtonTitle.RefreshString();
                 openedInventoryTabTitle.RefreshString();
-                RefreshOpenedInvContent();
                 OpenOtherInventory(OpenedInventory);
+                RefreshOpenedInvContent();
+                tabManager.ClickedTab(2);
             }
             else
             {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Items.ItemTypes
+namespace Player.Interaction
 {
     public interface IUpdateBehaviourItem
     {

@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Player.Interaction;
+using Sirenix.OdinInspector;
 using TileBehaviours.Excavator;
 using UI.Menu.EscapeMenu;
 using UnityEngine;
@@ -18,8 +19,8 @@ namespace Items.ItemTypes
         [BoxGroup(GeneralInformationBox)] [VerticalGroup(VerticalMain)] [SerializeField] [MinValue(1)]
         private float miningSpeedModifier;
 
-        public void Hold(MouseButton mouseButton, ref ItemStack itemStack, TileInstance tileClicked, Vector3Int pos,
-            TilemapManager tilemapManager, InventoryUIController inventoryUIController,
+        public void Hold(MouseButton mouseButton, ref ItemStack itemStack, TileInstance tileClicked, Vector3 clickedPos, 
+            Vector3Int pos, TilemapManager tilemapManager, InventoryUIController inventoryUIController,
             EquipmentsController equipmentsController, Vector3 playerPosition,
             Vector3 playerDistanceToClickedPoint)
         {
@@ -32,7 +33,7 @@ namespace Items.ItemTypes
                 if (MineTile(ref itemStack, ore))
                 {
                     var result = recipes.FindRecipe(ore.Tile).output;
-                    ItemSpawner.Current.SpawnApproximatelyAt(tilemapManager.CellToWorldPosition(pos, TilemapLayer.Ground), result);
+                    ItemSpawner.Current.SpawnApproximatelyAt(clickedPos, result);
                 }
             }
             else if (MineTile(ref itemStack, tileClicked))
@@ -54,8 +55,8 @@ namespace Items.ItemTypes
             itemStack.CustomData.Remove(CurrentlyMiningTile);
         }
 
-        public bool CanInteract(ref ItemStack itemStack, TileInstance tileAtLocation, Vector3Int pos,
-            TilemapManager tilemapManager, InventoryUIController inventoryUIController,
+        public bool CanInteract(ref ItemStack itemStack, TileInstance tileAtLocation, Vector3 clickedPos,
+            Vector3Int pos, TilemapManager tilemapManager, InventoryUIController inventoryUIController,
             EquipmentsController equipmentsController, Vector3 playerPosition,
             Vector3 playerDistanceToClickedPoint)
         {
