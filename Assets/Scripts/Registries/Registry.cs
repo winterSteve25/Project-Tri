@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -16,6 +17,11 @@ namespace Registries
         [SerializeField] protected TDictionary entries;
         public TDictionary Entries => entries;
 
+        public T GetObjectWithID(string id)
+        {
+            return entries.FirstOrDefault(e => e.Value == id).Key;
+        }
+        
 #if UNITY_EDITOR
         [Button(ButtonSizes.Medium)]
         public void UpdateEntries()

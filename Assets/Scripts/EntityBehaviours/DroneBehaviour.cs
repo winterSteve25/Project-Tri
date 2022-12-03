@@ -18,9 +18,6 @@ namespace EntityBehaviours
 
         [SerializeField] 
         private SpriteRenderer[] sprites;
-
-        [SerializeField] private Color normalColor;
-        [SerializeField] private Color hoveredColor;
         
         private Vector3 _destination;
         private bool _flying;

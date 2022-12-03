@@ -1,12 +1,12 @@
 using System.Collections;
-using System.Linq;
 using System.Threading.Tasks;
 using SaveLoad;
 using SaveLoad.Interfaces;
 using UnityEngine;
 using Utils;
 using Utils.Data;
-using World.Nodes;
+using World.Generation.Nodes;
+using World.Generation.XNode;
 using World.Tiles;
 using Debug = UnityEngine.Debug;
 
@@ -25,11 +25,13 @@ namespace World.Generation
         public int CurrentStep { get; private set; }
         public string CurrentStepMessage { get; private set; }
 
-        [SerializeField] private GenerationGraph generationGraph;
+        [SerializeField] private BiomeGraph biomeGraph;
+        private GenerationNode _generationNode;
 
         private void Awake()
         {
             _tilemapManager = FindObjectOfType<TilemapManager>();
+            _generationNode = biomeGraph.Build();
         }
         
         private void Start()
@@ -39,8 +41,9 @@ namespace World.Generation
             
             const int width = 256;
             const int height = 256;
-            
-            GlobalData.Set(GlobalDataKeys.CurrentWorldSettings, WorldSettings.Default);
+
+            _worldSettings = WorldSettings.Default;
+            GlobalData.Set(GlobalDataKeys.CurrentWorldSettings, _worldSettings);
             StartCoroutine(Generate(width, height, -width / 2, -height / 2));
         }
 
@@ -61,42 +64,24 @@ namespace World.Generation
         private IEnumerator Generate(int width, int height, int xOffset, int yOffset)
         {
             _tilemapManager.UpdateTiles = false;
-            var root = generationGraph.nodes.Find(node => node is TerrainGeneratorRoot);
-
-            if (root is not TerrainGeneratorRoot rootNode)
-            {
-                Debug.LogError($"No root node found in generation graph with name {name}");
-                yield break;
-            }
-
-            rootNode.seed = WorldSeed;
-            rootNode.xOffset = xOffset;
-            rootNode.yOffset = yOffset;
-            rootNode.width = width;
-            rootNode.height = height;
 
             CurrentStep = 0;
-            TotalSteps = generationGraph.nodes.Count(node => node is TerrainGenerator) + 1;
+            TotalSteps = _generationNode.GetDepth();
 
-            var currentNode = rootNode.GetPort("nextStage");
+            var currentNode = _generationNode;
 
-            while (currentNode.IsConnected && currentNode.Connection.node is TerrainGenerator generatorNode)
+            while (currentNode != null)
             {
-                if (generatorNode.IsDebugNode() && !generationGraph.EnableDebugNodes)
-                {
-                    currentNode = generatorNode.GetPort("nextStage");
-                    continue;
-                }
-
-                CurrentStepMessage = generatorNode.StageMessage();
-                generatorNode.Generate(WorldSeed, width, height, xOffset, yOffset, _tilemapManager);
-                currentNode = generatorNode.GetPort("nextStage");
+                CurrentStepMessage = currentNode.StageMessage;
+                currentNode.Generate(WorldSeed, width, height, xOffset, yOffset, _tilemapManager);
+                currentNode = currentNode.NextStep;
                 CurrentStep++;
-
                 yield return null;
             }
-
+            
             _tilemapManager.UpdateTiles = true;
+
+            #region Find Valid Spawnpoint
 
             // find the player object
             var player = GameObject.FindGameObjectsWithTag("Player");
@@ -150,8 +135,11 @@ namespace World.Generation
                 yield break;
             }
 
-            p.position = obstaclesLayer.CellToWorld(spawnPoint.Value);
+            _worldSettings.SpawnPoint = obstaclesLayer.CellToWorld(spawnPoint.Value);
+            p.position = _worldSettings.SpawnPoint;
             CurrentStep++;
+
+            #endregion
         }
 
         public SerializationPriority Priority => SerializationPriority.High;

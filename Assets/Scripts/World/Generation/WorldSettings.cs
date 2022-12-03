@@ -1,4 +1,6 @@
-﻿namespace World.Generation
+﻿using UnityEngine;
+
+namespace World.Generation
 {
     public class WorldSettings
     {
@@ -8,6 +10,7 @@
         public readonly int Seed;
         public readonly int Width;
         public readonly int Height;
+        public Vector2 SpawnPoint;
 
         public WorldSettings(string worldName, int seed, int width, int height)
         {
@@ -15,6 +18,7 @@
             Width = width;
             Height = height;
             WorldName = worldName;
+            SpawnPoint = Vector2.zero;
         }
 
         public override string ToString()
