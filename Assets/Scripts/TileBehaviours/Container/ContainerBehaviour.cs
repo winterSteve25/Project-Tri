@@ -4,7 +4,7 @@ using Player;
 using SaveLoad.Interfaces;
 using SaveLoad.Tasks;
 using Systems.Inv;
-using UI.Menu.EscapeMenu;
+using UI.Menu.InventoryMenu;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -19,13 +19,13 @@ namespace TileBehaviours.Container
         [SerializeField] private LocalizedString inventoryName;
         
         public Inventory Inventory { get; private set; }
-        private InventoryUIController _inventoryUIController;
+        private InventoryController _inventoryController;
         private PlayerInventory _playerInventory;
         
         private void Awake()
         {
-            Inventory = new Inventory(inventoryName);
-            _inventoryUIController = InventoryUIController.Current;
+            Inventory = new Inventory(inventoryName, 15);
+            _inventoryController = InventoryController.Current;
             _playerInventory = FindObjectOfType<PlayerInventory>();
         }
         
@@ -39,7 +39,8 @@ namespace TileBehaviours.Container
 
         public override void OnInteract()
         {
-            _inventoryUIController.SetOpenedInventory(Inventory);
+            if (Vector2.Distance(_playerInventory.transform.position, transform.position) > distanceBeforeAccessDenied) return;
+                _inventoryController.SetOpenedInventory(Inventory);
         }
 
         public override void OnBroken()
@@ -57,9 +58,9 @@ namespace TileBehaviours.Container
         private void ExitMenu()
         {
             // if currently displaying this inventory, close it when this is broken
-            if (_inventoryUIController.OpenedInventory == Inventory)
+            if (_inventoryController.OpenedInventory == Inventory)
             {
-                _inventoryUIController.SetOpenedInventory(null);
+                _inventoryController.SetOpenedInventory(null);
             }
         }
         

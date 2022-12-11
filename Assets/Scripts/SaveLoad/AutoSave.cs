@@ -16,8 +16,8 @@ namespace SaveLoad
             // auto save every 10 minutes
             InvokeRepeating(nameof(Save), 120, 600);
             
-            _notification = TextContent.Empty();
-            _notification.AddLayer(savingNotification);
+            _notification = TextContent.Empty()
+                .AddLayer(savingNotification);
         }
 
         private void Save()
@@ -27,10 +27,9 @@ namespace SaveLoad
 
         private IEnumerator SaveCoroutine()
         {
-            NotificationManager.CreateNotification(_notification, NotificationManager.NotificationPosition.TopLeft, 200);
+            NotificationManager.CreateNotification(_notification, 6);
 
             yield return new WaitForSeconds(1f);
-            
             yield return FindObjectsOfType<MonoBehaviour>()
                 .OfType<ICustomWorldData>()
                 .ToList()

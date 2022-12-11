@@ -20,7 +20,7 @@ namespace Systems.Inv
 
         public ItemStack[] ItemStacks { get; private set; }
 
-        public Inventory(LocalizedString inventoryName, int slotsCount = 30)
+        public Inventory(LocalizedString inventoryName, int slotsCount = 20)
         {
             SlotsCount = slotsCount;
             InventoryName = inventoryName;

@@ -1,4 +1,5 @@
 ﻿using UI.Menu.EscapeMenu;
+using UI.Menu.InventoryMenu;
 using UnityEngine;
 
 namespace Utils
@@ -42,7 +43,8 @@ namespace Utils
 
         private static bool CanInput()
         {
-            return !EscapeMenuController.Current.IsActive;
+            return (InventoryMenuController.Current is null || !InventoryMenuController.Current.IsActive)
+                   && (EscapeMenuController.Current is null || !EscapeMenuController.Current.IsActive);
         }
     }
 }

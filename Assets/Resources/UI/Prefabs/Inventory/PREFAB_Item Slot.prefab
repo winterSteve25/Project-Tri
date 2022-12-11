@@ -176,7 +176,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7682373953043294556
 CanvasRenderer:
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.70980394, g: 0.69803923, b: 0.7607843, a: 0.78431374}
+  m_Color: {r: 0.011764706, g: 0.70980394, b: 0.6666667, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -240,8 +240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f9f0b45a2b4be284ce684a6ac00413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor: {r: 0.70980394, g: 0.69803923, b: 0.7607843, a: 0.78431374}
-  hoverColor: {r: 0.70980394, g: 0.69803923, b: 0.7607843, a: 1}
+  normalColor: {r: 0.011764706, g: 0.70980394, b: 0.6666667, a: 1}
+  hoverColor: {r: 0, g: 0.7490196, b: 0.7019608, a: 1}
   image: {fileID: 7682373953043294557}
   lerpDuration: 0.15
 --- !u!114 &4254527060363614118
@@ -297,8 +297,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000076293945, y: -0.000015258789}
-  m_SizeDelta: {x: -25, y: -25}
+  m_AnchoredPosition: {x: -0.099998474, y: 0.6000004}
+  m_SizeDelta: {x: -28.2597, y: -28.2597}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7682373953737049811
 CanvasRenderer:

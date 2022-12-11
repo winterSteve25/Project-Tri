@@ -32,7 +32,7 @@ namespace World.Tiles
             SavedData = savedData;
             CustomData = new DataStorage();
         }
-        
+
         public static implicit operator TileInstance(TriTile tile)
         {
             return new TileInstance(tile);

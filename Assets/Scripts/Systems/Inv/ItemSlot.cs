@@ -34,8 +34,7 @@ namespace Systems.Inv
 
             if (!item.IsEmpty)
             {
-                _textContent = TextContent.Empty()
-                    .AddText(item.item.itemName, headerStyle: true)
+                _textContent = TextContent.Titled(item.item.itemName)
                     .AddText(item.item.itemDescription);
             }
             

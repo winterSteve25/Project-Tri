@@ -34,7 +34,7 @@ namespace Items
         }
 
         [MessagePackIgnore] 
-        [AssetSelector(Paths = "Assets/Resources/Items")]
+        [AssetSelector]
         public TriItem item;
 
         [MessagePackIgnore]

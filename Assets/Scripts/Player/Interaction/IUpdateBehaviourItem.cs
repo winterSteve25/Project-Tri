@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Items;
+using UnityEngine;
 
 namespace Player.Interaction
 {
     public interface IUpdateBehaviourItem
     {
-        void UpdateBehaviour(Vector3 playerPosition);
+        void UpdateBehaviour(ref ItemStack itemStack, Vector3 playerPosition);
     }
 }

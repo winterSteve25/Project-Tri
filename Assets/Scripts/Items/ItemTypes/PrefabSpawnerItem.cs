@@ -1,6 +1,6 @@
 ﻿using Player.Interaction;
 using Sirenix.OdinInspector;
-using UI.Menu.EscapeMenu;
+using UI.Menu.InventoryMenu;
 using UnityEngine;
 using Utils;
 using World.Tiles;
@@ -15,8 +15,8 @@ namespace Items.ItemTypes
         private GameObject prefab;
 
         public void Click(MouseButton mouseButton, ref ItemStack itemStack, TileInstance tileClicked, Vector3 clickedPos,
-            Vector3Int pos, TilemapManager tilemapManager, InventoryUIController inventoryUIController,
-            EquipmentsController equipmentsController, Vector3 playerPosition, Vector3 playerDistanceToClickedPoint)
+            Vector3Int pos, TilemapManager tilemapManager, InventoryController inventoryController,
+            EquipmentsController equipmentsController, Vector3 playerPosition)
         {
             // spawn the prefab
             var spawned = Instantiate(prefab);
@@ -29,9 +29,8 @@ namespace Items.ItemTypes
         }
 
         public bool CanInteract(ref ItemStack itemStack, TileInstance tileAtLocation, Vector3 clickedPos,
-            Vector3Int pos, TilemapManager tilemapManager, InventoryUIController inventoryUIController,
-            EquipmentsController equipmentsController, Vector3 playerPosition,
-            Vector3 playerDistanceToClickedPoint)
+            Vector3Int pos, TilemapManager tilemapManager, InventoryController inventoryController,
+            EquipmentsController equipmentsController, Vector3 playerPosition)
         {
             return true;
         }

@@ -88,6 +88,16 @@ namespace World.Tiles
         {
             return Chunk.CellToWorld(pos, layer);
         }
+
+        public Tilemap GetTilemap(TilemapLayer layer)
+        {
+            return layer switch
+            {
+                TilemapLayer.Ground => GroundLayer,
+                TilemapLayer.Obstacles => ObstacleLayer,
+                _ => throw new ArgumentOutOfRangeException(nameof(layer), layer, null)
+            };
+        }
         
         public SerializationPriority Priority => SerializationPriority.Medium;
 

@@ -83,6 +83,15 @@ MonoBehaviour:
     m_Localized: A flying device capable of transporting items
     m_Metadata:
       m_Items: []
+  - m_Id: 6811608210173952
+    m_Localized: Rubizoid Gem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6811608235339776
+    m_Localized: A blood red gem that can be obtained from one certain type of local
+      inhabitant
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

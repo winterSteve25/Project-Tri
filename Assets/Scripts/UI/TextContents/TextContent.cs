@@ -24,29 +24,63 @@ namespace UI.TextContents
         private Transform _itemStackList;
         private GameObject _iconAndText;
         private GameObject _iconAndLocalizedText;
+
+        private LocalizedString _localizedTitle;
+        private string _title;
         
-        public TextContent(List<Action<Transform>> layout)
+        private TextContent(List<Action<Transform>> layout)
         {
             _layoutTopToDown = layout;
         }
 
         /// <summary>
-        /// Creates and returns an empty tooltip object
+        /// Creates and returns an empty text content object
         /// </summary>
         /// <returns></returns>
         public static TextContent Empty()
         {
             return new TextContent(new List<Action<Transform>>());
         }
+        
+        /// <summary>
+        /// Creates a new TextContent with localized title
+        /// </summary>
+        /// <param name="title">Title of the text content</param>
+        /// <returns></returns>
+        public static TextContent Titled(LocalizedString title)
+        {
+            return new TextContent(new List<Action<Transform>>())
+            {
+                _localizedTitle = title
+            };
+        }
 
+        /// <summary>
+        /// Creates a new TextContent with title
+        /// </summary>
+        /// <param name="title">Title of the text content</param>
+        /// <returns></returns>
+        public static TextContent Titled(string title)
+        {
+            return new TextContent(new List<Action<Transform>>())
+            {
+                _title = title
+            };
+        }
+        
         /// <summary>
         /// Adds a GameObject to the layout
         /// </summary>
         /// <param name="layer">Prefab to add</param>
+        /// <param name="onContentConstructed">A callback when the content is constructed. Can be used to store the reference of a content and modify it later on</param>
         /// <returns></returns>
-        public TextContent AddLayer(GameObject layer)
+        public TextContent AddLayer(GameObject layer, Action<GameObject> onContentConstructed = null)
         {
-            _layoutTopToDown.Add(transform => Object.Instantiate(layer, transform));
+            _layoutTopToDown.Add(transform =>
+            {
+                var go = Object.Instantiate(layer, transform);
+                onContentConstructed?.Invoke(go);
+            });
             return this;
         }
 
@@ -56,8 +90,9 @@ namespace UI.TextContents
         /// <param name="text">The text displayed, TMP special characters are supported</param>
         /// <param name="headerStyle">Whether the text should be displayed with the header template</param>
         /// <param name="fontSize">Font size</param>
+        /// <param name="onContentConstructed">A callback when the content is constructed. Can be used to store the reference of a content and modify it later on</param>
         /// <returns></returns>
-        public TextContent AddText(string text, bool headerStyle = false, float fontSize = -1)
+        public TextContent AddText(string text, bool headerStyle = false, float fontSize = -1, Action<TextMeshProUGUI> onContentConstructed = null)
         {
             TextMeshProUGUI t;
 
@@ -87,12 +122,13 @@ namespace UI.TextContents
                 var tmp = Object.Instantiate(t, transform);
                 tmp.text = text;
                 tmp.fontSize = fontSize;
+                onContentConstructed?.Invoke(tmp);
                 transform.GetComponent<TextWrapper>().TextBoxes.Add(tmp);
             });
             return this;
         }
 
-        public TextContent AddIconAndText(Sprite icon, string text, float fontSize = -1)
+        public TextContent AddIconAndText(Sprite icon, string text, float fontSize = -1, Action<GameObject> onContentConstructed = null)
         {
             _iconAndText ??= Resources.Load<GameObject>($"{PrefabsLocation}Icon and Text");
             
@@ -106,6 +142,7 @@ namespace UI.TextContents
                     tmp.fontSize = fontSize;
                 }
                 go.GetComponentInChildren<Image>().sprite = icon;
+                onContentConstructed?.Invoke(go);
             });
             
             return this;
@@ -117,8 +154,9 @@ namespace UI.TextContents
         /// <param name="text">The localized string object</param>
         /// <param name="headerStyle">Whether the text should be displayed with the header template</param>
         /// <param name="fontSize">Font size</param>
+        /// <param name="onContentConstructed">A callback when the content is constructed. Can be used to store the reference of a content and modify it later on</param>
         /// <returns></returns>
-        public TextContent AddText(LocalizedString text, bool headerStyle = false, float fontSize = -1)
+        public TextContent AddText(LocalizedString text, bool headerStyle = false, float fontSize = -1, Action<LocalizeStringEvent> onContentConstructed = null)
         {
             LocalizeStringEvent t;
 
@@ -150,12 +188,13 @@ namespace UI.TextContents
                 localizedT.RefreshString();
                 var tmp = localizedT.GetComponent<TMP_Text>();
                 tmp.fontSize = fontSize;
+                onContentConstructed?.Invoke(localizedT);
                 transform.GetComponent<TextWrapper>().TextBoxes.Add(tmp);
             });
             return this;
         }
 
-        public TextContent AddIconAndText(Sprite icon, LocalizedString text, float fontSize = -1)
+        public TextContent AddIconAndText(Sprite icon, LocalizedString text, float fontSize = -1, Action<LocalizeStringEvent> onContentConstructed = null)
         {
             _iconAndLocalizedText ??= Resources.Load<GameObject>($"{PrefabsLocation}Icon and Localized Text");
             
@@ -174,6 +213,7 @@ namespace UI.TextContents
                 }
                 
                 go.GetComponentInChildren<Image>().sprite = icon;
+                onContentConstructed?.Invoke(strEvent);
             });
             
             return this;
@@ -183,11 +223,17 @@ namespace UI.TextContents
         /// Adds an item to the tooltip with an item icon and the item name with count
         /// </summary>
         /// <param name="itemStack">ItemStack to display, if count is 0 or below no count will be displayed</param>
+        /// <param name="onContentConstructed">A callback when the content is constructed. Can be used to store the reference of a content and modify it later on</param>
         /// <returns></returns>
-        public TextContent AddItem(ItemStack itemStack)
+        public TextContent AddItem(ItemStack itemStack, Action<UIItem> onContentConstructed = null)
         {
             _itemWithName ??= Resources.Load<UIItem>($"{PrefabsLocation}Item With Name");
-            _layoutTopToDown.Add(transform => Object.Instantiate(_itemWithName, transform).Item = itemStack);
+            _layoutTopToDown.Add(transform =>
+            {
+                var item = Object.Instantiate(_itemWithName, transform);
+                item.Item = itemStack;
+                onContentConstructed?.Invoke(item);
+            });
             return this;
         }
 
@@ -195,8 +241,9 @@ namespace UI.TextContents
         /// Adds items in a list with a grid layout.
         /// </summary>
         /// <param name="itemStacks">Items to display</param>
+        /// <param name="onContentConstructed">A callback when the content is constructed. Can be used to store the reference of a content and modify it later on</param>
         /// <returns></returns>
-        public TextContent AddItems(params ItemStack[] itemStacks)
+        public TextContent AddItems(Action<Transform> onContentConstructed = null, params ItemStack[] itemStacks)
         {
             _itemWithName ??= Resources.Load<UIItem>($"{PrefabsLocation}Item With Name");
             _itemStackList ??= Resources.Load<Transform>($"{PrefabsLocation}ItemStacks List");
@@ -207,6 +254,7 @@ namespace UI.TextContents
                 {
                     Object.Instantiate(_itemWithName, list).Item = itemStack;
                 }
+                onContentConstructed?.Invoke(list);
             });
             return this;
         }
@@ -217,11 +265,21 @@ namespace UI.TextContents
             return this;
         }
 
-        public void Build(Transform tooltipObject)
+        public void Build(LocalizeStringEvent titleString, TMP_Text titleText, Transform contentArea)
         {
+            if (_localizedTitle != null && titleString != null)
+            {
+                titleString.StringReference = _localizedTitle;
+            }
+
+            if (!string.IsNullOrEmpty(_title) && titleText != null)
+            {
+                titleText.text = _title;
+            }
+            
             foreach (var instantiation in _layoutTopToDown)
             {
-                instantiation(tooltipObject);
+                instantiation(contentArea);
             }
         }
     }

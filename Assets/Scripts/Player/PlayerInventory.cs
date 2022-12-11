@@ -23,11 +23,10 @@ namespace Player
         [SerializeField] private ItemStack[] startingEquipments;
         [SerializeField] private ItemStack[] startingInventory;
         [SerializeField] private LocalizedString inventoryName;
-
         
         private void Awake()
         {
-            Inv = new Inventory(inventoryName, 40);
+            Inv = new Inventory(inventoryName);
             Equipments = new Inventory(null, 3);
         }
 

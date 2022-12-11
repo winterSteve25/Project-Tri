@@ -79,6 +79,14 @@ MonoBehaviour:
     m_Key: Drone Item Description
     m_Metadata:
       m_Items: []
+  - m_Id: 6811608210173952
+    m_Key: Rubizoid Gem Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6811608235339776
+    m_Key: Rubizoid Gem Description
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

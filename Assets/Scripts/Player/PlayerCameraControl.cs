@@ -1,4 +1,6 @@
-﻿using Cinemachine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Cinemachine;
 using UnityEngine;
 using Utils;
 
@@ -9,18 +11,12 @@ namespace Player
     /// </summary>
     public class PlayerCameraControl : MonoBehaviour
     {
+        public static readonly List<Transform> ScaledObjects = new();
+
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
         [SerializeField] private float size = 6f;
 
-        [SerializeField] private Transform selection;
-
         private readonly Vector3 _constantOfProportionality = new (6, 6);
-        private bool _isSelectionNull;
-
-        private void Start()
-        {
-            _isSelectionNull = selection == null;
-        }
 
         private void Update()
         {
@@ -44,9 +40,11 @@ namespace Player
             if (size == 0) return;
             size = Mathf.Clamp(size, 3, 18);
             virtualCamera.m_Lens.OrthographicSize = size;
-
-            if (_isSelectionNull) return;
-            selection.localScale = _constantOfProportionality / size;
+            
+            foreach (var obj in ScaledObjects.Where(obj => obj.gameObject.activeSelf))
+            {
+                obj.localScale = _constantOfProportionality / size;
+            }
         }
     }
 }

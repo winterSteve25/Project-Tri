@@ -348,6 +348,7 @@ GameObject:
   - component: {fileID: 2985696865057661755}
   - component: {fileID: 2985696865057661752}
   - component: {fileID: 2985696865057661753}
+  - component: {fileID: 9189850479693003356}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -407,9 +408,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d539c6d5d169402c82857310ed29129c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 2985696865057661752}
-  flySpeedModifier: 5
-  sprites:
+  selectedColor: {r: 0, g: 1, b: 1, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  spriteRenderers:
   - {fileID: 2985696865538430136}
   - {fileID: 2985696865690681572}
   - {fileID: 2985696865615380389}
@@ -419,6 +420,24 @@ MonoBehaviour:
   - {fileID: 2985696864515834519}
   - {fileID: 2985696864231547990}
   - {fileID: 2985696865447036133}
+  animator: {fileID: 2985696865057661752}
+  flySpeedModifier: 5
+--- !u!58 &9189850479693003356
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2985696865057661754}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &2985696865188654596
 GameObject:
   m_ObjectHideFlags: 0

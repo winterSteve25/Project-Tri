@@ -1,5 +1,5 @@
 ﻿using UI;
-using UI.Menu.EscapeMenu;
+using UI.Menu.InventoryMenu;
 using UI.TextContents;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -64,11 +64,11 @@ namespace Systems.Craft
         private void RecipeChanged()
         {
             if (_recipe.IsInvalid) return;
-            _textContent = TextContent.Empty()
+            _textContent = TextContent.Titled(item.item.itemName)
                 .AddText(craft)
                 .AddItem(item)
                 .AddText(requires)
-                .AddItems(_recipe.inputs);
+                .AddItems(itemStacks: _recipe.inputs);
         }
     }
 }

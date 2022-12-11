@@ -38,7 +38,7 @@ namespace UI.Menu.CreateOrJoin.JoinWorld
             StartCoroutine(NextScene());
         }
 
-        private void PopulateWorldSelection()
+        public void PopulateWorldSelection()
         {
             foreach (Transform child in content)
             {
@@ -48,6 +48,7 @@ namespace UI.Menu.CreateOrJoin.JoinWorld
             foreach (var worldSave in _location.Directories(null))
             {
                 var worldItem = Instantiate(worldItemPrefab, content);
+                worldItem.JoinWorldMenu = this;
                 worldItem.Setup(worldSave[(worldSave.LastIndexOf('/') + 1)..]);
                 worldItem.OnClick += ButtonClicked;
                 _worldButtons.Add(worldItem);

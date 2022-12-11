@@ -1,7 +1,7 @@
 ﻿using Player.Interaction;
 using Sirenix.OdinInspector;
 using Tiles;
-using UI.Menu.EscapeMenu;
+using UI.Menu.InventoryMenu;
 using UnityEngine;
 using Utils;
 using World.Tiles;
@@ -18,13 +18,12 @@ namespace Items.ItemTypes
         public PlaceableTile placeableTile;
 
         public void Hold(MouseButton mouseButton, ref ItemStack itemStack, TileInstance tileClicked, Vector3 clickedPos, 
-            Vector3Int pos, TilemapManager tilemapManager, InventoryUIController inventoryUIController,
-            EquipmentsController equipmentController, Vector3 playerPosition,
-            Vector3 playerDistanceToClickedPoint)
+            Vector3Int pos, TilemapManager tilemapManager, InventoryController inventoryController,
+            EquipmentsController equipmentController, Vector3 playerPosition)
         {
             if (mouseButton != MouseButton.Right) return;
             if (tileClicked is not null) return;
-            if (placeableTile.hasCollider && !(playerDistanceToClickedPoint.sqrMagnitude > 101)) return;
+            if (placeableTile.hasCollider && !(Vector3.Distance(playerPosition, clickedPos) > 1)) return;
             if (!tilemapManager.TryPlaceTile(placeableTile, pos, TilemapLayer.Obstacles)) return;
 
             // consume an item
@@ -34,9 +33,8 @@ namespace Items.ItemTypes
         }
 
         public bool CanInteract(ref ItemStack itemStack, TileInstance tileAtLocation, Vector3 clickedPos,
-            Vector3Int pos, TilemapManager tilemapManager, InventoryUIController inventoryUIController,
-            EquipmentsController equipmentController, Vector3 playerPosition,
-            Vector3 playerDistanceToClickedPoint)
+            Vector3Int pos, TilemapManager tilemapManager, InventoryController inventoryController,
+            EquipmentsController equipmentController, Vector3 playerPosition)
         {
             if (tileAtLocation is not null) return false;
             var canPlace = placeableTile.CanPlace(pos, tilemapManager);
@@ -44,7 +42,7 @@ namespace Items.ItemTypes
 
             return
                 /* is the player inside the block they are about to place? */
-                playerDistanceToClickedPoint.sqrMagnitude > 101 &&
+                Vector3.Distance(playerPosition, clickedPos) > 1 &&
                 /* custom placement predicate */
                 canPlace;
         }

@@ -1,9 +1,8 @@
 ﻿using DG.Tweening;
 using Items;
-using Items.ItemTypes;
 using Player;
 using Player.Interaction;
-using UI.Menu.EscapeMenu;
+using UI.Menu.InventoryMenu;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
@@ -14,23 +13,33 @@ namespace UI.Managers
 {
     public class SelectionManager : MonoBehaviour
     {
-        private InventoryUIController _inventoryUIController;
+        private InventoryController _inventoryController;
         private EquipmentsController _equipmentsController;
         private Tilemap _obstacleLayer;
         private TilemapManager _tilemapManager;
         private Transform _playerTransform;
-        
+
         [SerializeField] private Camera mainCamera;
         [SerializeField] private Canvas selectionCanvas;
         [SerializeField] private CanvasGroup selection;
 
         private void Start()
         {
-            _inventoryUIController = InventoryUIController.Current;
+            _inventoryController = InventoryController.Current;
             _equipmentsController = EquipmentsController.Current;
             _tilemapManager = TilemapManager.Current;
             _obstacleLayer = _tilemapManager.ObstacleLayer;
             _playerTransform = FindObjectOfType<PlayerInteractionHandler>().transform;
+        }
+
+        private void OnEnable()
+        {
+            PlayerCameraControl.ScaledObjects.Add(selection.transform);
+        }
+
+        private void OnDisable()
+        {
+            PlayerCameraControl.ScaledObjects.Remove(selection.transform);
         }
 
         private void Update()
@@ -41,7 +50,7 @@ namespace UI.Managers
             var tileAtPos = _tilemapManager.GetTile(pos, TilemapLayer.Obstacles);
             var isEmpty = tileAtPos == null;
             var overUI = EventSystem.current.IsPointerOverGameObject();
-            
+
             var item = _equipmentsController[EquipmentType.Outer];
             var isHoldingInteractableItem = item.item is IInteractableItem;
 
@@ -54,8 +63,8 @@ namespace UI.Managers
                 var playerPosition = _playerTransform.position;
                 var interactable = (IInteractableItem)item.item;
 
-                if (interactable.CanInteract(ref item, tileAtPos, point, pos, _tilemapManager, _inventoryUIController,
-                        _equipmentsController, playerPosition, playerPosition - point))
+                if (interactable.CanInteract(ref item, tileAtPos, point, pos, _tilemapManager, _inventoryController,
+                        _equipmentsController, playerPosition))
                 {
                     MoveSelection(pos);
                 }
@@ -75,16 +84,17 @@ namespace UI.Managers
             var cam = selectionCanvas.worldCamera;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 selectionCanvas.transform as RectTransform,
-                RectTransformUtility.WorldToScreenPoint(cam, _obstacleLayer.CellToWorld(cellPos) + _obstacleLayer.cellSize * 0.5f),
+                RectTransformUtility.WorldToScreenPoint(cam,
+                    _obstacleLayer.CellToWorld(cellPos) + _obstacleLayer.cellSize * 0.5f),
                 cam, out var p);
             var p2 = selectionCanvas.transform.TransformPoint(p);
-            
+
             if (!selection.gameObject.activeSelf)
             {
                 selection.transform.position = p2;
                 selection.FadeIn(0.2f);
             }
-            
+
             selection.transform.DOMove(p2, 0.35f)
                 .SetEase(Ease.OutCubic);
         }

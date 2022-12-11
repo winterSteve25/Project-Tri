@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using KevinCastejon.MoreAttributes;
 using SaveLoad;
 using SaveLoad.Interfaces;
 using Sirenix.OdinInspector;
+using UI.Managers;
 using UnityEngine;
 using Utils;
 using Utils.Data;
@@ -12,44 +12,42 @@ namespace UI.Menu.EscapeMenu
 {
     public class EscapeMenuController : CurrentInstanced<EscapeMenuController>
     {
-        [SerializeField, Required] 
-        [FoldoutGroup("Required Fields")]
-        private CanvasGroup escapeMenu;
-
-        [SerializeField, Scene, Required] 
-        [FoldoutGroup("Required Fields")]
-        private string titleScene;
+        [SerializeField, Scene] private string titleScene;
         
-        [SerializeField] 
-        [FoldoutGroup("Configuration")]
-        private float fadeTime = 0.15f;
-
+        [SerializeField, Required] private CanvasGroup escapeMenu;
+        [SerializeField, Required] private EscapeMenuButtonAnimator buttonAnimator;
+      
         public bool IsActive => escapeMenu.gameObject.activeSelf;
 
         private void Start()
         {
-            escapeMenu.Disable();
+            escapeMenu.alpha = 0;
+            escapeMenu.gameObject.SetActive(false);
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                ToggleMenu();
+                ToggleVisibility();
             }
         }
 
-        public void ToggleMenu()
+        private void ToggleVisibility()
         {
-            escapeMenu.FadeToggle(fadeTime);
-        }
-
-        public void SaveAndExit()
-        {
-            ExitWorld();
+            if (!escapeMenu.gameObject.activeSelf)
+            {
+                UIManager.ToggleUI(escapeMenu);
+                buttonAnimator.AnimateIn();
+            }
+            else
+            {
+                buttonAnimator.AnimateOut();
+                UIManager.CloseUI();
+            }
         }
         
-        private async Task ExitWorld()
+        public async void ExitWorld()
         {
             await FindObjectsOfType<MonoBehaviour>()
                 .OfType<ICustomWorldData>()
@@ -61,6 +59,16 @@ namespace UI.Menu.EscapeMenu
             GlobalData.Remove(GlobalDataKeys.CurrentWorldSettings);
             
             SceneUtilities.Instance.LoadScene(titleScene);
+        }
+
+        public void Settings()
+        {
+            
+        }
+
+        public void Resume()
+        {
+            ToggleVisibility();
         }
     }
 }

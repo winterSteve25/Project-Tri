@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
@@ -20,10 +21,14 @@ namespace UI.TabsSystem
         
         [SerializeField, FoldoutGroup("Configuration")]
         private float tabFadeDuration = 0.1f;
-        
+
         [SerializeField, ReadOnly] private int selectedTab;
         [SerializeField, ReadOnly] private bool moving;
 
+        private int EnabledTabs => tabs.Count(t => t.gameObject.activeSelf);
+
+        public int SelectedTab => selectedTab;
+        
         private void Start()
         {
             // disable all but first
@@ -42,6 +47,29 @@ namespace UI.TabsSystem
             StartCoroutine(RefreshContent(selectedTab, index));
         }
 
+        public void SwitchTabNoAnimation(int index)
+        {
+            var go = tabs[selectedTab].TabObject;
+            go.alpha = 0;
+            go.gameObject.SetActive(false);
+            selectedTab = index;
+            go = tabs[selectedTab].TabObject;
+            go.alpha = 1;
+            go.gameObject.SetActive(true);
+        }
+
+        public void NextTab()
+        {
+            var enabledTabs = EnabledTabs;
+            ClickedTab((selectedTab + 1 + enabledTabs) % enabledTabs);
+        }
+
+        public void LastTab()
+        {
+            var enabledTabs = EnabledTabs;
+            ClickedTab((selectedTab - 1 + enabledTabs) % enabledTabs);
+        }
+        
         private IEnumerator RefreshContent(int oldTab, int newTab)
         {
             moving = true;

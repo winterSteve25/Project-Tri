@@ -1,6 +1,8 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
+using UI.Managers;
 using UnityEngine;
 
 namespace Utils
@@ -25,15 +27,20 @@ namespace Utils
                 .SetEase(ease);
         }
         
-        public static TweenerCore<float, float, FloatOptions> FadeOut(this CanvasGroup canvasGroup, float fadeDuration, Ease ease = Ease.Linear)
+        public static TweenerCore<float, float, FloatOptions> FadeOut(this CanvasGroup canvasGroup, float fadeDuration, Ease ease = Ease.Linear, Action onComplete = null)
         {
             return canvasGroup.DOFade(0, fadeDuration)
                 .SetEase(ease)
                 .OnComplete(() =>
                 {
-                    canvasGroup.DOKill();
                     canvasGroup.gameObject.SetActive(false);
+                    onComplete?.Invoke();
                 });
+        }
+
+        public static void PushUI(this CanvasGroup canvasGroup, float fadeDuration)
+        {
+            UIManager.ToggleUI(canvasGroup, fadeDuration);   
         }
     }
 }

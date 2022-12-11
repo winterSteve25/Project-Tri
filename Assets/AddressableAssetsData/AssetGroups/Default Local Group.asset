@@ -21,6 +21,14 @@ MonoBehaviour:
     m_Address: Prefabs/----SCENE MANAGER----
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 85e95d51044cfed4c8289e27f7b75656
+    m_Address: UI/Mouse Cursor
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a6a002e6a7d67ad4c9a27b9cef22f656
+    m_Address: Prefabs/----AUDIO PLAYER----
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4cc7fc1ec1b7b014c8261c905c08d61d, type: 2}
   m_SchemaSet:

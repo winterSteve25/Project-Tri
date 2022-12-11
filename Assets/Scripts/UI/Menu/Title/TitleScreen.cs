@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Audio;
 using UnityEngine;
 
 namespace UI.Menu.Title
@@ -12,11 +13,13 @@ namespace UI.Menu.Title
         [SerializeField] private MenuTransition toSettings;
         [SerializeField] private MenuTransition toCreate;
         [SerializeField] private MenuTransition toJoin;
+        [SerializeField] private AudioObject menuMusic;
 
         private void Start()
         {
             _camera = Camera.main.transform;
             _lastTransition = new Stack<MenuTransition>();
+            menuMusic.Play();
         }
 
         public void Play()
