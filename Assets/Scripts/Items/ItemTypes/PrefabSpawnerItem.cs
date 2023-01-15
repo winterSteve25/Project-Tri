@@ -15,7 +15,7 @@ namespace Items.ItemTypes
         private GameObject prefab;
 
         public void Click(MouseButton mouseButton, ref ItemStack itemStack, TileInstance tileClicked, Vector3 clickedPos,
-            Vector3Int pos, TilemapManager tilemapManager, InventoryController inventoryController,
+            Vector3Int pos, TilemapManager tilemapManager, InventoryTabController inventoryTabController,
             EquipmentsController equipmentsController, Vector3 playerPosition)
         {
             // spawn the prefab
@@ -29,7 +29,7 @@ namespace Items.ItemTypes
         }
 
         public bool CanInteract(ref ItemStack itemStack, TileInstance tileAtLocation, Vector3 clickedPos,
-            Vector3Int pos, TilemapManager tilemapManager, InventoryController inventoryController,
+            Vector3Int pos, TilemapManager tilemapManager, InventoryTabController inventoryTabController,
             EquipmentsController equipmentsController, Vector3 playerPosition)
         {
             return true;

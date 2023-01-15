@@ -45,6 +45,10 @@ namespace Editor.Registries
                     {
                         tree.Add(path, new BaseTable<ItemTableEntry, TriItem>(Resources.LoadAll<TriItem>(path), x => new ItemTableEntry(x)));
                     }
+                    else if (path.StartsWith("Recipes"))
+                    {
+                        tree.Add(path, new BaseTable<RecipeTableEntry, CraftingRecipe>(Resources.LoadAll<CraftingRecipe>(path), x => new RecipeTableEntry(x)));
+                    }
                 });
             
             return tree;

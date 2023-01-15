@@ -10,7 +10,7 @@ namespace Player.Interaction
     public interface IClickedBehaviourItem : IInteractableItem
     {
         void Click(MouseButton mouseButton, ref ItemStack itemStack, [CanBeNull] TileInstance tileClicked, Vector3 clickedPos,
-            Vector3Int pos, TilemapManager tilemapManager, InventoryController inventoryController,
+            Vector3Int pos, TilemapManager tilemapManager, InventoryTabController inventoryTabController,
             EquipmentsController equipmentsController, Vector3 playerPosition);
     }
 }

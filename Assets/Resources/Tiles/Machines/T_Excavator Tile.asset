@@ -16,7 +16,9 @@ MonoBehaviour:
   color: {r: 1, g: 1, b: 1, a: 0}
   hardness: 0.8
   drops:
-  - count: 1
-    item: {fileID: 11400000, guid: 1687e2267c6ddef42b9f3356fdcffafc, type: 2}
+  - itemStack:
+      count: 1
+      item: {fileID: 11400000, guid: 1687e2267c6ddef42b9f3356fdcffafc, type: 2}
+    chance: 1
   hasCollider: 0
   recipes: {fileID: 11400000, guid: b4edfd8c98c49ce43842307cad05f9fe, type: 2}

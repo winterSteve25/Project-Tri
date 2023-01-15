@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 6917388738900754142}
   - component: {fileID: 6917388738900754143}
   - component: {fileID: 6917388738900754112}
+  - component: {fileID: 757682057485836694}
   m_Layer: 5
   m_Name: PREFAB_Large Button
   m_TagString: Untagged
@@ -168,7 +169,7 @@ RectTransform:
   m_Children:
   - {fileID: 6917388737413589054}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -257,3 +258,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &757682057485836694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6917388738900754114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e451c0fe89c49db846774b61ee7ffe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverSound:
+    audioType: 0
+    soundToPlay: {fileID: 11400000, guid: 740500e078dbc534092f80aaa1b05408, type: 2}
+    showSettings: 0
+    editSettings: 0
+    sfxBase: {fileID: 11400000, guid: 740500e078dbc534092f80aaa1b05408, type: 2}
+    waitToPlay: 1
+    useDefault: 1
+    audiosource: {fileID: 0}
+  fadeDuration: 0

@@ -31,7 +31,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  maxStackSize: 64
+  maxStackSize: 32
   equipmentType: 
   references:
     version: 2

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: T_Kiterite Ore
   m_EditorClassIdentifier: 
   tileBase: {fileID: 11400000, guid: 5217cae213c5e2c4b85d619766cfa0cf, type: 2}
-  color: {r: 0.14117648, g: 0.89019614, b: 0.9803922, a: 1}
+  color: {r: 1, g: 0.491457, b: 0.21226418, a: 1}
   hardness: 2

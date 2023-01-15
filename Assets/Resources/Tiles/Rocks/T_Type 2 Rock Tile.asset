@@ -16,6 +16,12 @@ MonoBehaviour:
   color: {r: 0.09411766, g: 0.03137255, b: 0.20784315, a: 1}
   hardness: 0.5
   drops:
-  - count: 1
-    item: {fileID: 11400000, guid: fde87653ec879ce4daca44587ff42931, type: 2}
+  - itemStack:
+      count: 1
+      item: {fileID: 11400000, guid: fde87653ec879ce4daca44587ff42931, type: 2}
+    chance: 1
+  - itemStack:
+      count: 1
+      item: {fileID: 11400000, guid: 08d3eec9a31806e4b99564dfbea540a1, type: 2}
+    chance: 0.1
   hasCollider: 1

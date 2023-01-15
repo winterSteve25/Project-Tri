@@ -36,7 +36,10 @@ MonoBehaviour:
       _node: {fileID: -8752521000785782394}
       _typeQualifiedName: System.Byte, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-      connections: []
+      connections:
+      - fieldName: previousNode
+        node: {fileID: 7574387349311761409}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
@@ -58,6 +61,79 @@ MonoBehaviour:
   material: {fileID: 11400000, guid: 7a19f2885be593348b6d2e253b6ca525, type: 2}
   layer: 0
   message: Placinng ore with funny name...
+--- !u!114 &-7632070575052147283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95db91246fbf45a78c4a313e718040f7, type: 3}
+  m_Name: Clusterize Function X
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -424, y: 936}
+  ports:
+    keys:
+    - Function Output
+    - Original Positions
+    values:
+    - _fieldName: Function Output
+      _node: {fileID: -7632070575052147283}
+      _typeQualifiedName: World.Generation.Nodes.FunctionNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Position Function Input
+        node: {fileID: 7574387349311761409}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: Original Positions
+      _node: {fileID: -7632070575052147283}
+      _typeQualifiedName: World.Generation.Nodes.FunctionNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Function Output
+        node: {fileID: 8651521931700822728}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  minSize: {x: 2, y: 2}
+  maxSize: {x: 4, y: 4}
+  distanceEffect:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  noiseScale: 15
+  noiseOctave: 4
+  noiseThreshold: 0.5
+  comparison: 1
 --- !u!114 &-7455016545534597081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +400,9 @@ MonoBehaviour:
   - {fileID: -8752521000785782394}
   - {fileID: -3652878959467151825}
   - {fileID: 6252327345194670694}
+  - {fileID: 7574387349311761409}
+  - {fileID: 8651521931700822728}
+  - {fileID: -7632070575052147283}
 --- !u!114 &2561141256967724563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,6 +594,64 @@ MonoBehaviour:
   noiseOctave: 3
   noiseThreshold: 0.3
   comparison: 1
+--- !u!114 &7574387349311761409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08413eeb554d49e5a502ab2a5c73ca3a, type: 3}
+  m_Name: Tile Placer X
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -136, y: 936}
+  ports:
+    keys:
+    - previousNode
+    - nextNode
+    - Position Function Input
+    values:
+    - _fieldName: previousNode
+      _node: {fileID: 7574387349311761409}
+      _typeQualifiedName: System.Byte, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: nextNode
+        node: {fileID: -8752521000785782394}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: nextNode
+      _node: {fileID: 7574387349311761409}
+      _typeQualifiedName: System.Byte, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Position Function Input
+      _node: {fileID: 7574387349311761409}
+      _typeQualifiedName: World.Generation.Nodes.FunctionNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Function Output
+        node: {fileID: -7632070575052147283}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  previousNode: 0
+  nextNode: 0
+  material: {fileID: 11400000, guid: 351454ef3aebb8248bc60eb14e685c1e, type: 2}
+  layer: 0
+  message: Placing geothermal nodes
 --- !u!114 &7811683586209581016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,4 +717,36 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 1
   radius: 64
+  samplesBeforeDiscard: 15
+--- !u!114 &8651521931700822728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ffbbe02e1224fe3a0799242b718dace, type: 3}
+  m_Name: Poisson Function X
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -712, y: 984}
+  ports:
+    keys:
+    - Function Output
+    values:
+    - _fieldName: Function Output
+      _node: {fileID: 8651521931700822728}
+      _typeQualifiedName: World.Generation.Nodes.FunctionNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Original Positions
+        node: {fileID: -7632070575052147283}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  radius: 32
   samplesBeforeDiscard: 15

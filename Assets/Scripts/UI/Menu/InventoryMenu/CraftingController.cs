@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommandTerminal;
 using Player;
 using Registries;
 using Sirenix.OdinInspector;
@@ -27,12 +28,15 @@ namespace UI.Menu.InventoryMenu
 
         [SerializeField, Required] 
         private TMP_InputField searchBar;
-        
+
+        private Dictionary<CraftingRecipe, string> _recipes;
         private List<CraftableItemEntry> _craftableItems;
         private Inventory _inventory;
 
         private void Start()
         {
+            RefreshRecipes();
+
             _craftableItems = new List<CraftableItemEntry>();
             searchBar.onValueChanged.AddListener(SearchItem);
             
@@ -54,11 +58,12 @@ namespace UI.Menu.InventoryMenu
             }
             
             _craftableItems.Clear();
-
-            foreach (var recipe in recipes.Entries.Where(recipe => !recipe.Key.IsInvalid && recipe.Key.CanCraft(_inventory)))
+            
+            foreach (var recipe in recipes.Entries.Where(recipe => !recipe.Key.IsInvalid))
             {
                 var entry = Instantiate(craftableItemEntryPrefab, craftableItemsParent);
                 entry.Recipe = recipe.Key;
+                entry.Slot.Interactable = entry.Recipe.CanCraft(_inventory);
                 _craftableItems.Add(entry);
             }
         }
@@ -116,6 +121,11 @@ namespace UI.Menu.InventoryMenu
             }
 
             craftableItemsParent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
+        }
+
+        public void RefreshRecipes()
+        {
+            _recipes = recipes.Entries.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         }
     }
 }

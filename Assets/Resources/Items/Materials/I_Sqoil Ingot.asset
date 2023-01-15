@@ -32,7 +32,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   maxStackSize: 128
-  equipmentType: 00000000
+  equipmentType: 
   references:
     version: 2
     RefIds: []

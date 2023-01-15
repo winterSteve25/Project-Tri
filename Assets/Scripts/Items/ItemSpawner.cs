@@ -37,7 +37,7 @@ namespace Items
         
         public GroundItemBehaviour Spawn(Vector2 pos, ItemStack item, float despawnTime = -1)
         {
-            if (item.count <= 0) return null;
+            if (item.IsEmpty) return null;
             var itemBehaviour = _pool.Get();
             itemBehaviour.transform.position = pos;
             itemBehaviour.Init(() => Despawn(itemBehaviour), item, despawnTime);
@@ -46,7 +46,7 @@ namespace Items
 
         public void SpawnApproximatelyAt(Vector2 pos, ItemStack item)
         {
-            if (item.count <= 0) return;
+            if (item.IsEmpty) return;
             var i = Spawn(pos, item);
             i.transform.DOMove(i.transform.position + (Vector3)Random.insideUnitCircle, 0.5f)
                 .SetEase(Ease.OutCubic);

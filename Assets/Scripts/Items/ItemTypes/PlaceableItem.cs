@@ -18,7 +18,7 @@ namespace Items.ItemTypes
         public PlaceableTile placeableTile;
 
         public void Hold(MouseButton mouseButton, ref ItemStack itemStack, TileInstance tileClicked, Vector3 clickedPos, 
-            Vector3Int pos, TilemapManager tilemapManager, InventoryController inventoryController,
+            Vector3Int pos, TilemapManager tilemapManager, InventoryTabController inventoryTabController,
             EquipmentsController equipmentController, Vector3 playerPosition)
         {
             if (mouseButton != MouseButton.Right) return;
@@ -33,7 +33,7 @@ namespace Items.ItemTypes
         }
 
         public bool CanInteract(ref ItemStack itemStack, TileInstance tileAtLocation, Vector3 clickedPos,
-            Vector3Int pos, TilemapManager tilemapManager, InventoryController inventoryController,
+            Vector3Int pos, TilemapManager tilemapManager, InventoryTabController inventoryTabController,
             EquipmentsController equipmentController, Vector3 playerPosition)
         {
             if (tileAtLocation is not null) return false;

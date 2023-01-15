@@ -11,7 +11,7 @@ namespace Tiles
     [CreateAssetMenu(fileName = "New Placeable Tile", menuName = "Machines/New Placeable Tile")]
     public class PlaceableTile : TriTile
     {
-        public List<ItemStack> drops;
+        public List<ChanceItemDrop> drops;
         public bool hasCollider;
 
         public virtual bool CanPlace(Vector3Int pos, TilemapManager tilemapManager)

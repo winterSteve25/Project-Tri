@@ -15,6 +15,7 @@ namespace TileBehaviours.Excavator
         [SerializeField] private MiningRecipes recipes;
         [SerializeField] private Animator animator;
         [SerializeField] private ParticleSystem dustParticles;
+        [SerializeField] private float speedMultiplier = 1;
         
         private TriTile _ore;
         private MiningRecipe _recipe;
@@ -50,7 +51,7 @@ namespace TileBehaviours.Excavator
                 _startedParticles = true;
             }
             
-            _progress += Time.deltaTime;
+            _progress += Time.deltaTime * speedMultiplier;
 
             if (_progress >= _recipe.ore.hardness)
             {

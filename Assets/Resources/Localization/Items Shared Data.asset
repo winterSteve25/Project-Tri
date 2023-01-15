@@ -87,6 +87,22 @@ MonoBehaviour:
     m_Key: Rubizoid Gem Description
     m_Metadata:
       m_Items: []
+  - m_Id: 22303867076571136
+    m_Key: Purpureum Ingot Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22303867101736960
+    m_Key: Purpureum Ingot Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22307149547270144
+    m_Key: Purpureum Chunk Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22307149547270145
+    m_Key: Purpureum Chunk Description
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

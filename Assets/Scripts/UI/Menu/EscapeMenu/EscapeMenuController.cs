@@ -37,7 +37,7 @@ namespace UI.Menu.EscapeMenu
         {
             if (!escapeMenu.gameObject.activeSelf)
             {
-                UIManager.ToggleUI(escapeMenu);
+                UIManager.ToggleUI(escapeMenu, onlyOpenIfCurrentIsNull: true);
                 buttonAnimator.AnimateIn();
             }
             else

@@ -14,7 +14,7 @@ namespace Player.Interaction
 {
     public class PlayerInteractionHandler : MonoBehaviour
     {
-        private InventoryController _inventoryController;
+        private InventoryTabController _inventoryTabController;
         private EquipmentsController _equipmentsController;
         private TilemapManager _tilemapManager;
         private Tilemap _obstacleLayer;
@@ -27,11 +27,11 @@ namespace Player.Interaction
         private bool _wasRightClickDown;
 
         [SerializeField] private Camera mainCamera;
-
+        
         private void Start()
         {
             _updateableEquipments = new List<IUpdateBehaviourItem>();
-            _inventoryController = InventoryController.Current;
+            _inventoryTabController = InventoryTabController.Current;
             _equipmentsController = EquipmentsController.Current;
             _tilemapManager = TilemapManager.Current;
             _obstacleLayer = _tilemapManager.ObstacleLayer;
@@ -76,13 +76,13 @@ namespace Player.Interaction
                     if (isLeftClickHeld)
                     {
                         pressBehaviourItem.Hold(MouseButton.Left, ref item, tileAtPos, point, pos, _tilemapManager,
-                            _inventoryController, _equipmentsController, playerPosition);
+                            _inventoryTabController, _equipmentsController, playerPosition);
                     }
 
                     if (isRightClickHeld)
                     {
                         pressBehaviourItem.Hold(MouseButton.Right, ref item, tileAtPos, point, pos, _tilemapManager,
-                            _inventoryController, _equipmentsController, playerPosition);
+                            _inventoryTabController, _equipmentsController, playerPosition);
                     }
                 }
 
@@ -91,13 +91,13 @@ namespace Player.Interaction
                     if (isLeftClickDown)
                     {
                         clickedBehaviourItem.Click(MouseButton.Left, ref item, tileAtPos, point, pos, _tilemapManager,
-                            _inventoryController, _equipmentsController, playerPosition);
+                            _inventoryTabController, _equipmentsController, playerPosition);
                     }
 
                     if (isRightClickDown)
                     {
                         clickedBehaviourItem.Click(MouseButton.Right, ref item, tileAtPos, point, pos, _tilemapManager,
-                            _inventoryController, _equipmentsController, playerPosition);
+                            _inventoryTabController, _equipmentsController, playerPosition);
                     }
                 }
 
@@ -117,13 +117,13 @@ namespace Player.Interaction
                 if (_wasLeftClickDown && !isLeftClickHeld)
                 {
                     releasedBehaviourItem.Release(MouseButton.Left, ref item, _tilemapManager,
-                        _inventoryController, _equipmentsController, playerPosition);
+                        _inventoryTabController, _equipmentsController, playerPosition);
                 }
 
                 if (_wasRightClickDown && !isRightClickHeld)
                 {
                     releasedBehaviourItem.Release(MouseButton.Right, ref item, _tilemapManager,
-                        _inventoryController, _equipmentsController, playerPosition);
+                        _inventoryTabController, _equipmentsController, playerPosition);
                 }
             }
 

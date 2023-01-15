@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3551037587156992
-    m_Localized: A kite shaped glowing blue gem
+    m_Localized: A relatively hard kite shaped glowing blue gem
     m_Metadata:
       m_Items: []
   - m_Id: 3551037591351296
@@ -63,8 +63,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3551037591351297
-    m_Localized: A hard metal ingot that can be used to construct various machines
-      and tools
+    m_Localized: A soft metal ingot that can be used to construct primitive machinery
+      and be easily molded into other shapes
     m_Metadata:
       m_Items: []
   - m_Id: 4253060620054528
@@ -90,6 +90,22 @@ MonoBehaviour:
   - m_Id: 6811608235339776
     m_Localized: A blood red gem that can be obtained from one certain type of local
       inhabitant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22303867076571136
+    m_Localized: Purpureum Ingot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22303867101736960
+    m_Localized: A hard metal ingot that can be used for more complex technologies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22307149547270144
+    m_Localized: Purpureum Ore Chunk
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22307149547270145
+    m_Localized: A chunk of impure purpureum that can be refined into purpureum ingots
     m_Metadata:
       m_Items: []
   references:

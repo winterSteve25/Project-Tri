@@ -19,13 +19,13 @@ namespace TileBehaviours.Container
         [SerializeField] private LocalizedString inventoryName;
         
         public Inventory Inventory { get; private set; }
-        private InventoryController _inventoryController;
+        private InventoryTabController _inventoryTabController;
         private PlayerInventory _playerInventory;
         
         private void Awake()
         {
             Inventory = new Inventory(inventoryName, 15);
-            _inventoryController = InventoryController.Current;
+            _inventoryTabController = InventoryTabController.Current;
             _playerInventory = FindObjectOfType<PlayerInventory>();
         }
         
@@ -40,7 +40,7 @@ namespace TileBehaviours.Container
         public override void OnInteract()
         {
             if (Vector2.Distance(_playerInventory.transform.position, transform.position) > distanceBeforeAccessDenied) return;
-                _inventoryController.SetOpenedInventory(Inventory);
+                _inventoryTabController.SetOpenedInventory(Inventory);
         }
 
         public override void OnBroken()
@@ -58,9 +58,9 @@ namespace TileBehaviours.Container
         private void ExitMenu()
         {
             // if currently displaying this inventory, close it when this is broken
-            if (_inventoryController.OpenedInventory == Inventory)
+            if (_inventoryTabController.OpenedInventory == Inventory)
             {
-                _inventoryController.SetOpenedInventory(null);
+                _inventoryTabController.SetOpenedInventory(null);
             }
         }
         

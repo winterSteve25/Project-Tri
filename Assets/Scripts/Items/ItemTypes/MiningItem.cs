@@ -21,8 +21,8 @@ namespace Items.ItemTypes
         [BoxGroup(GeneralInformationBox)] [VerticalGroup(VerticalMain)] [SerializeField] [MinValue(1)]
         private float miningSpeedModifier;
 
-        public void Hold(MouseButton mouseButton, ref ItemStack itemStack, TileInstance tileClicked, Vector3 clickedPos, 
-            Vector3Int pos, TilemapManager tilemapManager, InventoryController inventoryController,
+        public void Hold(MouseButton mouseButton, ref ItemStack itemStack, TileInstance tileClicked, Vector3 clickedPos,
+            Vector3Int pos, TilemapManager tilemapManager, InventoryTabController inventoryTabController,
             EquipmentsController equipmentsController, Vector3 playerPosition)
         {
             if (mouseButton != MouseButton.Left) return;
@@ -44,7 +44,7 @@ namespace Items.ItemTypes
         }
 
         public void Release(MouseButton mouseButton, ref ItemStack itemStack, TilemapManager tilemapManager,
-            InventoryController inventoryController, EquipmentsController equipmentsController,
+            InventoryTabController inventoryTabController, EquipmentsController equipmentsController,
             Vector3 playerPosition)
         {
             var usedToBeMiningTile = itemStack.CustomData.GetOrDefault(CurrentlyMiningTile, null);
@@ -57,7 +57,7 @@ namespace Items.ItemTypes
         }
 
         public bool CanInteract(ref ItemStack itemStack, TileInstance tileAtLocation, Vector3 clickedPos,
-            Vector3Int pos, TilemapManager tilemapManager, InventoryController inventoryController,
+            Vector3Int pos, TilemapManager tilemapManager, InventoryTabController inventoryTabController,
             EquipmentsController equipmentsController, Vector3 playerPosition)
         {
             if (tileAtLocation is not null) return true;
@@ -78,7 +78,7 @@ namespace Items.ItemTypes
         {
             var usedToBeMiningTile = itemStack.CustomData.GetOrDefault(CurrentlyMiningTile, null);
             var breakProgressManager = BreakProgressManager.Current;
-            
+
             if (tileInstance != usedToBeMiningTile)
             {
                 // reset the old breaking progress if there is one
@@ -98,7 +98,7 @@ namespace Items.ItemTypes
                 itemStack.CustomData.Remove(CurrentlyMiningTile);
                 return true;
             }
-            
+
             return false;
         }
     }

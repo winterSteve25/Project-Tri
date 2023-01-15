@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -136.59998, y: 3.3781738}
+  m_AnchoredPosition: {x: -138.6, y: 0}
   m_SizeDelta: {x: 262.4954, y: -16.612091}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1366028089545881633
@@ -50,10 +50,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
+    m_Left: 5
+    m_Right: 5
+    m_Top: 20
+    m_Bottom: 5
   m_ChildAlignment: 2
   m_Spacing: 0
   m_ChildForceExpandWidth: 0
@@ -158,8 +158,9 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -1208952639
-  m_SortingOrder: 2000
+  m_SortingOrder: 1000
   m_TargetDisplay: 0
 --- !u!114 &5972602520055495037
 MonoBehaviour:
@@ -199,4 +200,13 @@ MonoBehaviour:
   notificationPrefab: {fileID: 911715230808635376, guid: 23dcbb8e11bf03c4183135d07eebd1e0, type: 3}
   notificationPlaceHolder: {fileID: 5388939309090826671, guid: 6d69b6c7ccc20784794ad2e11e4a73cf, type: 3}
   realParent: {fileID: 1366028089616802906}
+  notificationSound:
+    audioType: 0
+    soundToPlay: {fileID: 11400000, guid: 61ea23db6ace78b488d5a54e9e4cac90, type: 2}
+    showSettings: 0
+    editSettings: 0
+    sfxBase: {fileID: 11400000, guid: 61ea23db6ace78b488d5a54e9e4cac90, type: 2}
+    waitToPlay: 1
+    useDefault: 1
+    audiosource: {fileID: 0}
   topRight: {fileID: 1366028089545881634}

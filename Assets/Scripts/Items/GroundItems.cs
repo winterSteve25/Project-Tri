@@ -14,14 +14,14 @@ namespace Items
         public async Task Save()
         {
             var itemstacks = new List<GroundItemStack>();
-            
+
             foreach (Transform child in transform)
             {
                 if (!child.gameObject.activeSelf) continue;
                 var item = child.GetComponent<GroundItemBehaviour>();
                 itemstacks.Add(new GroundItemStack(item.Item, item.transform.position, item.DespawnTime));
             }
-
+            
             var location = FileLocation.CurrentWorldSave(FileNameConstants.GroundItems);
             await SaveUtilities.Save(location, itemstacks);
         }

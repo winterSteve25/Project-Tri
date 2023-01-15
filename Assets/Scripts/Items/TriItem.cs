@@ -8,7 +8,6 @@ using UnityEngine.Localization;
 
 namespace Items
 {
-    
     /// <summary>
     /// Object that holds the identity of an item
     /// </summary>

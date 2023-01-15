@@ -18,5 +18,7 @@ namespace Systems.Craft
 
         [SerializeField] private LocalizeStringEvent resultText;
         [SerializeField] private CraftableItemSlot slot;
+
+        public CraftableItemSlot Slot => slot;
     }
 }

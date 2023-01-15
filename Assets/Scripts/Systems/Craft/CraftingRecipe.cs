@@ -1,4 +1,5 @@
-﻿using EditorAttributes;
+﻿using System.Linq;
+using EditorAttributes;
 using Items;
 using Sirenix.OdinInspector;
 using Systems.Inv;
@@ -15,16 +16,22 @@ namespace Systems.Craft
         
         [HorizontalGroup("Main")]
         [BoxGroup("Main/Input")]
-        public ItemStack[] inputs;
+        public CraftingIngredient[] ingredients;
 
-        public bool IsInvalid => inputs is not { Length: > 0 } || result.IsEmpty;
+        public ItemStack[] inputs
+        {
+            get => ingredients.Select(ing => ing.itemStack).ToArray();
+            set => ingredients = value.Select(item => (CraftingIngredient) item).ToArray();
+        }
+        
+        public bool IsInvalid => ingredients is not { Length: > 0 } || result.IsEmpty;
 
         public bool CanCraft(Inventory inventory)
         {
             var containsAllIngredients = true;
 
             // do we have all the ingredients?
-            foreach (var ingredient in inputs)
+            foreach (var ingredient in ingredients)
             {
                 if (inventory.Contains(ingredient)) continue;
                 containsAllIngredients = false;

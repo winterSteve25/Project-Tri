@@ -8,7 +8,7 @@ namespace UI.Managers
     {
         private CanvasGroup _activeUI;
 
-        public static void ToggleUI(CanvasGroup canvasGroup, float fadeDuration = 0.2f, Ease fadeEase = Ease.Linear)
+        public static void ToggleUI(CanvasGroup canvasGroup, float fadeDuration = 0.2f, Ease fadeEase = Ease.Linear, bool onlyOpenIfCurrentIsNull = false)
         {
             if (Current._activeUI == canvasGroup)
             {
@@ -23,6 +23,12 @@ namespace UI.Managers
             {
                 Current._activeUI.FadeOut(fadeDuration, onComplete: () =>
                 {
+                    if (onlyOpenIfCurrentIsNull)
+                    {
+                        Current._activeUI = null;
+                        return;
+                    }
+
                     Current._activeUI = canvasGroup;
                     Current._activeUI.FadeIn(fadeDuration, fadeEase);
                 });
@@ -33,7 +39,7 @@ namespace UI.Managers
                 Current._activeUI.FadeIn(fadeDuration, fadeEase);
             }
         }
-
+        
         public static void CloseUI(float fadeDuration = 0.2f, Ease fadeEase = Ease.Linear)
         {
             if (Current._activeUI == null) return;

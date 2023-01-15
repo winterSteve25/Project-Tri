@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileBase: {fileID: 11400000, guid: 8c1509ed54e536a49904c1b1741a39b6, type: 2}
   color: {r: 0.058758926, g: 0.041073337, b: 0.122641504, a: 1}
-  hardness: 0.5
+  hardness: 0

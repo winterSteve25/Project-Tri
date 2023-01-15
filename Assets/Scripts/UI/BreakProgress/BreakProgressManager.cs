@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Player;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utils;
@@ -44,6 +45,7 @@ namespace UI.BreakProgress
                 instantiated.Pos = pos;
                 instantiated.Tilemap = tilemap;
                 instantiated.UpdatePosition();
+                PlayerCameraControl.ScaledObjects.Add(instantiated.transform);
                 _miningTiles.Add(tileInstance, instantiated);
             }
 
@@ -58,7 +60,9 @@ namespace UI.BreakProgress
         {
             if (tileInstance is null) return;
             if (!_miningTiles.ContainsKey(tileInstance)) return;
-            Destroy(_miningTiles[tileInstance].gameObject);
+            var breakProgressVisual = _miningTiles[tileInstance];
+            PlayerCameraControl.ScaledObjects.Remove(breakProgressVisual.transform);
+            Destroy(breakProgressVisual.gameObject);
             _miningTiles.Remove(tileInstance);
             tileInstance.BreakProgress = 0;
         }

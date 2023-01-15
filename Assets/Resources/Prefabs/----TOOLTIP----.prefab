@@ -216,6 +216,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -1208952639
   m_SortingOrder: 1000
   m_TargetDisplay: 0
@@ -528,7 +529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 0, y: -4.59}
+  m_EffectDistance: {x: 0, y: -4}
   m_UseGraphicAlpha: 1
 --- !u!114 &2210150107854650973
 MonoBehaviour:
@@ -640,6 +641,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1905198960066146532}
     m_Modifications:
     - target: {fileID: 7709100538231656113, guid: d456583c34c639b42abae0d1e8a73360, type: 3}
@@ -735,6 +737,9 @@ PrefabInstance:
       value: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d456583c34c639b42abae0d1e8a73360, type: 3}
 --- !u!114 &2436002495592544570 stripped
 MonoBehaviour:

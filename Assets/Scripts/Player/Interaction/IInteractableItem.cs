@@ -9,7 +9,7 @@ namespace Player.Interaction
     public interface IInteractableItem
     {
         bool CanInteract(ref ItemStack itemStack, [CanBeNull] TileInstance tileAtLocation, Vector3 clickedPos,
-            Vector3Int pos, TilemapManager tilemapManager, InventoryController inventoryController,
+            Vector3Int pos, TilemapManager tilemapManager, InventoryTabController inventoryTabController,
             EquipmentsController equipmentsController, Vector3 playerPosition);
     }
 }

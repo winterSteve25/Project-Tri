@@ -78,7 +78,7 @@ namespace World.Tiles
                 {
                     foreach (var item in placeableTile.drops)
                     {
-                        ItemSpawner.Current.SpawnApproximatelyAt(CellToWorld(pos), item);
+                        ItemSpawner.Current.SpawnApproximatelyAt(CellToWorld(pos), item.Get());
                     }
                 }
             }

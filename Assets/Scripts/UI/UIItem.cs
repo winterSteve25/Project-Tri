@@ -23,6 +23,19 @@ namespace UI
         [SerializeField] protected TextMeshProUGUI itemCount;
         [SerializeField] private bool includeName;
         
+        [SerializeField] private GameObject disabledCover;
+        private bool _interactable = true;
+        public bool Interactable
+        {
+            get => _interactable;
+            set
+            {
+                _interactable = value;
+                if (disabledCover == null) return;
+                disabledCover.SetActive(!_interactable);
+            }
+        }
+        
         protected virtual void Start()
         {
             PreItemChanged();

@@ -64,6 +64,7 @@ namespace Systems.Inv
         
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (!Interactable) return;
             if (_inventory == null) return;
             if (eventData.button == PointerEventData.InputButton.Left)
             {

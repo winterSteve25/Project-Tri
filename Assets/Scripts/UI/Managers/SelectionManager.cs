@@ -13,7 +13,7 @@ namespace UI.Managers
 {
     public class SelectionManager : MonoBehaviour
     {
-        private InventoryController _inventoryController;
+        private InventoryTabController _inventoryTabController;
         private EquipmentsController _equipmentsController;
         private Tilemap _obstacleLayer;
         private TilemapManager _tilemapManager;
@@ -25,7 +25,7 @@ namespace UI.Managers
 
         private void Start()
         {
-            _inventoryController = InventoryController.Current;
+            _inventoryTabController = InventoryTabController.Current;
             _equipmentsController = EquipmentsController.Current;
             _tilemapManager = TilemapManager.Current;
             _obstacleLayer = _tilemapManager.ObstacleLayer;
@@ -63,7 +63,7 @@ namespace UI.Managers
                 var playerPosition = _playerTransform.position;
                 var interactable = (IInteractableItem)item.item;
 
-                if (interactable.CanInteract(ref item, tileAtPos, point, pos, _tilemapManager, _inventoryController,
+                if (interactable.CanInteract(ref item, tileAtPos, point, pos, _tilemapManager, _inventoryTabController,
                         _equipmentsController, playerPosition))
                 {
                     MoveSelection(pos);

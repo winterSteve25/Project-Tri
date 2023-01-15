@@ -20,7 +20,7 @@ public class Commands
     /// Third parameter used to determine the width of the chunk
     /// Fourth parameter used to determine the height of the chunk
     /// </summary>
-    [RegisterCommand(command_name: "generate", Name = "generate", Help = "Generates cave by calling \"Generate\" in the CaveGenerator present in the current level", MinArgCount = 4, MaxArgCount = 4)]
+    [RegisterCommand(Help = "Generates cave by calling \"Generate\" in the CaveGenerator present in the current level", MinArgCount = 4, MaxArgCount = 4)]
     private static void GenerateCave(CommandArg[] args)
     {
         var caveGenerator = Object.FindObjectOfType<WorldGenerator>();
@@ -50,7 +50,7 @@ public class Commands
     /// First parameter is the name of the item
     /// [Optional - defaults to 1 if no argument is provided] Second parameter is the amount of item
     /// </summary>
-    [RegisterCommand(command_name: "give", Name = "give", Help = "Gives item to player", MinArgCount = 1, MaxArgCount = 2)]
+    [RegisterCommand(Help = "Gives item to player", MinArgCount = 1, MaxArgCount = 2)]
     private static void GiveItem(CommandArg[] args)
     {
         var playerInv = Object.FindObjectOfType<PlayerInventory>();
@@ -79,7 +79,7 @@ public class Commands
     /// <summary>
     /// Debug command used to list all the items available
     /// </summary>
-    [RegisterCommand(command_name: "items", Name = "items", Help = "Prints a list of all items loaded", MinArgCount = 0, MaxArgCount = 0)]
+    [RegisterCommand(Help = "Prints a list of all items loaded", MinArgCount = 0, MaxArgCount = 0)]
     private static void ListItems(CommandArg[] args)
     {
         foreach (var (item, _) in ItemsRegistry.Instance.Entries)
@@ -88,14 +88,14 @@ public class Commands
         }
     }
 
-    [RegisterCommand(command_name: "seed", Name = "seed", Help = "Prints the seed of the current world", MinArgCount = 0, MaxArgCount = 0)]
+    [RegisterCommand(Help = "Prints the seed of the current world", MinArgCount = 0, MaxArgCount = 0)]
     private static void Seed(CommandArg[] args)
     {
         if (Terminal.IssuedError) return;
         Debug.Log("The world seed is: " + GlobalData.Read(GlobalDataKeys.CurrentWorldSettings).Seed);
     }
 
-    [RegisterCommand(command_name: "spawn_notification", Name = "spawn_notification", Help = "Spawns a test notification", MinArgCount = 0, MaxArgCount = 2)]
+    [RegisterCommand(Help = "Spawns a test notification", MinArgCount = 0, MaxArgCount = 2)]
     private static void SpawnNotification(CommandArg[] args)
     {
         var content = TextContent.Empty()

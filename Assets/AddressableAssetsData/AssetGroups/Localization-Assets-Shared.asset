@@ -21,14 +21,17 @@ MonoBehaviour:
     m_Address: Assets/Resources/Localization/UIElements Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 350c5b8640b4cbf4586931c9c2e345e2
     m_Address: Assets/Resources/Localization/Items Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5aa9c1d89744b5d4db94d1311a07c20a
     m_Address: Assets/Resources/Localization/Menu Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 4cc7fc1ec1b7b014c8261c905c08d61d, type: 2}
   m_SchemaSet:

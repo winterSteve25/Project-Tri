@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using MsgPack.Serialization;
+using UnityEngine;
 
 namespace World.Generation
 {
@@ -21,9 +22,19 @@ namespace World.Generation
             SpawnPoint = Vector2.zero;
         }
 
+        [MessagePackDeserializationConstructor]
+        public WorldSettings(string worldName, int seed, int width, int height, Vector2 spawnPoint)
+        {
+            WorldName = worldName;
+            Seed = seed;
+            Width = width;
+            Height = height;
+            SpawnPoint = spawnPoint;
+        }
+
         public override string ToString()
         {
-            return $"{WorldName}, Seed: {Seed}, Dimensions: {Width}x{Height}";
+            return $"{WorldName}, Seed: {Seed}, Dimensions: {Width}x{Height}, Spawn Point; {SpawnPoint}";
         }
     }
 }

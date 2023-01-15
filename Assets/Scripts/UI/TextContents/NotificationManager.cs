@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Audio;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UI.Utilities;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace UI.TextContents
         [SerializeField, AssetsOnly] private GameObject notificationPrefab;
         [SerializeField, AssetsOnly] private LayoutElement notificationPlaceHolder;
         [SerializeField] private Transform realParent;
+        [SerializeField] private PlayableAudio notificationSound;
         
         [SerializeField]
         private RectTransform topRight;
@@ -52,6 +54,8 @@ namespace UI.TextContents
                     Destroy(go);
                     Destroy(placeHolder.gameObject);
                 });
+            
+            Instance.notificationSound.Play(0f);
         }
     }
 }

@@ -20,10 +20,10 @@ namespace Editor.Registries
         }
 
         [ShowInInspector]
-        public ItemStack[] Inputs
+        public CraftingIngredient[] Inputs
         {
-            get => Object.inputs;
-            set => Object.inputs = value;
+            get => Object.ingredients;
+            set => Object.ingredients = value;
         }
     }
 }

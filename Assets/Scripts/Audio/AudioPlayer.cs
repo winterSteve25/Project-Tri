@@ -22,10 +22,10 @@ namespace Audio
         [AssetList(Path = "/Resources/Audio/Music", AutoPopulate = true)]
         public List<SoundClip> musicAudio;
 
-        public static void PlayAudio(AudioObject audioObject, bool waitToFinish = true, float fadeDuration = 0.2f, AudioSource audioSource = null)
+        public static void PlayAudio(PlayableAudio playableAudio, bool waitToFinish = true, float fadeDuration = 1f, AudioSource audioSource = null)
         {
             if (audioSource == null)
-                audioSource = Instance.audioSources[audioObject.audioType];
+                audioSource = Instance.audioSources[playableAudio.audioType];
 
             if (audioSource == null)
             {
@@ -35,13 +35,20 @@ namespace Audio
 
             if (audioSource.isPlaying && waitToFinish) return;
 
-            var sound = audioObject.soundToPlay;
+            var sound = playableAudio.soundToPlay;
             audioSource.clip = sound.clip;
             audioSource.loop = sound.loop;
-            audioSource.volume = 0;
+            if (fadeDuration > 0)
+            {
+                audioSource.volume = 0;
+                audioSource.DOFade(sound.volume + Random.Range(-sound.volumeVariation, sound.volumeVariation), fadeDuration);
+            }
+            else
+            {
+                audioSource.volume = sound.volume + Random.Range(-sound.volumeVariation, sound.volumeVariation);
+            }
             audioSource.pitch = sound.pitch + Random.Range(-sound.pitchVariation, sound.pitchVariation);
             audioSource.Play();
-            audioSource.DOFade(sound.volume + Random.Range(-sound.volumeVariation, sound.volumeVariation), fadeDuration);
         }
         
         [ShowIf("@audioSources.Count <= 0")]

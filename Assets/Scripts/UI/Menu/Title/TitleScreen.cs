@@ -13,7 +13,7 @@ namespace UI.Menu.Title
         [SerializeField] private MenuTransition toSettings;
         [SerializeField] private MenuTransition toCreate;
         [SerializeField] private MenuTransition toJoin;
-        [SerializeField] private AudioObject menuMusic;
+        [SerializeField] private PlayableAudio menuMusic;
 
         private void Start()
         {

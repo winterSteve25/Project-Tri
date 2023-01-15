@@ -15,8 +15,10 @@ MonoBehaviour:
   result:
     count: 1
     item: {fileID: 11400000, guid: 73b97e1327eed72419c90da3ae95854d, type: 2}
-  inputs:
-  - count: 5
-    item: {fileID: 11400000, guid: 2c6a5e0b7db95e546a217736d298ad93, type: 2}
-  - count: 5
-    item: {fileID: 11400000, guid: fde87653ec879ce4daca44587ff42931, type: 2}
+  ingredients:
+  - itemStack:
+      count: 5
+      item: {fileID: 11400000, guid: 2c6a5e0b7db95e546a217736d298ad93, type: 2}
+  - itemStack:
+      count: 10
+      item: {fileID: 11400000, guid: fde87653ec879ce4daca44587ff42931, type: 2}

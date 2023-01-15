@@ -11,6 +11,7 @@ namespace UI.Menu.CreateOrJoin.JoinWorld
         [NonSerialized] public JoinWorldMenu JoinWorldMenu;
         [NonSerialized] public bool Selected;
         public event Action OnClick;
+        public event Action OnClickFinished;
 
         [SerializeField] private TextMeshProUGUI text;
         
@@ -26,6 +27,7 @@ namespace UI.Menu.CreateOrJoin.JoinWorld
         {
             OnClick?.Invoke();
             Selected = !Selected;
+            OnClickFinished?.Invoke();
         }
 
         public void DeleteWorld()
