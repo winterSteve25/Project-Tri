@@ -9,9 +9,7 @@ namespace UI.BreakProgress
 {
     public class BreakProgressManager : CurrentInstanced<BreakProgressManager>
     {
-        [SerializeField] private Sprite[] breakStages;
         [SerializeField] private BreakProgressVisual progressPrefab;
-
         private Dictionary<TileInstance, BreakProgressVisual> _miningTiles;
 
         private void Start()
@@ -24,13 +22,7 @@ namespace UI.BreakProgress
             foreach (var (tile, visual) in _miningTiles)
             {
                 var percentageDone = tile.BreakProgress / tile.Tile.hardness;
-                var spriteUsed = Mathf.FloorToInt(breakStages.Length * percentageDone);
-                visual.tileMask.sprite = tile.Tile.Sprite;
-                
-                if (spriteUsed > 0 && spriteUsed < breakStages.Length)
-                {
-                    visual.progress.sprite = breakStages[spriteUsed];
-                }
+                visual.progress.value = percentageDone;
             }
         }
 

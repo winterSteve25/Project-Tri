@@ -30,7 +30,12 @@ namespace Items.ItemTypes
             if (tileClicked is null)
             {
                 var ore = tilemapManager.GetTile(pos, TilemapLayer.Ground);
-                if (!recipes.HasRecipe(ore.Tile)) return;
+                if (!recipes.HasRecipe(ore.Tile))
+                {
+                    CancelMining(ref itemStack);
+                    return;
+                }
+                
                 if (MineTile(ref itemStack, ore, pos, tilemapManager.GetTilemap(TilemapLayer.Ground)))
                 {
                     var result = recipes.FindRecipe(ore.Tile).output;
@@ -43,9 +48,7 @@ namespace Items.ItemTypes
             }
         }
 
-        public void Release(MouseButton mouseButton, ref ItemStack itemStack, TilemapManager tilemapManager,
-            InventoryTabController inventoryTabController, EquipmentsController equipmentsController,
-            Vector3 playerPosition)
+        private static void CancelMining(ref ItemStack itemStack)
         {
             var usedToBeMiningTile = itemStack.CustomData.GetOrDefault(CurrentlyMiningTile, null);
             if (usedToBeMiningTile != null)
@@ -54,6 +57,13 @@ namespace Items.ItemTypes
             }
 
             itemStack.CustomData.Remove(CurrentlyMiningTile);
+        }
+
+        public void Release(MouseButton mouseButton, ref ItemStack itemStack, TilemapManager tilemapManager,
+            InventoryTabController inventoryTabController, EquipmentsController equipmentsController,
+            Vector3 playerPosition)
+        {
+            CancelMining(ref itemStack);
         }
 
         public bool CanInteract(ref ItemStack itemStack, TileInstance tileAtLocation, Vector3 clickedPos,

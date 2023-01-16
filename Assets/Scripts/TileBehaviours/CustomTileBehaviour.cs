@@ -13,7 +13,7 @@ namespace TileBehaviours
 
         protected TilemapManager TilemapManager;
         public Vector3Int Pos { get; protected set; }
-        public Vector2Int Pos2D => new(Pos.x, Pos.x);
+        public Vector2Int Pos2D => new(Pos.x, Pos.y);
         
         protected virtual void Start()
         {

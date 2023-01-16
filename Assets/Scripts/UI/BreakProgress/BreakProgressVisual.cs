@@ -7,9 +7,7 @@ namespace UI.BreakProgress
 {
     public class BreakProgressVisual : MonoBehaviour
     {
-        public Image tileMask;
-        public Image progress;
-        
+        public Slider progress;
         [NonSerialized] public Vector3Int Pos;
         [NonSerialized] public Tilemap Tilemap;
         
