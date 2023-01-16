@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 using UnityEngine.Localization;
 
 namespace Liquid
@@ -9,8 +10,9 @@ namespace Liquid
     [CreateAssetMenu(fileName = "New Liquid", menuName = "Liquids/New Liquid")]
     public class TriLiquid : ScriptableObject
     {
-        [Header("General Information")]
+        [BoxGroup("Basic Information")]
         public LocalizedString liquidName;
+        [BoxGroup("Basic Information")]
         public Color color;
     }
 }

@@ -37,6 +37,13 @@ MonoBehaviour:
     - Locale-zh-Hans
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5008d20acb2b584b90bc8e2326e6991
+    m_Address: Liquids_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 4cc7fc1ec1b7b014c8261c905c08d61d, type: 2}
   m_SchemaSet:

@@ -38,6 +38,13 @@ MonoBehaviour:
     - Locale-en
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fff688cea3c2def48b88b0b268c5d8be
+    m_Address: Liquids_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 4cc7fc1ec1b7b014c8261c905c08d61d, type: 2}
   m_SchemaSet:

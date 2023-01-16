@@ -21,12 +21,12 @@ namespace TileBehaviours.Melter
 
         public async Task Save(SaveTask saveTask)
         {
-            await saveTask.Serialize(_inventory.ItemStacks);
+            await _inventory.Serialize(saveTask);
         }
 
         public async Task Load(LoadTask loadTask)
         {
-            _inventory.Load(await loadTask.Deserialize<ItemStack[]>());
+            await _inventory.Deserialize(loadTask);
         }
     }
 }

@@ -66,12 +66,12 @@ namespace TileBehaviours.Container
         
         public async Task Save(SaveTask saveTask)
         {
-            await saveTask.Serialize(Inventory.ItemStacks);
+            await Inventory.Serialize(saveTask);
         }
 
         public async Task Load(LoadTask loadTask)
         {
-            Inventory.Load(await loadTask.Deserialize<ItemStack[]>());
+            await Inventory.Deserialize(loadTask);
         }
     }
 }

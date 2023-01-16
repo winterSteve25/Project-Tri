@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Items;
+using Liquid;
 using Registries;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
@@ -29,6 +30,7 @@ namespace Editor.Registries
             TilesRegistry.Instance.UpdateEntries();
             ItemsRegistry.Instance.UpdateEntries();
             RecipesRegistry.Instance.UpdateEntries();
+            LiquidsRegistry.Instance.UpdateEntries();
             
             SetupTree(tree);
             SetupTree(duplicate);
@@ -48,6 +50,10 @@ namespace Editor.Registries
                     else if (path.StartsWith("Recipes"))
                     {
                         tree.Add(path, new BaseTable<RecipeTableEntry, CraftingRecipe>(Resources.LoadAll<CraftingRecipe>(path), x => new RecipeTableEntry(x)));
+                    }
+                    else if (path.StartsWith("Liquids"))
+                    {
+                        tree.Add(path, new BaseTable<LiquidTableEntry, TriLiquid>(Resources.LoadAll<TriLiquid>(path), x => new LiquidTableEntry(x)));
                     }
                 });
             
@@ -96,6 +102,11 @@ namespace Editor.Registries
                 {
                     ScriptableObjectCreator.ShowDialog<CraftingRecipe>("Assets/Resources/Recipes/", TrySelectMenuItemWithObject);
                 }
+                
+                if (SirenixEditorGUI.ToolbarButton(new GUIContent("Create Liquid")))
+                {
+                    ScriptableObjectCreator.ShowDialog<TriLiquid>("Assets/Resources/Liquids/", TrySelectMenuItemWithObject);
+                }
             }
             SirenixEditorGUI.EndHorizontalToolbar();
         }
@@ -108,6 +119,7 @@ namespace Editor.Registries
             tree.Add("Tiles", new BaseTable<TileTableEntry, TriTile>(TilesRegistry.Instance.Entries.Keys.ToList(), x => new TileTableEntry(x)));
             tree.Add("Items", new BaseTable<ItemTableEntry, TriItem>(ItemsRegistry.Instance.Entries.Keys.ToList(), x => new ItemTableEntry(x)));
             tree.Add("Recipes", new BaseTable<RecipeTableEntry, CraftingRecipe>(RecipesRegistry.Instance.Entries.Keys.ToList(), x => new RecipeTableEntry(x)));
+            tree.Add("Liquids", new BaseTable<LiquidTableEntry, TriLiquid>(LiquidsRegistry.Instance.Entries.Keys.ToList(), x => new LiquidTableEntry(x)));
             
             tree.AddAllAssetsAtPath("Tiles", "Assets/Resources/Tiles/", typeof(TriTile), true)
                 .ForEach(AddDragAndDeleteHandlers)
@@ -120,6 +132,9 @@ namespace Editor.Registries
             tree.AddAllAssetsAtPath("Recipes", "Assets/Resources/Recipes/", typeof(CraftingRecipe), true)
                 .ForEach(AddDragAndDeleteHandlers)
                 .AddIcons<CraftingRecipe>(x => x.result.IsEmpty ? null : x.result.item.sprite);
+
+            tree.AddAllAssetsAtPath("Liquids", "Assets/Resources/Liquids/", typeof(TriLiquid), true)
+                .ForEach(AddDragAndDeleteHandlers);
         }
     }
 }

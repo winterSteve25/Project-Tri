@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Items;
+using SaveLoad.Tasks;
 using UnityEngine;
 using UnityEngine.Localization;
+using Task = System.Threading.Tasks.Task;
 
 namespace Systems.Inv
 {
@@ -211,8 +213,23 @@ namespace Systems.Inv
         {
             ItemStacks[Array.FindIndex(ItemStacks, s => s.IsEmpty)] = itemstack;
         }
+        
+        public void RefreshItemSlotsWithContent(ItemSlot[] slots)
+        {
+            RefreshItemSlotsWithContent(slots, this);
+        }
 
-        public void Load(ItemStack[] stacks)
+        public async Task Serialize(SaveTask task)
+        {
+            await task.Serialize(ItemStacks);
+        }
+
+        public async Task Deserialize(LoadTask task)
+        {
+            Load(await task.Deserialize<ItemStack[]>());
+        }
+        
+        private void Load(ItemStack[] stacks)
         {
             if (stacks.Length != ItemStacks.Length)
             {
@@ -222,11 +239,6 @@ namespace Systems.Inv
 
             ItemStacks = stacks;
             OnChanged?.Invoke();
-        }
-
-        public void RefreshItemSlotsWithContent(ItemSlot[] slots)
-        {
-            RefreshItemSlotsWithContent(slots, this);
         }
         
         public static void RefreshItemSlotsWithContent(ItemSlot[] slots, Inventory inventory)

@@ -15,7 +15,7 @@ namespace Items
     {
         public static readonly ItemStack Empty = new();
 
-        public string itemId => item == null ? string.Empty : ItemsRegistry.Instance.Entries[item];
+        public string ItemId => item == null ? string.Empty : ItemsRegistry.Instance.Entries[item];
         [MinValue(1)]
         public int count;
 

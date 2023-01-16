@@ -32,6 +32,11 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 82119c181ef85a94a8fee3db0c7a5986
+    m_Address: Assets/Resources/Localization/Liquids Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 4cc7fc1ec1b7b014c8261c905c08d61d, type: 2}
   m_SchemaSet:
