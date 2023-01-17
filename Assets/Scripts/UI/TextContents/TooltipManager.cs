@@ -1,15 +1,10 @@
-﻿using DG.Tweening;
-using TMPro;
-using UI.Utilities;
-using UnityEngine;
-using UnityEngine.Localization.Components;
+﻿using UnityEngine;
 using Utils;
 
 namespace UI.TextContents
 {
     public class TooltipManager : Singleton<TooltipManager>
     {
-
         [SerializeField] private TextContentHelper textContentHelper;
         
         private void Start()

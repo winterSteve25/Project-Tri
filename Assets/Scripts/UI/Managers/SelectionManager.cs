@@ -2,6 +2,8 @@
 using Items;
 using Player;
 using Player.Interaction;
+using TileBehaviours;
+using TileBehaviours.GeothermalNode;
 using UI.Menu.InventoryMenu;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -44,17 +46,15 @@ namespace UI.Managers
 
         private void Update()
         {
-            var point = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            point.z = 0;
+            var point = mainCamera.ScreenToWorldPoint(Input.mousePosition); point.z = 0;
             var pos = _obstacleLayer.WorldToCell(point);
             var tileAtPos = _tilemapManager.GetTile(pos, TilemapLayer.Obstacles);
-            var isEmpty = tileAtPos == null;
             var overUI = EventSystem.current.IsPointerOverGameObject();
 
             var item = _equipmentsController[EquipmentType.Outer];
             var isHoldingInteractableItem = item.item is IInteractableItem;
 
-            if ((isEmpty && !isHoldingInteractableItem) || overUI)
+            if (overUI)
             {
                 HideSelection();
             }
@@ -73,19 +73,42 @@ namespace UI.Managers
                     HideSelection();
                 }
             }
-            // else
-            // {
-            //     MoveSelection(pos);
-            // }
+            else
+            {
+                var tileGo = _tilemapManager.GetGameObject(pos, TilemapLayer.Obstacles);
+                if (tileGo == null)
+                {
+                    tileGo = _tilemapManager.GetGameObject(pos, TilemapLayer.Ground);
+                    if (tileGo == null)
+                    {
+                        HideSelection();
+                        return;
+                    }
+                    HoverTileGameObject(tileGo);
+                    return;
+                }
+                HoverTileGameObject(tileGo);
+            }
+
+            void HoverTileGameObject(GameObject tileGo)
+            {
+                if (!tileGo.TryGetComponent<CustomTileHoverEffect>(out var hover)) return;
+                if (!hover.CanInteract()) return;
+                MoveSelection(pos);
+            }
         }
 
         private void MoveSelection(Vector3Int cellPos)
         {
+            MoveSelection(_obstacleLayer.CellToWorld(cellPos));
+        }
+
+        private void MoveSelection(Vector3 worldPos)
+        {
             var cam = selectionCanvas.worldCamera;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 selectionCanvas.transform as RectTransform,
-                RectTransformUtility.WorldToScreenPoint(cam,
-                    _obstacleLayer.CellToWorld(cellPos) + _obstacleLayer.cellSize * 0.5f),
+                RectTransformUtility.WorldToScreenPoint(cam, worldPos + _obstacleLayer.cellSize * 0.5f),
                 cam, out var p);
             var p2 = selectionCanvas.transform.TransformPoint(p);
 

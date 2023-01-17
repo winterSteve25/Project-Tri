@@ -103,6 +103,14 @@ MonoBehaviour:
     m_Key: Purpureum Chunk Description
     m_Metadata:
       m_Items: []
+  - m_Id: 22779590228799488
+    m_Key: Melter Item Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22779590245576704
+    m_Key: Melter Item Description
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -29,7 +29,7 @@ namespace UI.TabsSystem
 
         public int SelectedTab => selectedTab;
         
-        private void Start()
+        private void Awake()
         {
             // disable all but first
             for (var i = 1; i < tabs.Count; i++)

@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: Crafting Search
     m_Metadata:
       m_Items: []
+  - m_Id: 22780421451771904
+    m_Key: Melter
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7530bb816fec3b4ca3b37496e294383, type: 3}
   m_Name: I_Melter
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 546af1691229f014abbed07cf50d63fe, type: 3}
   itemName:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:350c5b8640b4cbf4586931c9c2e345e2
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 22779590228799488
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   itemDescription:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:350c5b8640b4cbf4586931c9c2e345e2
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 22779590245576704
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

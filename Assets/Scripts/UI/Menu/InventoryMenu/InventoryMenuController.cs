@@ -27,7 +27,10 @@ namespace UI.Menu.InventoryMenu
 
         public void ToggleMenu()
         {
-            UIManager.ToggleUI(menu);
+            if (UIManager.ToggleUI(menu))
+            {
+                InventoryTabController.Current.SetOpenedInventory(null);
+            }
         }
     }
 }

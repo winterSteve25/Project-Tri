@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
     m_keys:
-    - {fileID: 11400000, guid: 28e3fe1d680e6ac4e8fa3c007748e375, type: 2}
     - {fileID: 11400000, guid: 7a19f2885be593348b6d2e253b6ca525, type: 2}
     - {fileID: 11400000, guid: 351454ef3aebb8248bc60eb14e685c1e, type: 2}
     - {fileID: 11400000, guid: 418e8ea86fce9824dbc79912cd4fbf46, type: 2}
     - {fileID: 11400000, guid: 9e8950b825c16e645bcfeea8a5379fbe, type: 2}
     - {fileID: 11400000, guid: 9fa81131e20ccdd46a1a9a3a6c800e2a, type: 2}
     - {fileID: 11400000, guid: fb20b7ebf9c13c3418a6ec763366c1fe, type: 2}
+    - {fileID: 11400000, guid: 28e3fe1d680e6ac4e8fa3c007748e375, type: 2}
     - {fileID: 11400000, guid: 599b649a4dd62204689dc360da64bed6, type: 2}
     m_values:
-    - Melter_Tile
     - Sqoil_Ore
     - Geothermal_Node
     - Type_1_Rock_Tile
     - Type_2_Rock_Tile
     - Container_Tile
     - Excavator_Tile
+    - Melter_Tile
     - Kiterite_Ore
