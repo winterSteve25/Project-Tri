@@ -101,7 +101,7 @@ namespace UI.Menu.InventoryMenu
             if (OpenedInventory != null)
             {
                 OpenedInventory.OnChanged += RefreshOpenedInvContent;
-                ExtraTabController.Current.EnableExtraTab(OpenedInventory.InventoryName, openedInventoryTabContent, true);
+                ExtraTabController.Current.EnableExtraTab(OpenedInventory.InventoryName, openedInventoryTabContent, false, true);
                 openedInventoryTabTitle.StringReference = OpenedInventory.InventoryName;
                 openedInventoryTabTitle.RefreshString();
                 OpenOtherInventory(OpenedInventory);

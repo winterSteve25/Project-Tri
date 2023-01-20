@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 using Items;
-using Player;
 using SaveLoad.Interfaces;
 using SaveLoad.Tasks;
 using Systems.Inv;
 using UI.Menu.InventoryMenu;
 using UnityEngine;
 using UnityEngine.Localization;
+using Utils.Data;
 
 namespace TileBehaviours.Container
 {
@@ -15,31 +15,31 @@ namespace TileBehaviours.Container
     /// </summary>
     public class ContainerBehaviour : CustomTileBehaviour, IChainedWorldData
     {
-        [SerializeField] private float distanceBeforeAccessDenied;
         [SerializeField] private LocalizedString inventoryName;
         
         public Inventory Inventory { get; private set; }
         private InventoryTabController _inventoryTabController;
-        private PlayerInventory _playerInventory;
+        private Transform _playerTransform;
         
         private void Awake()
         {
             Inventory = new Inventory(inventoryName, 15);
             _inventoryTabController = InventoryTabController.Current;
-            _playerInventory = FindObjectOfType<PlayerInventory>();
         }
         
         private void Update()
         {
-            if (Vector2.Distance(_playerInventory.transform.position, transform.position) > distanceBeforeAccessDenied)
+            if (_playerTransform == null) return;
+            if (Vector2.Distance(_playerTransform.position, transform.position) > Statistics.AccessDistance)
             {
                 ExitMenu();
             }
         }
 
-        public override void OnInteract()
+        public override void OnInteract(Transform playerTransform)
         {
-            if (Vector2.Distance(_playerInventory.transform.position, transform.position) > distanceBeforeAccessDenied) return;
+            _playerTransform = playerTransform;
+            if (Vector2.Distance(_playerTransform.position, transform.position) > Statistics.AccessDistance) return;
                 _inventoryTabController.SetOpenedInventory(Inventory);
         }
 

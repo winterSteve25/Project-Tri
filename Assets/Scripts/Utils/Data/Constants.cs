@@ -18,4 +18,9 @@ namespace Utils.Data
         public const string PlayerData = "player_data";
         public const string GroundItems = "ground_items";
     }
+
+    public static class Statistics
+    {
+        public const int AccessDistance = 6;
+    }
 }

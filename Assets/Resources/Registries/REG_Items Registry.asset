@@ -14,28 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
     m_keys:
-    - {fileID: 11400000, guid: 0b496a9d1b8a5da4988bbd7a4e57f163, type: 2}
-    - {fileID: 11400000, guid: fde87653ec879ce4daca44587ff42931, type: 2}
-    - {fileID: 11400000, guid: 2c6a5e0b7db95e546a217736d298ad93, type: 2}
-    - {fileID: 11400000, guid: 1687e2267c6ddef42b9f3356fdcffafc, type: 2}
-    - {fileID: 11400000, guid: 699a97d8b073be34a941fb88bffd6231, type: 2}
-    - {fileID: 11400000, guid: 08d3eec9a31806e4b99564dfbea540a1, type: 2}
-    - {fileID: 11400000, guid: 19c7b50df6450f545a8e2fd62183423a, type: 2}
-    - {fileID: 11400000, guid: 23c4d16274de302489e12ab7e33c0d72, type: 2}
-    - {fileID: 11400000, guid: 38079b4ce0e0c3f4abb70955d8b70a4b, type: 2}
     - {fileID: 11400000, guid: 73b97e1327eed72419c90da3ae95854d, type: 2}
-    - {fileID: 11400000, guid: 3cf4cf73ed58d7a49a0e9ce23b5b3244, type: 2}
+    - {fileID: 11400000, guid: 2c6a5e0b7db95e546a217736d298ad93, type: 2}
+    - {fileID: 11400000, guid: fde87653ec879ce4daca44587ff42931, type: 2}
+    - {fileID: 11400000, guid: 0b496a9d1b8a5da4988bbd7a4e57f163, type: 2}
+    - {fileID: 11400000, guid: 38079b4ce0e0c3f4abb70955d8b70a4b, type: 2}
+    - {fileID: 11400000, guid: 1687e2267c6ddef42b9f3356fdcffafc, type: 2}
+    - {fileID: 11400000, guid: 08d3eec9a31806e4b99564dfbea540a1, type: 2}
+    - {fileID: 11400000, guid: 23c4d16274de302489e12ab7e33c0d72, type: 2}
     - {fileID: 11400000, guid: 08cc6453243df304889d648bbf654997, type: 2}
+    - {fileID: 11400000, guid: 19c7b50df6450f545a8e2fd62183423a, type: 2}
+    - {fileID: 11400000, guid: 699a97d8b073be34a941fb88bffd6231, type: 2}
+    - {fileID: 11400000, guid: 3cf4cf73ed58d7a49a0e9ce23b5b3244, type: 2}
     m_values:
-    - Laser_Drill
-    - Type_2_Rock_Item
-    - Sqoil_Ingot
-    - Excavator
-    - Drone
-    - Purpureum_Chunk
-    - Chain_Saw
-    - Melter
-    - Kiterite_Gem
     - Container
-    - Purpureum_Ingot
+    - Sqoil_Ingot
+    - Type_2_Rock_Item
+    - Laser_Drill
+    - Kiterite_Gem
+    - Excavator
+    - Purpureum_Chunk
+    - Melter
     - Rubizoid_Gem
+    - Chain_Saw
+    - Drone
+    - Purpureum_Ingot

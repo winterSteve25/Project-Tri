@@ -107,7 +107,7 @@ namespace Player.Interaction
                     if (go == null) return;
                     if (go.TryGetComponent<CustomTileBehaviour>(out var tileMachine))
                     {
-                        tileMachine.OnInteract();
+                        tileMachine.OnInteract(transform);
                     }
                 }
             }

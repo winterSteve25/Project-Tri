@@ -3,7 +3,6 @@ using Items;
 using Player;
 using Player.Interaction;
 using TileBehaviours;
-using TileBehaviours.GeothermalNode;
 using UI.Menu.InventoryMenu;
 using UnityEngine;
 using UnityEngine.EventSystems;

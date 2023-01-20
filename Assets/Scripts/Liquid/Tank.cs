@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using SaveLoad.Tasks;
 using UnityEngine;
 
@@ -8,6 +9,15 @@ namespace Liquid
     {
         private LiquidStack _liquidStack;
         private float _capacity;
+
+        public event Action OnChanged;
+        public LiquidStack Liquid => _liquidStack;
+        public float Capacity => _capacity;
+        
+        public Tank(float capacity = 1000)
+        {
+            _capacity = capacity;
+        }
         
         public bool Add(LiquidStack liquidStack, out float unAddedAmount)
         {
@@ -18,6 +28,8 @@ namespace Liquid
                 return false;
             }
 
+            OnChanged?.Invoke();
+            
             if (_liquidStack.volume + liquidStack.volume > _capacity)
             {
                 unAddedAmount = liquidStack.volume - (_capacity - liquidStack.volume);
@@ -32,6 +44,11 @@ namespace Liquid
 
         public void Remove(float volume)
         {
+            if (volume == 0)
+            {
+                return;
+            }
+            
             if (_liquidStack.volume - volume < 0)
             {
                 _liquidStack.volume = 0;
@@ -39,6 +56,7 @@ namespace Liquid
             }
 
             _liquidStack.volume -= volume;
+            OnChanged?.Invoke();
         }
 
         public async Task Serialize(SaveTask task)

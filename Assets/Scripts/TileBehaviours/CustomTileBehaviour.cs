@@ -22,7 +22,7 @@ namespace TileBehaviours
             Pos = TilemapManager.ObstacleLayer.WorldToCell(transform.position);
         }
 
-        public virtual void OnInteract()
+        public virtual void OnInteract(Transform playerTransform)
         {
         }
 

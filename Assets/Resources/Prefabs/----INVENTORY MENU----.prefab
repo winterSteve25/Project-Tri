@@ -2141,6 +2141,7 @@ MonoBehaviour:
   extraTabButton: {fileID: 745949329258656078}
   extraTabButtonTitle: {fileID: 1260959822627838345}
   tabManager: {fileID: 8812746714645423615}
+  extraTabsArea: {fileID: 1087232406386733222}
 --- !u!1 &2484638802025738733
 GameObject:
   m_ObjectHideFlags: 0
