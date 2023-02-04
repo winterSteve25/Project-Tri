@@ -19,26 +19,24 @@ namespace Liquid
             _capacity = capacity;
         }
         
-        public bool Add(LiquidStack liquidStack, out float unAddedAmount)
+        public bool Add(LiquidStack liquidStack)
         {
-            if (liquidStack.liquid != _liquidStack.liquid)
+            if (!CanAdd(liquidStack))
             {
                 Debug.LogWarning("Can not add a liquidstack with different liquid into a tank with liquids already");
-                unAddedAmount = 0f;
                 return false;
             }
 
-            OnChanged?.Invoke();
-            
-            if (_liquidStack.volume + liquidStack.volume > _capacity)
+            if (_liquidStack.IsEmpty)
             {
-                unAddedAmount = liquidStack.volume - (_capacity - liquidStack.volume);
-                _liquidStack.volume = _capacity;
-                return true;
+                _liquidStack = liquidStack;
+            }
+            else
+            {
+                _liquidStack += liquidStack;
             }
             
-            _liquidStack += liquidStack;
-            unAddedAmount = 0f;
+            OnChanged?.Invoke();
             return true;
         }
 
@@ -57,6 +55,12 @@ namespace Liquid
 
             _liquidStack.volume -= volume;
             OnChanged?.Invoke();
+        }
+
+        public bool CanAdd(LiquidStack liquidStack, bool allowOverflow = false)
+        {
+            if (!_liquidStack.IsEmpty && liquidStack.liquid != _liquidStack.liquid) return false;
+            return !(liquidStack.volume + _liquidStack.volume > _capacity) || allowOverflow;
         }
 
         public async Task Serialize(SaveTask task)

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -2828466983785465140}
   - component: {fileID: -830359941241146364}
   m_Layer: 0
-  m_Name: Melter
+  m_Name: Melter Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   uiContent: {fileID: 4118771928588170085, guid: 2fcc67944b0691441bc61829157e9cb1, type: 3}
+  recipes: {fileID: 11400000, guid: f407fafcab153ef48884149a4c9fcc46, type: 2}
   references:
     version: 2
     RefIds: []

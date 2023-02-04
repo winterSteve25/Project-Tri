@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using Utils;
 
@@ -6,6 +7,9 @@ namespace UI.Managers
 {
     public class UIManager : CurrentInstanced<UIManager>
     {
+        public delegate void UIStatusChange(CanvasGroup menu, bool closed);
+        public event UIStatusChange OnUIStatusChanged;
+        
         private CanvasGroup _activeUI;
         
         /// <summary>
@@ -20,6 +24,7 @@ namespace UI.Managers
         {
             if (Current._activeUI == canvasGroup)
             {
+                Current.OnUIStatusChanged?.Invoke(canvasGroup, true);
                 Current._activeUI.FadeOut(fadeDuration, onComplete: () =>
                 {
                     Current._activeUI = null;
@@ -29,6 +34,7 @@ namespace UI.Managers
             
             if (Current._activeUI != null)
             {
+                Current.OnUIStatusChanged?.Invoke(Current._activeUI, true);
                 Current._activeUI.FadeOut(fadeDuration, onComplete: () =>
                 {
                     if (onlyOpenIfCurrentIsNull)
@@ -38,12 +44,14 @@ namespace UI.Managers
                     }
 
                     Current._activeUI = canvasGroup;
+                    Current.OnUIStatusChanged?.Invoke(Current._activeUI, false);
                     Current._activeUI.FadeIn(fadeDuration, fadeEase);
                 });
             }
             else
             {
                 Current._activeUI = canvasGroup;
+                Current.OnUIStatusChanged?.Invoke(Current._activeUI, false);
                 Current._activeUI.FadeIn(fadeDuration, fadeEase);
             }
 

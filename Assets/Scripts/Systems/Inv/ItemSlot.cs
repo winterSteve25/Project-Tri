@@ -1,7 +1,10 @@
 ﻿using Items;
+using Sirenix.OdinInspector;
 using UI;
 using UI.Managers;
+using UI.Menu.InventoryMenu;
 using UI.TextContents;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Systems.Inv
@@ -71,10 +74,24 @@ namespace Systems.Inv
                 // not holding anything
                 if (_itemDragManager.DraggedItem.Item.IsEmpty)
                 {
-                    // grabs the item from the slot
-                    var itemStack = _inventory[_slotIndex];
-                    _inventory[_slotIndex] = ItemStack.Empty;
-                    _itemDragManager.DragItem(itemStack);
+                    if (item.IsEmpty) return;
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        var extraTab = ExtraTabController.Current;
+                        var invToAdd = _inventory == extraTab.OpenedInventory ? InventoryTabController.Current.PlayerInventory : extraTab.OpenedInventory;
+                        if (invToAdd == null) return;
+                        if (invToAdd.Add(item, Vector2.zero, false))
+                        {
+                            _inventory[_slotIndex] = ItemStack.Empty;
+                        }
+                    }
+                    else
+                    {
+                        // grabs the item from the slot
+                        var itemStack = _inventory[_slotIndex];
+                        _inventory[_slotIndex] = ItemStack.Empty;
+                        _itemDragManager.DragItem(itemStack);
+                    }
                 }
                 else
                 {
@@ -188,6 +205,12 @@ namespace Systems.Inv
             }
 
             return true;
+        }
+
+        [Button]
+        private void Test()
+        {
+            Debug.Log("Hello");
         }
     }
 }

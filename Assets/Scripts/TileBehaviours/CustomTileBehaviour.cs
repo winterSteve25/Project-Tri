@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Items;
+using Systems.Inv;
 using UnityEngine;
 using World.Tiles;
 
@@ -32,6 +34,16 @@ namespace TileBehaviours
 
         public virtual void OnNeighborsChanged()
         {
+        }
+
+        protected void DropInventory(Inventory inventory)
+        {
+            var pos = transform.position;
+            
+            foreach (var item in inventory.ItemStacks)
+            {
+                ItemSpawner.Current.SpawnApproximatelyAt(pos, item);
+            }
         }
 
         protected List<CustomTileBehaviour> GetNeighbors()

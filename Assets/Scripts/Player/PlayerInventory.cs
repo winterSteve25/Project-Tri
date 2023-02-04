@@ -33,18 +33,18 @@ namespace Player
 
             foreach (var equipment in startingEquipments)
             {
-                Equipments.Add(pos, equipment);
+                Equipments.Add(equipment, pos);
             }
 
             foreach (var item in startingInventory)
             {
-                Inv.Add(pos, item);
+                Inv.Add(item, pos);
             }
         }
 
         public bool TryAddItem(Vector2 position, ItemStack itemStack)
         {
-            return Inv.Add(position, itemStack);
+            return Inv.Add(itemStack, position);
         }
 
         public SerializationPriority Priority => SerializationPriority.Medium;

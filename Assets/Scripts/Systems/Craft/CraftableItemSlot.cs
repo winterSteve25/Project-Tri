@@ -34,7 +34,7 @@ namespace Systems.Craft
             _craftingController = CraftingController.Current;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (_isPointerOver)
             {

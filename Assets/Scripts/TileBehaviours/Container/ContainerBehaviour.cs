@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Items;
 using SaveLoad.Interfaces;
 using SaveLoad.Tasks;
 using Systems.Inv;
@@ -45,13 +44,7 @@ namespace TileBehaviours.Container
 
         public override void OnBroken()
         {
-            var pos = transform.position;
-            
-            foreach (var item in Inventory.ItemStacks)
-            {
-                ItemSpawner.Current.SpawnApproximatelyAt(pos, item);
-            }
-            
+            DropInventory(Inventory);
             ExitMenu();
         }
 

@@ -15,6 +15,12 @@ namespace UI.Menu.InventoryMenu
         private void Start()
         {
             menu.Disable();
+            UIManager.Current.OnUIStatusChanged += UpdateStatus;
+        }
+        
+        private void OnDisable()
+        {
+            UIManager.Current.OnUIStatusChanged -= UpdateStatus;
         }
 
         private void Update()
@@ -27,10 +33,14 @@ namespace UI.Menu.InventoryMenu
 
         public void ToggleMenu()
         {
-            if (UIManager.ToggleUI(menu))
-            {
-                InventoryTabController.Current.SetOpenedInventory(null);
-            }
+            UIManager.ToggleUI(menu);
+        }
+
+        private void UpdateStatus(CanvasGroup canvasGroup, bool closed)
+        {
+            if (!closed) return;
+            if (canvasGroup != menu) return;
+            InventoryTabController.Current.SetOpenedInventory(null);
         }
     }
 }

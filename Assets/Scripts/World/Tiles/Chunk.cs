@@ -108,19 +108,19 @@ namespace World.Tiles
         
         public GameObject GetGameObject(Vector3Int pos)
         {
-            return GetGameObject(GetTile(pos), pos);
+            return _tileMap.GetInstantiatedObject(pos);
         }
 
-        private GameObject GetGameObject(TileInstance tile, Vector3Int pos)
-        {
-            if (tile == null) return null;
-            return tile.Tile.tileBase switch
-            {
-                Tile => _tileMap.GetInstantiatedObject(pos),
-                RuleTile rt => rt.m_DefaultGameObject,
-                _ => null
-            };
-        }
+        // private GameObject GetGameObject(TileInstance tile, Vector3Int pos)
+        // {
+        //     if (tile == null) return null;
+        //     return tile.Tile.tileBase switch
+        //     {
+        //         Tile => _tileMap.GetInstantiatedObject(pos),
+        //         RuleTile rt => rt.m_DefaultGameObject,
+        //         _ => null
+        //     };
+        // }
         
         private void UpdateNeighbors(Vector3Int pos, bool updateTiles)
         {

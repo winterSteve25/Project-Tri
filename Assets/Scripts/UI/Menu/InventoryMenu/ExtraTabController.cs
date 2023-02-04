@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using Sirenix.OdinInspector;
+using Systems.Inv;
 using UI.TabsSystem;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -19,6 +20,9 @@ namespace UI.Menu.InventoryMenu
         private GameObject _enabledTabContent;
         public GameObject EnabledTabContent => _enabledTabContent;
 
+        private Inventory _openedInventory;
+        public Inventory OpenedInventory => _openedInventory;
+        
         private void Start()
         {
             extraTabButton.SetActive(false);
@@ -30,7 +34,7 @@ namespace UI.Menu.InventoryMenu
         }
 
         [CanBeNull]
-        public GameObject EnableExtraTab(LocalizedString tabTitle, GameObject tabContent, bool isContentPrefab, bool switchToTab = false)
+        public GameObject EnableExtraTab(LocalizedString tabTitle, GameObject tabContent, bool isContentPrefab, bool switchToTab = false, Inventory openedInventory = null)
         {
             if (tabContent == _enabledTabContent)
             {
@@ -38,20 +42,14 @@ namespace UI.Menu.InventoryMenu
                 return null;
             }
 
+            _openedInventory = openedInventory;
             extraTabButton.SetActive(true);
             extraTabButtonTitle.StringReference = tabTitle;
             extraTabButtonTitle.RefreshString();
 
             if (_enabledTabContent != null)
             {
-                if (_isCurrentContentPrefab)
-                {
-                    Destroy(_enabledTabContent);
-                }
-                else
-                {
-                    _enabledTabContent.SetActive(false);
-                }
+                DisableExtraTab();
             }
 
             var inventoryMenuController = InventoryMenuController.Current;
@@ -86,7 +84,22 @@ namespace UI.Menu.InventoryMenu
                 tabManager.SwitchTabNoAnimation(0);
             }
 
+            _openedInventory = null;
             extraTabButton.SetActive(false);
+            
+            if (_enabledTabContent != null)
+            {
+                if (_isCurrentContentPrefab)
+                {
+                    Destroy(_enabledTabContent);
+                }
+                else
+                {
+                    _enabledTabContent.SetActive(false);
+                }
+
+                _enabledTabContent = null;
+            }
         }
     }
 }

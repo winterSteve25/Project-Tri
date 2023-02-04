@@ -101,7 +101,7 @@ namespace UI.Menu.InventoryMenu
             if (OpenedInventory != null)
             {
                 OpenedInventory.OnChanged += RefreshOpenedInvContent;
-                ExtraTabController.Current.EnableExtraTab(OpenedInventory.InventoryName, openedInventoryTabContent, false, true);
+                ExtraTabController.Current.EnableExtraTab(OpenedInventory.InventoryName, openedInventoryTabContent, false, true, OpenedInventory);
                 openedInventoryTabTitle.StringReference = OpenedInventory.InventoryName;
                 openedInventoryTabTitle.RefreshString();
                 OpenOtherInventory(OpenedInventory);
@@ -116,7 +116,7 @@ namespace UI.Menu.InventoryMenu
         [Button]
         private void AddItem(ItemStack itemStack)
         {
-            PlayerInventory.Add(Vector2.zero, itemStack);
+            PlayerInventory.Add(itemStack, Vector2.zero);
         }
         
         #region Refresh Inventory

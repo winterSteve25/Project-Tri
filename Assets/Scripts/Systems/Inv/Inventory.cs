@@ -39,16 +39,17 @@ namespace Systems.Inv
                 OnChanged?.Invoke();
             }
         }
-        
+
         /// <summary>
         /// Attempts to add itemstack to inventory 
         /// </summary>
         /// <param name="position">Position that it will spawn the access items to the ground if inventory can not fit</param>
         /// <param name="itemStack">ItemStack to add</param>
+        /// <param name="spawnOnGround"></param>
         /// <returns>If the item was added</returns>
-        public bool Add(Vector2 position, ItemStack itemStack)
+        public bool Add(ItemStack itemStack, Vector2 position, bool spawnOnGround = true)
         {
-            var result = AddInternal(position, itemStack);
+            var result = AddInternal(position, itemStack, spawnOnGround);
 
             if (result)
             {
@@ -58,7 +59,7 @@ namespace Systems.Inv
             return result;
         }
         
-        private bool AddInternal(Vector2 position, ItemStack itemStack)
+        private bool AddInternal(Vector2 position, ItemStack itemStack, bool spawnOnGround)
         {
             if (itemStack.IsEmpty)
             {
@@ -129,6 +130,8 @@ namespace Systems.Inv
                     allStacks.Add(new ItemStack(item, remainingItems));
                 }
 
+                var hasSpace = true;
+
                 // for each stack if we have space we add them if not we spawn them to the ground
                 foreach (var itemstack in allStacks)
                 {
@@ -138,12 +141,17 @@ namespace Systems.Inv
                     }
                     else
                     {
-                        ItemSpawner.Current.Spawn(position, itemStack);
+                        if (spawnOnGround)
+                        {
+                            ItemSpawner.Current.Spawn(position, itemStack);
+                        }
+
+                        hasSpace = false;
                     }
                 }
 
                 OnChanged?.Invoke();
-                return true;
+                return hasSpace;
             }
 
             if (Count >= SlotsCount) return false;

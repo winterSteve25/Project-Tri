@@ -76,7 +76,7 @@ namespace TileBehaviours.Excavator
             }
             else
             {
-                _container.Inventory.Add(pos, itemStack);
+                _container.Inventory.Add(itemStack, pos);
             }
         }
 

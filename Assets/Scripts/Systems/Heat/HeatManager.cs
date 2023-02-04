@@ -35,6 +35,12 @@ namespace Systems.Heat
             }    
         }
 
+        public float GetHeatAt(Vector2Int pos)
+        {
+            if (_heatMap.ContainsKey(pos)) return _heatMap[pos];
+            return 0;
+        }
+
         private void OnDrawGizmos()
         {
             if (_heatMap == null) return;
