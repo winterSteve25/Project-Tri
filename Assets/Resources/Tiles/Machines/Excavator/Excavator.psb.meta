@@ -114,7 +114,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 325, y: 448}
-    spritePosition: {x: 221, y: 243}
+    spritePosition: {x: 223, y: 243}
   - name: Circle Dark
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -135,7 +135,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 325, y: 356}
-    spritePosition: {x: 216, y: 238}
+    spritePosition: {x: 218, y: 239}
   - name: Top Triangle
     originalName: 
     pivot: {x: 0.51095957, y: 0.6451528}
@@ -156,7 +156,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 3, y: 2}
-    spritePosition: {x: 57, y: 57}
+    spritePosition: {x: 58, y: 59}
   - name: Middle Triangle
     originalName: 
     pivot: {x: 0.50598085, y: 0.3431883}
@@ -177,7 +177,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 3, y: 673}
-    spritePosition: {x: 99, y: 176}
+    spritePosition: {x: 100, y: 178}
   - name: Bottom Drill
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -198,7 +198,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 2, y: 356}
-    spritePosition: {x: 94, y: 113}
+    spritePosition: {x: 96, y: 114}
   characterData:
     bones: []
     parts: []
